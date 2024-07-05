@@ -42,6 +42,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Specify the views directory
 app.set("views", path.join(__dirname, "../views"));
 
+
+app.get('/',(req,res)=>{
+    res.render("home")
+})
 // Register view engine
 app.set("view engine", "ejs");
 
