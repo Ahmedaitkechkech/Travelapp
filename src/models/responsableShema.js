@@ -4,11 +4,7 @@ const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
 const responsableShema = new Schema({
-    CIN: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+   
     name_Responsable: {
         type: String,
         required: true,
@@ -19,7 +15,7 @@ const responsableShema = new Schema({
     },
     birthday: {
         type: String,
-        required: true,
+        required: false,
     },
     num_tel: {
         type: String,
@@ -36,12 +32,12 @@ const responsableShema = new Schema({
     },
     username: {
         type: String,
-        required: true,
+        required: false,
         unique :true,
     },
     password: {
         type: String,
-        required: true,
+        required: false,
     },
     type: {
         type: String,
