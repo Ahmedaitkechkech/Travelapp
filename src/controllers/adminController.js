@@ -196,6 +196,15 @@ const admin_delete_responsable = async (req, res) => {
         console.log(error);
     }
 };
+// admin_get_Settings
+const admin_get_Settings = async (req,res)=>{
+    try{
+     res.render("Admin/Settings");
+
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
 module.exports = {
@@ -211,5 +220,6 @@ module.exports = {
     admin_edit_responsable_id ,
     admin_edit_responsable,
     admin_delete_responsable,
+    admin_get_Settings
 
 }
