@@ -33,6 +33,7 @@ app.use(
     })
 );
 
+
 // Flash messages middleware
 app.use(flash());
 
@@ -43,14 +44,15 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("views", path.join(__dirname, "../views"));
 
 
-app.get('/',(req,res)=>{
-    res.render("home")
-})
+
 // Register view engine
 app.set("view engine", "ejs");
+
+
+app.use("/", require("./routes/admin"));
 
 // Start the server
 const PORT = process.env.PORT ;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`http://localhost/${PORT}`);
 });
