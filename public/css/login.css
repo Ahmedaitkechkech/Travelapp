@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.TravelLoginPage {
+    width: 1920px;
+    height: 940px;
+    display: flex;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.left-side {
+    width: 65%;
+    background: url('/img/background.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.left-side .content {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.left-side .content h1 {
+    text-align: center;
+    font-family: 'Emotional Rescue Personal Use';
+    font-size: 44px;
+    margin: 0;
+}
+
+.left-side .content p {
+    text-align: center;
+    font-family: 'Cabinet Grotesk';
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.right-side {
+    width: 50%;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all items horizontally */
+}
+
+.right-side .welcome {
+    text-align: center;
+    font-family: 'Cabinet Grotesk';
+    font-size: 74px;
+    color: #009EE2;
+    margin-bottom: 10px;
+}
+
+.right-side .login-with-email {
+    font-family: 'Cabinet Grotesk';
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+    width: 450px; /* Set the width of the input group */
+}
+
+.input-group label {
+    font-family: 'Poppins';
+    font-size: 10px;
+    color: #009EE2;
+    font-weight: 700;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #009EE2;
+    border-radius: 9px;
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 12px 12px 12px 40px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 10px;
+    top: 66%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}
+
+.forgot-password {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    font-family: 'Cabinet Grotesk';
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    width: 30%; /* Adjust width as needed */
+    padding: 15px;
+    background-color: #009EE2;
+    color: white;
+    font-family: 'Cabinet Grotesk';
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 16px 32px rgba(0, 158, 226, 0.1);
+    cursor: pointer;
+    display: block; /* Ensure it takes full width of its container */
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center text within button */
+}
+
+.or-divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.or-divider:before, .or-divider:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ccc;
+}
+
+.or-divider:before {
+    left: 0;
+}
+
+.or-divider:after {
+    right: 0;
+}
+
+.or-divider span {
+    background: white;
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: 'Montserrat';
+}
+
+.google-btn {
+    width: 30%;
+    padding: 15px;
+    background-color: #E7F2F5;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center text within buttons */
+}
+
+.google-btn img {
+    margin-right: 10px;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link span {
+    color: #009EE2;
+    cursor: pointer;
+}
+
+.blue-icons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.blue-icons img {
+    height: 100px;
+}
+.icon-1 {
+position: relative;
+right: -1560px; /* Adjust this value to move Icon 1 horizontally */
+top: -800px; /* Adjust this value to move Icon 1 vertically */
+width: 260px;
+height: 40px;
+}
+.icon-3{
+position: relative;
+right: -30px; /* Adjust this value to move Icon 1 horizontally */
+top: 0px; /* Adjust this value to move Icon 1 vertically */
+}
+.icon-2{
+position: relative;
+right: -120px; /* Adjust this value to move Icon 1 horizontally */
+top: 0px; /* Adjust this value to move Icon 1 vertically */
+}
+.Google-icon {
+    width: 23.52px;
+    height: 24px;
+}

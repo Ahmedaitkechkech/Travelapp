@@ -1,11 +1,11 @@
 
 const Admintravel = require("../models/AdminTravelSchema");
 const Responsabelsschema = require("../models/responsableShema");
-
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
 
-const jwt = require("jsonwebtoken");
+
 
 // login page
 const loginAuth = async (req, res) => {
@@ -57,7 +57,7 @@ const admin_login = async (req, res) => {
                 res.status(401).redirect("/admin");
                 break;
             default:
-                const adminToken = jwt.sign({ adminId: admin._id }, jwtSecret);
+                const adminToken = jwt.sign({ adminId: admin._id },jwtSecret);
                 res.cookie("adminToken", adminToken, { httpOnly: true });
                 res.status(200).redirect("/dashborad");
                 break;
