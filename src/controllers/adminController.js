@@ -125,19 +125,18 @@ const admin_get_AddResponssable = async (req, res) => {
 const admin_Add_Responssable = async (req, res) => {
     try {
         const {
-            CIN, name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type } = req.body;
+             name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type } = req.body;
 
    
-        const newResponsable = AddRespo({
-            CIN, name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type});
+        const newResponsable = Responsabelsschema({
+         name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type});
 
-        await AddRespo.create(newResponsable);
+        await Responsabelsschema.create(newResponsable);
         req.flash("success","Responsable has been saved successfully!");
-        res.render('admin/add-responsable',{
-            messages:req.flash()
-        });
+     
+   
        
-        res.redirect("/responsables");
+        res.send("ajouter");
         
     } catch (error) {
         console.log(error);
