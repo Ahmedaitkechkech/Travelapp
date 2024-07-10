@@ -44,7 +44,7 @@ app.set("views", path.join(__dirname, "../views"));
 
 
 app.get('/',(req,res)=>{
-    res.render("home")
+    res.render("Signup")
 })
 // Register view engine
 app.set("view engine", "ejs");
