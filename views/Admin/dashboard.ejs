@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/dashboardAdmin.css" />
+    <title>Tableau de bord</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+    
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="">
+                    <i class="bx bxs-user"></i>
+                    <span style="font-size: 20px;" class="text"><%= admin.username %></span>
+                </a>
+            </li>
+            <li>
+                <a href="Responsables">
+                    <i class='bx bxs-user-check'></i>
+                    <span style="font-size: 20px;" class="text">Responsables</span>
+                </a>
+            </li>
+            <li>
+                <a href="Clients">
+                    <i class='bx bxs-user'></i>
+
+                    <span style="font-size: 20px;" class="text">Clients</span>
+                </a>
+            </li>
+            <li>
+                <a href="cars">
+                    <i class='bx bxs-car'></i>
+                    <span style="font-size: 20px;" class="text">cars</span>
+                </a>
+            </li>
+            <li>
+                <a href="Flights">
+                    <i class='bx bxs-plane'></i>
+
+                    <span style="font-size: 20px;" class="text">Flights</span>
+                </a>
+            </li>
+            <li>
+                <a href="Hotels">
+                    <i class='bx bxs-hotel'></i>
+                    <span style="font-size: 20px;" class="text">Hotels</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="Paramètres">
+                    <i class='bx bxs-cog'></i>
+                    <span style="font-size: 20px;" class="text">Paramètres</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logout" class="logout">
+                    <i class='bx bx-log-out'></i>
+                    <span style="font-size: 20px;" class="text">Déconnexion</span>
+                </a>
+            </li>
+        </ul>
+        
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu' ></i>
+            <form action="#">
+                
+            </form>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell' ></i>
+                <span class="num">8</span>
+            </a>
+            <a href="" class="profile">
+                <img src="img/Amin.png">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main >
+            <div class="head-title">
+                <div class="left">
+                
+                </div>
+              
+            </div>
+
+            <ul  class="box-info">
+             
+                <li>
+                    <i class='bx bxs-hotel'></i>
+                    <span class="text">
+                        <h3></h3>
+                        <p  style="font-size: 20px;">Hotels</p>
+                    </span>
+                </li>
+                <li>
+                 
+                    <i class='bx bxs-plane'></i>
+                    <span class="text">
+                        <h3></h3>
+                        <p  style="font-size: 20px;">Flights</p>
+                    </span>
+                </li>
+                <li>
+                 
+                    <i class='bx bxs-user'></i>
+                    <span class="text">
+                        <h3></h3>
+                        <p  style="font-size: 20px;">Cliets</p>
+                    </span>
+                </li>
+              
+
+
+            
+    
+                
+            
+            </div>
+            
+            
+        </main>
+        <!-- MAIN -->
+    </section>
+
+    
+    
+    <!-- CONTENT -->
+
+
+
+    <script src="/js/adminDashboard.js"></script>
+    
+</body>
+</html>
