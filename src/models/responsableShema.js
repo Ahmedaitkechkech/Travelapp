@@ -3,8 +3,7 @@ const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
-const responsableShema = new Schema({
-   
+const responsableSchema = new Schema({
     name_Responsable: {
         type: String,
         required: true,
@@ -23,9 +22,8 @@ const responsableShema = new Schema({
     },
     birthplace: {
         type: String,
-        required :true,
+        required: true,
     },
-  
     email: {
         type: String,
         required: true,
@@ -33,7 +31,7 @@ const responsableShema = new Schema({
     username: {
         type: String,
         required: false,
-        unique :true,
+        unique: true,
     },
     password: {
         type: String,
@@ -44,17 +42,13 @@ const responsableShema = new Schema({
         required: true,
         enum: ['flight', 'car', 'hotel'],
     },
-
-  
-
- 
- 
     createdAt: { type: Date, default: Date.now },
 });
-responsableShema.pre("save", async function (next) {
+
+responsableSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-module.exports = mongoose.model("ResponsableShema", responsableShema);
+module.exports = mongoose.model("Responsable", responsableSchema);

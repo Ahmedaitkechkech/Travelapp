@@ -1,51 +1,42 @@
 const express = require("express");
 const router = express.Router();
 const adminTravel = require("../controllers/adminController");
-const {adminMiddleware} = require("../middlewares/adminMiddleware");
+const { adminMiddleware } = require("../middlewares/adminMiddleware");
 
+/****************** Admin ************************/
 
-/******************Admin************************/
-
-/*get login page*/
-
+/* Get login page */
 router.get("/admin", adminTravel.loginAuth);
-/*check admin*/
+/* Check admin */
 router.post("/admin", adminTravel.admin_login);
 
-/*Dashboard admin*/
-router.get("/dashborad", adminMiddleware, adminTravel.get_dashboard_admin);
+/* Dashboard admin */
+router.get("/dashboard", adminMiddleware, adminTravel.get_dashboard_admin);
 
-/*logout admin*/
+/* Logout admin */
 router.get("/logout", adminMiddleware, adminTravel.admin_logout);
-/*Settings admin*/
-router.get("/Settings",adminMiddleware,adminTravel.admin_get_Settings);
 
-/* -----------------------routers CRUD Adlin to responssable---------------------- */
+/* Settings admin */
+router.get("/settings", adminMiddleware, adminTravel.admin_get_Settings);
 
-/*get list responsables*/
-router.get("/responsables",adminMiddleware, adminTravel.admin_responsables);
+/* ----------------------- Routes CRUD Admin to Responsable ---------------------- */
 
-/*get view addRrsponsable*/ 
-router.get("/add-responsable",adminMiddleware, adminTravel.admin_get_AddResponssable);
+/* Get list of responsables */
+router.get("/responsables", adminMiddleware, adminTravel.admin_responsables);
 
-/*Post  Rrsponsable db*/ 
-router.post("/add-responsable", adminMiddleware, adminTravel.admin_Add_Responssable);
+/* Get view to add Responsable */
+router.get("/add-responsable", adminMiddleware, adminTravel.admin_get_AddResponsable);
 
-/* admin edit  Rrsponsable */ 
-router.get("/edit-responsable/:id", adminMiddleware, adminTravel.admin_edit_responsable_id );
+/* Post Responsable to DB */
+router.post("/add-responsable", adminMiddleware, adminTravel.admin_Add_Responsable);
 
-/*  admin  edit  Responsable */ 
-router.put("/edit-responsable/:id", adminMiddleware,  adminTravel.admin_edit_responsable );
+/* Admin edit Responsable */
+router.get("/edit-responsable/:id", adminMiddleware, adminTravel.admin_edit_responsable_id);
 
-/*admin delete Rrsponsable */ 
-router.delete("/edit-responsable/:id",adminMiddleware, adminTravel.admin_delete_responsable );
+/* Admin edit Responsable */
+router.put("/edit-responsable/:id", adminMiddleware, adminTravel.admin_edit_responsable);
 
-
-
-
-
-
-
-
+/* Admin delete Responsable */
+router.delete("/edit-responsable/:id", adminMiddleware, adminTravel.admin_delete_responsable);
 
 module.exports = router;

@@ -1,11 +1,8 @@
-
 const Admintravel = require("../models/AdminTravelSchema");
-const Responsabelsschema = require("../models/responsableShema");
+const Responsable = require("../models/responsableShema"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
-
-
 
 // login page
 const loginAuth = async (req, res) => {
@@ -57,9 +54,9 @@ const admin_login = async (req, res) => {
                 res.status(401).redirect("/admin");
                 break;
             default:
-                const adminToken = jwt.sign({ adminId: admin._id },jwtSecret);
+                const adminToken = jwt.sign({ adminId: admin._id }, jwtSecret);
                 res.cookie("adminToken", adminToken, { httpOnly: true });
-                res.status(200).redirect("/dashborad");
+                res.status(200).redirect("/dashboard");
                 break;
         }
     } catch (error) {
@@ -69,49 +66,43 @@ const admin_login = async (req, res) => {
     }
 };
 
-
-//get dashboard
+// get dashboard
 const get_dashboard_admin = async (req, res) => {
-    const admin = await Admintravel.findOne({})
+    const admin = await Admintravel.findOne({});
     
     try {
         res.render("Admin/dashboard", {
             title: "place admin",
             admin,
-
-            
         });
     } catch (error) {
         console.log(error);
     }
 };
 
-
-//logout admin
+// logout admin
 const admin_logout = (req, res) => {
     res.clearCookie("adminToken");
     res.redirect("/admin");
 };
 
+// ----------------------- CRUD responsable -------------------------------
 
-// -----------------------curd resapnsable-------------------------------
-
-//get all responssables
-const admin_responsables = async (req,res)=>{
-    try{
-     const Respnsables = await Responsabelsschema.find().sort({createdAt:-1});
-     res.render('admin/Responables', {
-        title: "Place admin",
-        Respnsables
-    }
-     );
-    }catch(error){
-         console.log(error);
+// get all responsables
+const admin_responsables = async (req, res) => {
+    try {
+        const responsables = await Responsable.find().sort({ createdAt: -1 });
+        res.render('admin/Responsables', {
+            title: "Place admin",
+            responsables,
+        });
+    } catch (error) {
+        console.log(error);
     }
 }
 
-// get view add respo
-const admin_get_AddResponssable = async (req, res) => {
+// get view add responsable
+const admin_get_AddResponsable = async (req, res) => {
     try {
         res.render("admin/add-Responsable", {
             title: "Espace privé Admin",
@@ -121,52 +112,52 @@ const admin_get_AddResponssable = async (req, res) => {
     }
 };
 
-// add  respo db
-const admin_Add_Responssable = async (req, res) => {
+// add responsable to db
+const admin_Add_Responsable = async (req, res) => {
     try {
         const {
-             name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type } = req.body;
+            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password, type
+        } = req.body;
 
-   
-        const newResponsable = Responsabelsschema({
-         name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type});
+        // Validate required fields
+        if (!username || !password || !name_Responsable || !name_companies || !num_tel || !birthplace || !email || !type) {
+            return res.status(400).json({ error: "All required fields must be provided." });
+        }
 
-        await Responsabelsschema.create(newResponsable);
-        req.flash("success","Responsable has been saved successfully!");
-     
-   
-       
+        const newResponsable = new Responsable({
+            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password, type
+        });
+
+        await newResponsable.save(); 
+        req.flash("success", "Responsable has been saved successfully!");
+
         res.send("ajouter");
-        
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
-//get responsable by id
+
+// get responsable by id
 const admin_edit_responsable_id = async (req, res) => {
     try {
-        
-        const respo = await Responsabelsschema.findOne({ _id: req.params.id }).select("-password");
+        const respo = await Responsable.findOne({ _id: req.params.id }).select("-password");
         res.render("admin/edit-responsable", {
             respo,
-            title: "Espace privé Admin",        
-            
+            title: "Espace privé Admin",
         });
     } catch (error) {
         console.log(error);
     }
 };
 
-//admin edit reponsable by id 
-
+// edit responsable by id
 const admin_edit_responsable = async (req, res) => {
     try {
-      const {CIN, name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type } = req.body;
-    
-  
-      const updateObject = {};
+        const { CIN, name_Responsable, name_companies, birthday, birthplace, num_tel, email, password, type } = req.body;
+
+        const updateObject = {};
         if (CIN) updateObject.CIN = CIN;
         if (name_Responsable) updateObject.name_Responsable = name_Responsable;
         if (name_companies) updateObject.name_companies = name_companies;
@@ -174,51 +165,48 @@ const admin_edit_responsable = async (req, res) => {
         if (birthplace) updateObject.birthplace = birthplace;
         if (num_tel) updateObject.num_tel = num_tel;
         if (email) updateObject.email = email;
-        if (password) updateObject.password = password;
+        if (password) updateObject.password = await bcrypt.hash(password, 10); // hash new password if provided
         if (type) updateObject.type = type;
-        
-  
-      await Responsabelsschema.findByIdAndUpdate(req.params.id, updateObject);
 
-      res.redirect("/responsables");
-    } catch (error) {
-      console.log(error);
-    }
-};
+        await Responsable.findByIdAndUpdate(req.params.id, updateObject);
 
-// admin_delete_responsable
-const admin_delete_responsable = async (req, res) => {
-    try {
-        await Responsabelsschema.deleteOne({ _id: req.params.id });
         res.redirect("/responsables");
     } catch (error) {
         console.log(error);
     }
 };
-// admin_get_Settings
-const admin_get_Settings = async (req,res)=>{
-    try{
-     res.render("Admin/Settings");
 
-    }catch(error){
+// delete responsable
+const admin_delete_responsable = async (req, res) => {
+    try {
+        await Responsable.deleteOne({ _id: req.params.id });
+        res.redirect("/responsables");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// get settings
+const admin_get_Settings = async (req, res) => {
+    try {
+        res.render("Admin/Settings");
+    } catch (error) {
         console.log(error);
     }
 }
-
 
 module.exports = {
     loginAuth,
     admin_login,
     get_dashboard_admin,
     admin_logout,
-
-    //CRUD RESPONSABLE
-    admin_get_AddResponssable ,
-    admin_Add_Responssable,
+    // CRUD Responsable
+    admin_get_AddResponsable,
+    admin_Add_Responsable,
     admin_responsables,
-    admin_edit_responsable_id ,
+    admin_edit_responsable_id,
     admin_edit_responsable,
     admin_delete_responsable,
     admin_get_Settings
-
 }
+;
