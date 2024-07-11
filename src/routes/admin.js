@@ -13,11 +13,12 @@ router.post("/admin", adminTravel.admin_login);
 /* Dashboard admin */
 router.get("/dashboard", adminMiddleware, adminTravel.get_dashboard_admin);
 
-/* Logout admin */
-router.get("/logout", adminMiddleware, adminTravel.admin_logout);
+/*Settings admin*/
+router.get("/Settings",adminMiddleware,adminTravel.admin_get_Settings);
 
-/* Settings admin */
-router.get("/settings", adminMiddleware, adminTravel.admin_get_Settings);
+
+/*logout admin*/
+router.get("/logout", adminMiddleware, adminTravel.admin_logout);
 
 /* ----------------------- Routes CRUD Admin to Responsable ---------------------- */
 

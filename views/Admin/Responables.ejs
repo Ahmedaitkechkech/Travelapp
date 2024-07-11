@@ -1,1 +1,76 @@
-<h1>list respnssable</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card-body">
+        <!-- Table head -->
+        <div class="table-head bg-light rounded p-3 d-none d-lg-block">
+            <div class="row row-cols-7 g-4">
+                <div class="col"><h6 class="mb-0">Guest</h6></div>
+                <div class="col"><h6 class="mb-0">Booking Date</h6></div>
+                <div class="col"><h6 class="mb-0">Check-In</h6></div>
+                <div class="col"><h6 class="mb-0">Check-Out</h6></div>
+                <div class="col"><h6 class="mb-0">Room No</h6></div>
+                <div class="col"><h6 class="mb-0">Status</h6></div>
+                <div class="col"><h6 class="mb-0">Action</h6></div>
+            </div>
+        </div>
+    
+        <!-- Table data -->
+        <div class="table-row row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4">
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Booked by:</small>
+                <div class="d-flex align-items-center">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs flex-shrink-0">
+                        <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
+                    </div>
+                    <!-- Info -->
+                    <div class="ms-2">
+                        <h6 class="mb-0 fw-light">Amanda Reed</h6>
+                    </div>
+                </div>
+            </div>	
+    
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Booking date:</small>
+                <h6 class="mb-0 fw-normal">10 Nov 2022</h6>
+            </div>
+    
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Check-in:</small>
+                <h6 class="mb-0 fw-normal">02 Dec 2022</h6>
+            </div>
+    
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Check-out:</small>
+                <h6 class="mb-0 fw-normal">05 Dec 2022</h6>
+            </div>
+    
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Room no:</small>
+                <h6 class="mb-0 fw-normal">G102</h6>
+            </div>
+    
+            <!-- Data item -->
+            <div class="col">
+                <small class="d-block d-lg-none">Payment:</small>
+                <div class="badge bg-success bg-opacity-10 text-success">Booked</div>
+            </div>
+    
+            <!-- Data item -->
+            <div class="col"><a href="admin-guest-detail.html" class="btn btn-sm btn-light mb-0">View</a></div>
+        </div>
+    </div>
+</body>
+</html>

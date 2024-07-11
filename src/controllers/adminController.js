@@ -91,10 +91,10 @@ const admin_logout = (req, res) => {
 // get all responsables
 const admin_responsables = async (req, res) => {
     try {
-        const responsables = await Responsable.find().sort({ createdAt: -1 });
-        res.render('admin/Responsables', {
+       // const responsables = await Responsable.find().sort({ createdAt: -1 });
+        res.render('Admin/Responables', {
             title: "Place admin",
-            responsables,
+          //  responsables,
         });
     } catch (error) {
         console.log(error);
@@ -131,7 +131,7 @@ const admin_Add_Responsable = async (req, res) => {
         await newResponsable.save(); 
         req.flash("success", "Responsable has been saved successfully!");
 
-        res.send("ajouter");
+        res.redirect("/dashboard");
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -188,8 +188,11 @@ const admin_delete_responsable = async (req, res) => {
 
 // get settings
 const admin_get_Settings = async (req, res) => {
+    const infoAdmin  = await Admintravel.find({})
     try {
-        res.render("Admin/Settings");
+        res.render("Admin/Settings",{
+            infoAdmin,
+        });
     } catch (error) {
         console.log(error);
     }
