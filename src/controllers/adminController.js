@@ -87,6 +87,22 @@ const get_dashboard_admin = async (req, res) => {
 };
 
 
+// admin_get_Settings
+const admin_get_Settings = async (req,res)=>{
+    const infoAdmin = await Admintravel.find({})
+    try{
+     res.render("Admin/Settings",{
+        infoAdmin
+
+     })
+    
+  
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
 //logout admin
 const admin_logout = (req, res) => {
     res.clearCookie("adminToken");
@@ -128,7 +144,7 @@ const admin_Add_Responssable = async (req, res) => {
              name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type } = req.body;
 
    
-        const newResponsable = Responsabelsschema({
+        const newResponsable = new Responsabelsschema({
          name_Responsable, name_companies, birthday, birthplace,num_tel ,email, password,type});
 
         await Responsabelsschema.create(newResponsable);
@@ -136,7 +152,7 @@ const admin_Add_Responssable = async (req, res) => {
      
    
        
-        res.send("ajouter");
+        res.redirect("/dashborad");
         
     } catch (error) {
         console.log(error);
@@ -195,15 +211,6 @@ const admin_delete_responsable = async (req, res) => {
         console.log(error);
     }
 };
-// admin_get_Settings
-const admin_get_Settings = async (req,res)=>{
-    try{
-     res.render("Admin/Settings");
-
-    }catch(error){
-        console.log(error);
-    }
-}
 
 
 module.exports = {
@@ -211,6 +218,7 @@ module.exports = {
     admin_login,
     get_dashboard_admin,
     admin_logout,
+    admin_get_Settings ,
 
     //CRUD RESPONSABLE
     admin_get_AddResponssable ,
@@ -219,6 +227,5 @@ module.exports = {
     admin_edit_responsable_id ,
     admin_edit_responsable,
     admin_delete_responsable,
-    admin_get_Settings
 
 }

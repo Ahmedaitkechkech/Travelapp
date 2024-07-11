@@ -12,6 +12,19 @@ const AdminTravelSchema = new Schema({
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+        required: true,
+    },
+    tele: {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        required: true,
+    },
+
 });
 
 module.exports = mongoose.model("AdminTravelSchema", AdminTravelSchema);

@@ -15,10 +15,12 @@ router.post("/admin", adminTravel.admin_login);
 /*Dashboard admin*/
 router.get("/dashborad", adminMiddleware, adminTravel.get_dashboard_admin);
 
-/*logout admin*/
-router.get("/logout", adminMiddleware, adminTravel.admin_logout);
 /*Settings admin*/
 router.get("/Settings",adminMiddleware,adminTravel.admin_get_Settings);
+
+
+/*logout admin*/
+router.get("/logout", adminMiddleware, adminTravel.admin_logout);
 
 /* -----------------------routers CRUD Adlin to responssable---------------------- */
 
