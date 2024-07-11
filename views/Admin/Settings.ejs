@@ -15,47 +15,48 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card shadow bg-white text-dark">
-                    <div class="card-header border-bottom border-light">
-                        <h5 class="card-header-title text-primary">Profile Settings</h5>
+                    <div class="card-header border-bottom ">
+                        <h5 class="card-header-title ">Profile Settings</h5>
                     </div>
                     <div class="card-body">
                         <% infoAdmin.forEach(admin => { %>
                             
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" class="form-control bg-light text-dark border-primary" placeholder="Username" readonly="readonly" value="<%= admin.username %>">
+                                <input type="text" class="form-control bg-light text-dark " placeholder="Username" readonly="readonly" value="<%= admin.username %>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Profile Picture</label>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <label class="position-relative" for="uploadfile-1" title="Replace this pic">
                                         <span class="avatar avatar-xl">
-                                            <img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-primary border-3 shadow" src="img/Amin.png" alt="" style="border-radius: 50%;">
+                                            <img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-3 shadow" src="img/Amin.png" alt="" style="border-radius: 50%;">
                                         </span>
                                     </label>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="text" class="form-control bg-light text-dark border-primary" placeholder="Password" readonly="readonly" >
+                                <input type="text" class="form-control bg-light text-dark " placeholder="Password" readonly="readonly" >
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control bg-light text-dark border-primary" placeholder="Email" readonly="readonly" value="<%= admin.email %>">
+                                <input type="email" class="form-control bg-light text-dark " placeholder="Email" readonly="readonly" value="<%= admin.email %>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Telephone</label>
-                                <input type="text" class="form-control bg-light text-dark border-primary" placeholder="Telephone" readonly="readonly" value="<%= admin.tele %>">
+                                <input type="text" class="form-control bg-light text-dark " placeholder="Telephone" readonly="readonly" value="<%= admin.tele %>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Role</label>
-                                <input type="text" class="form-control bg-light text-dark border-primary" placeholder="Role" readonly="readonly" value="<%= admin.role %>">
+                                <input type="text" class="form-control bg-light text-dark " placeholder="Role" readonly="readonly" value="<%= admin.role %>">
                             </div>
                         <% }); %>
     
                         <div class="d-flex justify-content-end mt-4">
-                            <a href="/dashborad" class="btn text-secondary border-0 me-2" style="background-color: #009EE2; color: white;">Discard</a>
+                            <a href="/dashboard" class="btn btn-primary text-white me-2" style="background-color: #009EE2;">Discard</a>
                         </div>
+                        
                     </div>
                 </div>
             </div>

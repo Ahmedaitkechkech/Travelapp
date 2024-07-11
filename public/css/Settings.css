@@ -18,19 +18,19 @@ body {
 }
 
 .card-header {
-    background-color:#009EE2;
-    color: white;
+    background-color:white;
+    color :#009EE2;
     border-radius: 12px;
 }
 
 .card-header-title {
-    font-size: 1.2rem;
-    color: white;
+    color: #009EE2;
 }
 
 .form-label {
-    color:#009EE2;
+    color: #009EE2;
 }
+
 
 .form-control {
     background-color: #f8f9fa;
@@ -67,6 +67,7 @@ body {
 .btn {
     padding: 10px 20px;
     border-radius: 5px;
+    color: white;
     font-size: 0.9rem;
 }
 
