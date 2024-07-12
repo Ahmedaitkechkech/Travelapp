@@ -91,10 +91,10 @@ const admin_logout = (req, res) => {
 // get all responsables
 const admin_responsables = async (req, res) => {
     try {
-       // const responsables = await Responsable.find().sort({ createdAt: -1 });
+        const responsables = await Responsable.find().sort({ createdAt: -1 });
         res.render('Admin/Responables', {
             title: "Place admin",
-          //  responsables,
+            responsables,
         });
     } catch (error) {
         console.log(error);
@@ -131,7 +131,7 @@ const admin_Add_Responsable = async (req, res) => {
         await newResponsable.save(); 
         req.flash("success", "Responsable has been saved successfully!");
 
-        res.redirect("/dashboard");
+        res.redirect("/responsables");
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -198,6 +198,59 @@ const admin_get_Settings = async (req, res) => {
     }
 }
 
+//afiche les clients to admin
+
+const admin_clients = async (req, res) => {
+    try {
+        res.render("Admin/clients", {
+            title: "place admin",
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//afiche les Hoteles to admin
+
+const admin_Hoteles = async (req, res) => {
+    try {
+        res.render("Admin/hoteles", {
+            title: "place admin",
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//afiche les cars to admin
+
+const admin_cars = async (req, res) => {
+    try {
+        res.render("Admin/cars", {
+            title: "place admin",
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+//afiche les cars to admin
+
+const admin_flights = async (req, res) => {
+    try {
+        res.render("Admin/flights", {
+            title: "place admin",
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
 const guest_list = async (req, res) => {
     try {
         res.render("Admin/guest-list");
@@ -218,7 +271,6 @@ module.exports = {
     admin_edit_responsable_id,
     admin_edit_responsable,
     admin_delete_responsable,
-    admin_get_Settings,
-    guest_list
+    admin_get_Settings
 }
 ;

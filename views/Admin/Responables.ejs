@@ -4,73 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/Responables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   
 </head>
 <body>
+
+    <div class="table-controls">  
+        <a href="add-responsable">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i> Ajouter Responsable
+            </button>
+        </a>
+      
+        <a href="/dashboard">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    
+    
+   
     <div class="card-body">
-        <!-- Table head -->
-        <div class="table-head bg-light rounded p-3 d-none d-lg-block">
-            <div class="row row-cols-7 g-4">
-                <div class="col"><h6 class="mb-0">Guest</h6></div>
-                <div class="col"><h6 class="mb-0">Booking Date</h6></div>
-                <div class="col"><h6 class="mb-0">Check-In</h6></div>
-                <div class="col"><h6 class="mb-0">Check-Out</h6></div>
-                <div class="col"><h6 class="mb-0">Room No</h6></div>
-                <div class="col"><h6 class="mb-0">Status</h6></div>
-                <div class="col"><h6 class="mb-0">Action</h6></div>
-            </div>
-        </div>
-    
-        <!-- Table data -->
-        <div class="table-row row row-cols-xl-7 align-items-lg-center border-bottom g-4 px-2 py-4">
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Booked by:</small>
-                <div class="d-flex align-items-center">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs flex-shrink-0">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
-                    </div>
-                    <!-- Info -->
-                    <div class="ms-2">
-                        <h6 class="mb-0 fw-light">Amanda Reed</h6>
-                    </div>
-                </div>
-            </div>	
-    
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Booking date:</small>
-                <h6 class="mb-0 fw-normal">10 Nov 2022</h6>
-            </div>
-    
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Check-in:</small>
-                <h6 class="mb-0 fw-normal">02 Dec 2022</h6>
-            </div>
-    
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Check-out:</small>
-                <h6 class="mb-0 fw-normal">05 Dec 2022</h6>
-            </div>
-    
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Room no:</small>
-                <h6 class="mb-0 fw-normal">G102</h6>
-            </div>
-    
-            <!-- Data item -->
-            <div class="col">
-                <small class="d-block d-lg-none">Payment:</small>
-                <div class="badge bg-success bg-opacity-10 text-success">Booked</div>
-            </div>
-    
-            <!-- Data item -->
-            <div class="col"><a href="admin-guest-detail.html" class="btn btn-sm btn-light mb-0">View</a></div>
-        </div>
+  
+        <table>
+            <thead>
+                <tr>
+                    <th>Name_responsable</th>
+                    <th>Name_companies</th>
+                    <th>birthday</th>
+                    <th>tele</th>
+                    <th>birthplace</th>
+                    <th>Email</th>
+                    <th>UserName</th>
+                    <th>type</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% responsables.forEach(responsable => { %>
+                <tr>
+                    <td><%= responsable.name_Responsable %></td>
+                    <td><%= responsable.name_companies %></td>
+                    <td><%= responsable.birthday %></td>
+                    <td><%= responsable.num_tel %></td>
+                    <td><%= responsable.birthplace %></td>
+                    <td><%= responsable.email %></td>
+                    <td><%= responsable.username %></td>
+                    <td>
+                        <div class="badge text-white" style="<%= responsable.type === 'car' ? 'background-color: #1d3b53; width: 50px; color: white;' : responsable.type === 'flight' ? 'background-color: #6610f2; width: 50px; color: white;' : 'background-color: #8f55c1; width: 50px; color: white;' %>">
+                            <%= responsable.type %>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/edit-responsable/<%= responsable._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                       
+                        <form action="/edit-responsable/<%= responsable._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
