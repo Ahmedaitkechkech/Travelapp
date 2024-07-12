@@ -198,6 +198,14 @@ const admin_get_Settings = async (req, res) => {
     }
 }
 
+const guest_list = async (req, res) => {
+    try {
+        res.render("Admin/guest-list");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     loginAuth,
     admin_login,
@@ -210,6 +218,7 @@ module.exports = {
     admin_edit_responsable_id,
     admin_edit_responsable,
     admin_delete_responsable,
-    admin_get_Settings
+    admin_get_Settings,
+    guest_list
 }
 ;

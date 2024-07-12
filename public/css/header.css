@@ -1,0 +1,84 @@
+/* General styling for the header */
+.header-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: #f8f9fa; /* Light background color for navbar-light */
+}
+
+/* Navbar brand item */
+.navbar-brand-item {
+    height: 40px; /* Adjust height as needed */
+}
+
+/* Light mode and dark mode items */
+.light-mode-item {
+    display: block;
+}
+
+.dark-mode-item {
+    display: none;
+}
+
+/* Language dropdown */
+#languageDropdown {
+    color: #4f4f4f;
+    font-size: 1.5rem; /* Increase font size */ /* Increase padding */
+    height: 20px; /* Adjust height */
+    width: 40px; /* Adjust width */
+    padding-top: 10px;
+}
+
+#languageDropdown .dropdown-menu {
+    min-width: auto;
+    padding: 0.5rem;
+}
+
+#languageDropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+#languageDropdown .dropdown-item img {
+    width: 20px; /* Adjust as needed */
+    height: auto;
+}
+
+/* Sign-up button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Ensure the dropdown menus and tooltips are shown correctly */
+.dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+/* Responsive adjustments */
+@media (prefers-color-scheme: dark) {
+    .light-mode-item {
+        display: none;
+    }
+
+    .dark-mode-item {
+        display: block;
+    }
+
+    .navbar-light {
+        background-color: white;
+    }
+
+    .btn-light {
+        
+        color: #080000;
+    }
+
+   
+}
