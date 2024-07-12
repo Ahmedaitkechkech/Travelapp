@@ -69,11 +69,14 @@ const admin_login = async (req, res) => {
 // get dashboard
 const get_dashboard_admin = async (req, res) => {
     const admin = await Admintravel.findOne({});
+    const responsables = await Responsable.find().sort({ createdAt: -1 });
+
     
     try {
         res.render("Admin/dashboard", {
             title: "place admin",
             admin,
+            responsables
         });
     } catch (error) {
         console.log(error);
