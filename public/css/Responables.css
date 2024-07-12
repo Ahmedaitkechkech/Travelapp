@@ -1,4 +1,4 @@
-    /* General body styles */
+/* General body styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,17 +9,15 @@ body {
     justify-content: center;
     margin-top: 10%;
 }
-.table-controls {
+
+.new-table {
     display: flex;
-    margin-bottom:44%;
-   
-    
+    margin-bottom: 44%;
     justify-content: center;
     align-items: center;
 }
 
-
-.table-controls .btn-primary {
+.new-table.button-primary {
     background-color: #009EE2;
     border: none;
     color: white;
@@ -33,15 +31,16 @@ body {
     border-radius: 10px;
     margin-left: 100%;
 }
-.fa-arrow-left{
+
+.button-arrow {
     margin-left: -120%;
     font-size: 25px;
     color: gray;
     cursor: pointer;
 }
 
-.btn-danger {
-    background-color: #dc3545 !important;
+.button-danger {
+    background-color: #dc3545!important;
     border: none;
     color: white;
     padding: 5px 10px;
@@ -51,8 +50,9 @@ body {
     font-size: 14px;
     cursor: pointer;
 }
+
 /* Card body styling */
-.card-body {
+.Cart_body {
     background-color: #fff;
     padding: 20px;
     border-radius: 22px;
@@ -61,11 +61,10 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-   
 }
 
 /* Table styling */
-table {
+.table-bordered {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -81,11 +80,9 @@ thead th {
 }
 
 tbody td {
-
     padding: 10px;
     font-size: 14px;
     text-align: center;
-
     color: #666;
     border-bottom: 1px solid #dee2e6;
 }
@@ -94,10 +91,9 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-
 /* Responsive adjustments */
 @media (max-width: 992px) {
-    table, thead, tbody, th, td, tr {
+   .table-bordered, thead, tbody, th, td, tr {
         display: block;
         width: 100%;
     }
@@ -125,48 +121,16 @@ tbody tr:hover {
 }
 
 /* Button styling */
-.btn {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    background-color: #ddd;
-    color: #333;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-light {
+.button-light {
     background-color: #f8f9fa;
     color: #333;
 }
 
-.btn:hover {
+.button-light:hover {
     background-color: #ccc;
 }
 
-.btn:focus {
+.button-light:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
-
-/* Badge styling */
-.badge {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 4px;
-}
-
-.bg-success {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.bg-opacity-10 {
-    opacity: 0.1;
-}
-

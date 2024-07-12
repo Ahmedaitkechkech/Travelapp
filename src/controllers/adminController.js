@@ -274,6 +274,15 @@ module.exports = {
     admin_edit_responsable_id,
     admin_edit_responsable,
     admin_delete_responsable,
-    admin_get_Settings
+    admin_get_Settings,
+
+    //afiche les client to admin
+    admin_clients,
+    //afiche les admin_Hoteles to admin
+    admin_Hoteles,
+    //afiche les admin_cars to admin
+    admin_cars,
+    //afiche les admin_flights to admin
+    admin_flights,
 }
 ;

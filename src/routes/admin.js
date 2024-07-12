@@ -52,6 +52,5 @@ router.get("/admin_flights", adminMiddleware, adminTravel.admin_flights);
 /* Admin affiche les cars */
 router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
 
-router.get("/guest-list", adminMiddleware, adminTravel.guest_list);
 
 module.exports = router;
