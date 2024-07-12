@@ -1,0 +1,172 @@
+    /* General body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+.table-controls {
+    display: flex;
+    margin-bottom:44%;
+   
+    
+    justify-content: center;
+    align-items: center;
+}
+
+
+.table-controls .btn-primary {
+    background-color: #009EE2;
+    border: none;
+    color: white;
+    padding: 8px;
+    width: 150%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 100%;
+}
+.fa-arrow-left{
+    margin-left: -120%;
+    font-size: 25px;
+    color: gray;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+/* Card body styling */
+.card-body {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 22px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+   
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+tbody td {
+
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+
+    color: #666;
+    border-bottom: 1px solid #dee2e6;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #333;
+    }
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-light {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Badge styling */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.bg-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.bg-opacity-10 {
+    opacity: 0.1;
+}
+

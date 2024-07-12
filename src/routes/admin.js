@@ -40,4 +40,16 @@ router.put("/edit-responsable/:id", adminMiddleware, adminTravel.admin_edit_resp
 /* Admin delete Responsable */
 router.delete("/edit-responsable/:id", adminMiddleware, adminTravel.admin_delete_responsable);
 
+/* Admin affiche les client */
+router.get("/admin-clients", adminMiddleware, adminTravel.admin_clients);
+
+/* Admin affiche les Hoteles */
+router.get("/admin-Hoteles", adminMiddleware, adminTravel.admin_Hoteles);
+
+/* Admin affiche les flights */
+router.get("/admin_flights", adminMiddleware, adminTravel.admin_flights);
+
+/* Admin affiche les cars */
+router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
+
 module.exports = router;

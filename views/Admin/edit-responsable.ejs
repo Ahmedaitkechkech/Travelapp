@@ -1,1 +1,98 @@
-<h1>form repo by id</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+  
+  <link rel="stylesheet" href="/css/add-responsable.css">
+</head>
+<body>
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Edite Responsable</h5>
+          </div>
+
+          <div class="card-body">
+            <form method="POST" action="/edit-responsable/<%= respo._id %>?_method=PUT">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nom Responsable</label>
+                  <input value="<%= respo.name_Responsable %>" class="form-control" type="text" name="name_Responsable" placeholder="Entrez Nom Responsable">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Nom Entreprises</label>
+                  <input value="<%= respo.name_companies %>" class="form-control" type="text" name="name_companies" placeholder="Entrez Nom Entreprises">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Lieu de Naissance</label>
+                  <input value="<%= respo.birthplace %>" class="form-control" type="text" name="birthplace" placeholder="Entrez Lieu de Naissance">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Date de Naissance</label>
+                  <input value="<%= respo.birthday %>" class="form-control" type="date" name="birthday" placeholder="Entrez Date de Naissance">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Numéro de Téléphone</label>
+                  <input value="<%= respo.num_tel %>" class="form-control" type="tel" name="num_tel" placeholder="Entrez Numéro de Téléphone">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input value="<%= respo.email %>" class="form-control" type="email" name="email" placeholder="Entrez l'Email">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Nom d'utilisateur</label>
+                  <input value="<%= respo.username %>" class="form-control" type="text" name="username" placeholder="Entrez Nom d'utilisateur">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Mot de Passe</label>
+                  <input value="<%= respo.password %>" class="form-control" type="password" name="password" placeholder="Entrez Mot de Passe">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Type</label>
+                    <select class="form-control" name="type" data-search-enabled="true">
+                        <option value="">Sélectionner le type</option>
+                        <option value="flight" <%= respo.type === 'flight' ? 'selected' : '' %>>Flight</option>
+                        <option value="car" <%= respo.type === 'car' ? 'selected' : '' %>>Car</option>
+                        <option value="hotel" <%= respo.type === 'hotel' ? 'selected' : '' %>>Hotel</option>
+                    </select>
+                </div>
+                
+              </div>
+
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Souvgarder</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- JavaScript and dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>
