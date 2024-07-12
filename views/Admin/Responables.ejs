@@ -9,13 +9,10 @@
   <link href="/css/Responables.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
-  <%- include('../partials/header.ejs') %>
-  <!-- Header Ends!! -->
-  
-  <div class="main-content">
-    <div class="content">
-      <div class="new-table">  
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
+    <div class="table-controls">  
         <a href="add-responsable">
             <button class="button-primary">
                 <i class="button-Ajoute"></i> Ajouter Responsable
@@ -24,56 +21,56 @@
         <a href="/dashboard">
             <i class="button-arrow"></i>
         </a>
-      </div>
-
-      <div class="Cart">
-        <div class="Cart_body">
-            <table class="table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name_responsable</th>
-                        <th>Name_companies</th>
-                        <th>Birthday</th>
-                        <th>Tele</th>
-                        <th>Birthplace</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Type</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% responsables.forEach(responsable => { %>
-                    <tr>
-                        <td><%= responsable.name_Responsable %></td>
-                        <td><%= responsable.name_companies %></td>
-                        <td><%= responsable.birthday %></td>
-                        <td><%= responsable.num_tel %></td>
-                        <td><%= responsable.birthplace %></td>
-                        <td><%= responsable.email %></td>
-                        <td><%= responsable.username %></td>
-                        <td>
-                            <div class="text_white" style="<%= responsable.type === 'car' ? 'background-color: #1d3b53; width: 50px;' : responsable.type === 'flight' ? 'background-color: #6610f2; width: 50px;' : 'background-color: #8f55c1; width: 50px;' %>">
-                                <%= responsable.type %>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="/edit-responsable/<%= responsable._id %>" class="button-light">Edit</a>
-                            <form action="/edit-responsable/<%= responsable._id %>?_method=DELETE" method="POST" style="display:inline;">
-                                <button type="submit" class="button-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
-      </div>
     </div>
-  </div>
+    
+    
+   
+    <div class="card-body">
+  
+        <table>
+            <thead>
+                <tr>
+                    <th>Name_responsable</th>
+                    <th>Name_companies</th>
+                    <th>birthday</th>
+                    <th>tele</th>
+                    <th>birthplace</th>
+                    <th>Email</th>
+                    <th>UserName</th>
+                    <th>type</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% responsables.forEach(responsable => { %>
+                <tr>
+                    <td><%= responsable.name_Responsable %></td>
+                    <td><%= responsable.name_companies %></td>
+                    <td><%= responsable.birthday %></td>
+                    <td><%= responsable.num_tel %></td>
+                    <td><%= responsable.birthplace %></td>
+                    <td><%= responsable.email %></td>
+                    <td><%= responsable.username %></td>
+                    <td>
+                        <div class="badge text-white" style="<%= responsable.type === 'car' ? 'background-color: #1d3b53; width: 50px; color: white;' : responsable.type === 'flight' ? 'background-color: #6610f2; width: 50px; color: white;' : 'background-color: #8f55c1; width: 50px; color: white;' %>">
+                            <%= responsable.type %>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/edit-responsable/<%= responsable._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                       
+                        <form action="/edit-responsable/<%= responsable._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+        <%- include('../partials/footer.ejs') %>
 
-  <!-- Footer -->
-  <%- include('../partials/footer.ejs') %>
-  <!-- Footer Ends!! -->
 </body>
 </html>

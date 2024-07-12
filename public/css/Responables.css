@@ -1,70 +1,29 @@
-/* General body styles */
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
     background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10%;
 }
 
-.new-table {
-    display: flex;
-    margin-bottom: 44%;
-    justify-content: center;
-    align-items: center;
-}
 
-.new-table.button-primary {
-    background-color: #009EE2;
-    border: none;
-    color: white;
-    padding: 8px;
-    width: 150%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin-left: 100%;
-}
 
-.button-arrow {
-    margin-left: -120%;
-    font-size: 25px;
-    color: gray;
-    cursor: pointer;
-}
-
-.button-danger {
-    background-color: #dc3545!important;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* Card body styling */
-.Cart_body {
+/* Table container */
+.card-body {
     background-color: #fff;
     padding: 20px;
-    border-radius: 22px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    margin: 20px;
 }
 
-/* Table styling */
-.table-bordered {
+/* Table styles */
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -72,7 +31,7 @@ body {
 
 thead th {
     background-color: #f8f9fa;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
     font-size: 14px;
     color: #333;
@@ -80,7 +39,7 @@ thead th {
 }
 
 tbody td {
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
     text-align: center;
     color: #666;
@@ -91,46 +50,43 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
-   .table-bordered, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
-    }
-
-    thead {
-        display: none;
-    }
-
-    tbody tr {
-        margin-bottom: 10px;
-        border-bottom: 2px solid #ddd;
-    }
-
-    tbody td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-    }
-
-    tbody td:before {
-        content: attr(data-label);
-        font-weight: bold;
-        color: #333;
-    }
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5%;
 }
 
-/* Button styling */
-.button-light {
+.btn-light {
     background-color: #f8f9fa;
     color: #333;
 }
 
-.button-light:hover {
-    background-color: #ccc;
+.btn:hover {
+    background-color: #0056b3;
 }
 
-.button-light:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+.btn-danger {
+    background-color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 10px;
+    }
+    
+    table {
+        font-size: 12px;
+    }
 }
