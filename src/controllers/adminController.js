@@ -254,6 +254,7 @@ const admin_flights = async (req, res) => {
 
 
 
+
 module.exports = {
     loginAuth,
     admin_login,
@@ -276,5 +277,7 @@ module.exports = {
     admin_cars,
     //afiche les admin_flights to admin
     admin_flights,
+
+    
 }
 ;
