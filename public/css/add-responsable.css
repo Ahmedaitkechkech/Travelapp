@@ -23,8 +23,8 @@ body {
   
   
   .card-header {
-    background-color:#009EE2;
-    color: white;
+    background-color: #F8F8F8;
+    color: rgb(0, 0, 0);
     border-radius: 12px;
   }
   
