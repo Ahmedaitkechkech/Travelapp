@@ -50,25 +50,12 @@ app.set("view engine", "ejs");
 
 
 app.use("/", require("./routes/admin"));
+app.use("/", require("./routes/responsable"));
 
 
 //test client affiche ligin and register
 
 
-const loginclient = async (req, res) => {
-    try {
-        res.render("Login", {
-            title: "clinet",
-            query: req.query,
-            messages: req.flash(),
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-const Registerclient = async (req, res) => {
-  
-};
 
 
 app.get("/login",(req,res) => {
