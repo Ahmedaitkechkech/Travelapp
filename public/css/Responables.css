@@ -5,13 +5,23 @@
     box-sizing: border-box;
 }
 
+/* Ensure the HTML and body take up the full height of the viewport */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Flex-grow property for the main content */
+.main-content {
+    flex: 1;
+}
+
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
-
-
 
 /* Table container */
 .card-body {
@@ -89,4 +99,31 @@ tbody tr:hover {
     table {
         font-size: 12px;
     }
+}
+
+.button-primary {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    background-color: #009EE2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Adjust this to move the button to the right */
+    position: relative; /* Ensure the button is positioned correctly */
+    z-index: 1; /* Ensure the button is on top */
+   
+}
+
+/* Additional styles for the table controls */
+.table-controls {
+    display: flex;
+    justify-content: flex-end; /* Align controls to the right */
+    padding: 10px 70px;
+    margin-bottom: 1px;
 }
