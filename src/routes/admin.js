@@ -17,8 +17,7 @@ router.get("/dashboard", adminMiddleware, adminTravel.get_dashboard_admin);
 router.get("/Settings",adminMiddleware,adminTravel.admin_get_Settings);
 
 
-/*logout admin*/
-router.get("/logout", adminMiddleware, adminTravel.admin_logout);
+
 
 /* ----------------------- Routes CRUD Admin to Responsable ---------------------- */
 
@@ -51,5 +50,11 @@ router.get("/admin_flights", adminMiddleware, adminTravel.admin_flights);
 
 /* Admin affiche les cars */
 router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
+
+
+/*logout admin*/
+router.get("/logout", adminMiddleware, adminTravel.admin_logout);
+
+
 
 module.exports = router;

@@ -54,7 +54,7 @@
                     <td><%= responsable.email %></td>
                     <td><%= responsable.username %></td>
                     <td>
-                        <div class="badge text-white" style="<%= responsable.type === 'car' ? 'background-color: #1d3b53; width: 50px; color: white;' : responsable.type === 'flight' ? 'background-color: #6610f2; width: 50px; color: white;' : 'background-color: #8f55c1; width: 50px; color: white;' %>">
+                        <div class="badge text-white" style="<%= responsable.type === 'car' ? 'background-color: #1d3b53; width: 50px; color: white; height: 25px; display: flex; align-items: center; justify-content: center;' : responsable.type === 'flight' ? 'background-color: #6610f2; height: 25px; width: 50px; color: white; display: flex; align-items: center; justify-content: center;' : 'background-color: #6f42c1; width: 50px; color: white; height: 25px; display: flex; align-items: center; justify-content: center;' %>">
                             <%= responsable.type %>
                         </div>
                     </td>

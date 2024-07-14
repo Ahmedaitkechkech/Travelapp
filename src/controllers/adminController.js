@@ -255,11 +255,15 @@ const admin_flights = async (req, res) => {
 
 
 
+
+
+
+
 module.exports = {
     loginAuth,
     admin_login,
     get_dashboard_admin,
-    admin_logout,
+    
     // CRUD Responsable
     admin_get_AddResponsable,
     admin_Add_Responsable,
@@ -278,6 +282,10 @@ module.exports = {
     //afiche les admin_flights to admin
     admin_flights,
 
+
+    admin_logout,
     
+
+   
 }
 ;

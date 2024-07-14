@@ -4,6 +4,19 @@ const jwt = require("jsonwebtoken");
 const jwtSecretraespo = process.env.jwtSecretraespo;
 
 
+//get card respinsable and client
+const get_card = async (req, res) => {
+    try {
+        res.render("Responsable/index", {
+            title: "Espace privé Reasponsable",
+         
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 
 // login page
 const login_responsable = async (req, res) => {
@@ -86,10 +99,11 @@ const responsable_logout = (req, res) => {
 
 
 
-
 module.exports = {
     login_responsable,
     responsable_login,
+    get_card,
     responsable_logout,
+
     
 };
