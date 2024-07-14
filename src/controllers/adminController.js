@@ -254,9 +254,9 @@ const admin_flights = async (req, res) => {
 
 
 
-const guest_list = async (req, res) => {
+const test = async (req, res) => {
     try {
-        res.render("Admin/guest-list");
+        res.render("Admin/test");
     } catch (error) {
         console.log(error);
     }
@@ -285,6 +285,6 @@ module.exports = {
     //afiche les admin_flights to admin
     admin_flights,
 
-    
+    test
 }
 ;

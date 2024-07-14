@@ -53,4 +53,5 @@ router.get("/admin_flights", adminMiddleware, adminTravel.admin_flights);
 router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
 
 
+router.get("/test", adminMiddleware, adminTravel.test);
 module.exports = router;
