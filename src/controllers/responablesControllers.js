@@ -1,6 +1,5 @@
 const TicketFlight = require("../models/Ticket_flight");
 const { cloudinary } = require("../../utils/cloudinary");
-
 const Responsableshema = require("../models/responsableShema");
 const HotelSchema = require("../models/HotelSchema");
 const flightshema = require("../models/flightsSchema"); 
@@ -459,8 +458,7 @@ module.exports = {
     responsable_edit_ticket_flight_id,
     editTicketFlight,
     responsable_delete_Ticket_flight,
-    
-
+    //crud Hotel
     responsable_logout,
     responsable_get_AddHotel,
     responsable_AddHotel,
@@ -468,6 +466,6 @@ module.exports = {
     responsable_editHotel,
     responsable_editHotell_id,
     responsable_deleteHotel,
-/*** */
+    //Crud Hotel_Reservation
 responsable_get_HotelReservation,
 };
