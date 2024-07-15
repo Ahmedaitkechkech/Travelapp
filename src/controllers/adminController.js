@@ -119,16 +119,16 @@ const admin_get_AddResponsable = async (req, res) => {
 const admin_Add_Responsable = async (req, res) => {
     try {
         const {
-            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password, type
+            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password,
         } = req.body;
 
         // Validate required fields
-        if (!username || !password || !name_Responsable || !name_companies || !num_tel || !birthplace || !email || !type) {
+        if (!username || !password || !name_Responsable || !name_companies || !num_tel || !birthplace || !email ) {
             return res.status(400).json({ error: "All required fields must be provided." });
         }
 
         const newResponsable = new Responsable({
-            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password, type
+            name_Responsable, name_companies, birthday, birthplace, num_tel, email, username, password, 
         });
 
         await newResponsable.save(); 
@@ -158,7 +158,7 @@ const admin_edit_responsable_id = async (req, res) => {
 // edit responsable by id
 const admin_edit_responsable = async (req, res) => {
     try {
-        const { CIN, name_Responsable, name_companies, birthday, birthplace, num_tel, email, password, type } = req.body;
+        const { CIN, name_Responsable, name_companies, birthday, birthplace, num_tel, email, password, } = req.body;
 
         const updateObject = {};
         if (CIN) updateObject.CIN = CIN;
@@ -168,8 +168,8 @@ const admin_edit_responsable = async (req, res) => {
         if (birthplace) updateObject.birthplace = birthplace;
         if (num_tel) updateObject.num_tel = num_tel;
         if (email) updateObject.email = email;
-        if (password) updateObject.password = await bcrypt.hash(password, 10); // hash new password if provided
-        if (type) updateObject.type = type;
+        if (password) updateObject.password = await bcrypt.hash(password, 10); 
+        
 
         await Responsable.findByIdAndUpdate(req.params.id, updateObject);
 
@@ -254,19 +254,17 @@ const admin_flights = async (req, res) => {
 
 
 
-const test = async (req, res) => {
-    try {
-        res.render("Admin/test");
-    } catch (error) {
-        console.log(error);
-    }
-}
+
+
+
+
+
 
 module.exports = {
     loginAuth,
     admin_login,
     get_dashboard_admin,
-    admin_logout,
+    
     // CRUD Responsable
     admin_get_AddResponsable,
     admin_Add_Responsable,
@@ -285,6 +283,10 @@ module.exports = {
     //afiche les admin_flights to admin
     admin_flights,
 
-    test
+
+    admin_logout,
+    
+
+   
 }
 ;

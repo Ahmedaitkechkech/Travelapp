@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+   <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/add-responsable.css">
+</head>
+<body>
+  <!-- Header -->
+  <%- include('../partials/header.ejs') %>
+  <!-- Header Ends!! -->
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Ajouter ticket</h5>
+          </div>
+
+          <div class="card-body">
+              <form action="/tickets" method="POST" enctype="multipart/form-data">
+              
+              <div class="row g-3">
+                
+
+
+                <div class="col-md-6">
+                  <label class="form-label">Name Compagnies</label>
+                  <input class="form-control" type="text" name="name_compagnies" placeholder="Entrez Nom Compagnies" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Prix</label>
+                  <input class="form-control" type="number" name="prix" placeholder="Entrez Prix" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Lieu Départ</label>
+                  <input class="form-control" type="text" name="lieu_depart" placeholder="Entrez Lieu Départ" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Lieu Arrivée</label>
+                  <input class="form-control" type="text" name="lieu_arrivee" placeholder="Entrez Lieu Arrivée" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Heure Départ</label>
+                  <input class="form-control" type="time" name="heure_depart" placeholder="Entrez Heure Départ" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Heure Arrivée</label>
+                  <input class="form-control" type="time" name="heure_arrivee" placeholder="Entrez Heure Arrivée" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Photo</label>
+                  <input class="form-control" type="file" name="photo" required>
+                </div>
+              </div>
+              
+              </div>
+
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary" style="margin: 10px;">Sauvegarder</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Footer -->
+  <%- include('../partials/footer.ejs') %>
+  <!-- Footer End !! -->
+</body>
+</html>
