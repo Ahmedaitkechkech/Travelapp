@@ -37,11 +37,7 @@ const responsableSchema = new Schema({
         type: String,
         required: false,
     },
-    type: {
-        type: String,
-        required: true,
-        enum: ['flight', 'car', 'hotel'],
-    },
+    
     createdAt: { type: Date, default: Date.now },
 });
 

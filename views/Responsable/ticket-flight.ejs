@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/Responables.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <%- include('../partials/header.ejs') %>
+  <!-- Header Ends!! -->
+
+  <div class="table-controls">  
+    <a href="tickets">
+      <button class="button-primary">
+        <i class="button-Ajoute"></i> Ajouter Ticket
+      </button>
+    </a>
+    <a href="/dashboard">
+      <i class="button-arrow"></i>
+    </a>
+  </div>
+
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th>photo</th>
+          <th>Name_companies</th>
+          <th>prix</th>
+          <th>lieu_depart</th>
+          <th>lieu_arrivee</th>
+          <th>heure_depart</th>
+          <th>heure_arrivee</th>
+          <th>Action</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        <% flightinfoTecket.forEach(flightinfoTecket => { %>
+        <tr>
+          <td><img src="<%= flightinfoTecket.photo %>" alt="Company Image"></td>
+          <td><%= flightinfoTecket.name_compagnies %></td>
+          <td><%= flightinfoTecket.prix %></td>
+          <td><%= flightinfoTecket.lieu_depart %></td>
+          <td><%= flightinfoTecket.lieu_arrivee %></td>
+          <td><%= flightinfoTecket.heure_depart %></td>
+          <td><%= flightinfoTecket.heure_arrivee %></td>
+         <td>
+            <a href="/edit-Ticket_flight/<%= flightinfoTecket._id %>" class="btn btn-sm btn-light mb-0">Edite</a>
+                       
+            <form action="/edit-Ticket_flight/<%= flightinfoTecket._id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

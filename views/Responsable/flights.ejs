@@ -13,9 +13,9 @@
  <%- include('../partials/header.ejs') %>
  <!-- Header Ends!! -->
     <div class="table-controls">  
-        <a href="add-responsable">
+        <a href="add-flight">
             <button class="button-primary">
-                <i class="button-Ajoute"></i> Ajouter Responsable
+                <i class="button-Ajoute"></i> Ajouter flight
             </button>
         </a>
         <a href="/dashboard">
@@ -30,31 +30,25 @@
         <table>
             <thead>
                 <tr>
-                    <th>Name_responsable</th>
-                    <th>Name_companies</th>
-                    <th>birthday</th>
-                    <th>tele</th>
-                    <th>birthplace</th>
-                    <th>Email</th>
                     <th>UserName</th>
-                    <th>action</th>
+                    <th>Name_companies</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                <% responsables.forEach(responsable => { %>
+                <% flightinfo.forEach(flightinfo => { %>
                 <tr>
-                    <td><%= responsable.name_Responsable %></td>
-                    <td><%= responsable.name_companies %></td>
-                    <td><%= responsable.birthday %></td>
-                    <td><%= responsable.num_tel %></td>
-                    <td><%= responsable.birthplace %></td>
-                    <td><%= responsable.email %></td>
-                    <td><%= responsable.username %></td>
+                    <td><%= flightinfo.username %></td>
+                    <td><%= flightinfo.name_companies %></td>
+                    <td><%= flightinfo.description %></td>
+                    
                    
                     <td>
-                        <a href="/edit-responsable/<%= responsable._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                        <a href="/edit-flight/<%= flightinfo._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
                        
-                        <form action="/edit-responsable/<%= responsable._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <form action="/edit-flight/<%= flightinfo._id %>?_method=DELETE" method="POST" style="display:inline;">
                             <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
                         </form>
                     </td>
