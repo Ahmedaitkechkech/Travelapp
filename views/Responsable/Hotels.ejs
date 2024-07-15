@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+   <!-- FontAwesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/Responables.css" rel="stylesheet">
+</head>
+<body>
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
+    <div class="table-controls">  
+        <a href="add-Hotel">
+            <button class="button-primary">
+                <i class="button-Ajoute"></i> Ajouter Hotel
+            </button>
+        </a>
+        <a href="/dashboard">
+            <i class="button-arrow"></i>
+        </a>
+    </div>
+    
+    
+   
+    <div class="card-body">
+  
+        <table>
+            <thead>
+                <tr>
+                    <th>Name_Hotel</th>
+                    <th>Adresse_Hotel</th>
+                    <th>Description</th>
+                    <th>UserName</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% Hotels.forEach(Hotel => { %>
+                <tr>
+                    <td><%= Hotel.Nom_Hotel %></td>
+                    <td><%= Hotel.Adresse_Hotel %></td>
+                    <td><%= Hotel.Username_Responsable %></td>
+                    <td><%= Hotel.Description %></td>
+                    <td>
+                        <a href="/edit-Hotel/<%= Hotel._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                       
+                        <form action="/edit-Hotel/<%= Hotel._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+        <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>
