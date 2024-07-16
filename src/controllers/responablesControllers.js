@@ -6,8 +6,9 @@ const flightshema = require("../models/flightsSchema");
 const Ticket_flight = require("../models/Ticket_flight"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const HotelReservSchema = require("../models/Hotel_ReserSchema")
 const jwtSecretraespo = process.env.jwtSecretraespo;
-
+const mongoose = require('mongoose');
 
 
 //get card respinsable and client
@@ -409,33 +410,115 @@ const responsable_get_AddHotelReservation = async (req, res) => {
         console.log(error);
     }
 }
-
-const responsable_AddHotelReservation =  async (req, res, next) => {
+const responsable_AddHotelReservation = async (req, res) => {
     try {
-      // Upload photo to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-  
-      // Create ticket with Cloudinary URL
-      const newTicket = new TicketFlight({
-        name_compagnies: req.body.name_compagnies,
-        photo: result.secure_url,
-        prix: req.body.prix,
-        lieu_depart: req.body.lieu_depart,
-        lieu_arrivee: req.body.lieu_arrivee,
-        heure_depart: req.body.heure_depart,
-        heure_arrivee: req.body.heure_arrivee,
-      });
-  
-      // Save ticket to database
-      await newTicket.save();
-  
-      // Respond with success
-      res.status(201).redirect("/tickets-flights")
-    } catch (err) {
-      console.error("Error creating ticket:", err);
-      res.status(500).json({ error: "Server error" });
+        const { Nom_Hotel, Date_Aller, Date_Retour, Nombre_Personne, Nombre_Chambre } = req.body;
+
+        
+        if (!Nom_Hotel) {
+            return res.status(400).send('Nom_Hotel is required.');
+        }
+
+        const hotel = await HotelSchema.findOne({Nom_Hotel:Nom_Hotel});
+
+        // Check if the hotel exists
+        if (!hotel) {
+            return res.status(404).send('Hotel not found.');
+        }
+
+        if (!req.file) {
+            return res.status(400).send('Photo is required.');
+        }
+
+        // Upload the photo to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+
+        // Create new HotelReservation instance
+        const reservation = new HotelReservSchema({
+            Nom_Hotel: hotel._id,  
+            Photo: result.secure_url,
+            Date_Aller,
+            Date_Retour,
+            Nombre_Personne,
+            Nombre_Chambre
+        });
+
+        // Save the reservation to the database
+        await reservation.save();
+
+        // Redirect or render success page
+        res.render("Responsable/HotelReservation");
+    } catch (error) {
+        console.log('Error creating reservation:', error);
+        res.status(500).send('Internal Server Error');
     }
-  };
+};
+
+
+const responsable_List_HotelReservation= async (req,res)=>{
+    try{
+    const ListHotel = await HotelReservSchema.find().sort({ createdAt: -1 });
+    res.render('Responsable/HotelReservation',{ListHotel});
+    }catch(error){
+        console.log(error);
+    }
+}
+const responsable_edit_HotelReservation_id = async (req,res)=>{
+    try{
+        const Hotel_ReservInfo = await HotelReservSchema.findOne({_id:req.params.id});
+        res.render("Responsable/edit_HotelReservation",{
+            Hotel_ReservInfo
+        });
+    }catch(error){
+        console.log(error);
+    }
+}
+const responsable_edit_HotelReservation = async (req, res) => {
+    try {
+        const { Nom_Hotel, Date_Aller, Date_Retour, Nomber_Personne, Nomber_Chamber } = req.body;
+        const updateObject = {};
+
+        if (Nom_Hotel) updateObject.Nom_Hotel = Nom_Hotel;
+        if (Date_Aller) updateObject.Date_Aller = Date_Aller;
+        if (Date_Retour) updateObject.Date_Retour = Date_Retour;
+        if (Nomber_Personne) updateObject.Nomber_Personne = Nomber_Personne;
+        if (Nomber_Chamber) updateObject.Nomber_Chamber = Nomber_Chamber;
+
+        if (req.file) {
+            // Upload new photo to Cloudinary
+            const result = await cloudinary.uploader.upload(req.file.path);
+            updateObject.Photo = result.secure_url;
+        }
+
+        await HotelReservSchema.findByIdAndUpdate(req.params.id, updateObject);
+        res.render("Responsable/HotelReservation");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const responsable_delete_HotelReservation = async (req, res) => {
+    try {
+        const reservation = await HotelReservSchema.findById(req.params.id);
+        
+        if (!reservation) {
+            return res.status(404).send('Reservation not found');
+        }
+
+        // If the reservation has a photo, delete it from Cloudinary
+        if (reservation.Photo) {
+            const public_id = reservation.Photo.split('/').pop().split('.')[0];
+            await cloudinary.uploader.destroy(public_id);
+        }
+
+        await HotelReservSchema.findByIdAndDelete(req.params.id);
+        res.render("Responsable/HotelReservation");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 module.exports = {
     login_responsable,
@@ -467,5 +550,10 @@ module.exports = {
     responsable_editHotell_id,
     responsable_deleteHotel,
     //Crud Hotel_Reservation
-responsable_get_HotelReservation,
+    responsable_get_AddHotelReservation,
+    responsable_AddHotelReservation,
+    responsable_List_HotelReservation,
+    responsable_edit_HotelReservation_id,
+    responsable_edit_HotelReservation,
+    responsable_delete_HotelReservation,
 };

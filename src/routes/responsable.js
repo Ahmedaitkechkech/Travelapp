@@ -1,13 +1,12 @@
 const { storage } = require("../../utils/cloudinary");
 const responablesControllers = require("../controllers/responablesControllers");
 const multer = require("multer");
-
-
 const express = require("express");
 const router = express.Router();
 const responsablecontoller = require("../controllers/responablesControllers");
-
 const { responsableMiddleware } = require("../middlewares/adminMiddleware");
+const { upload } = require("../../utils/cloudinary");
+
 
 router.get("/", responsablecontoller.get_card)
 
@@ -41,21 +40,6 @@ router.put("/edit-flight/:id",  responsablecontoller.admin_edit_responsable);
 
 /* Responsable delete flight */
 router.delete("/edit-flight/:id",  responsablecontoller.responsable_delete_flight);
-
-
-
-
-
-
-
-
-
-
-// Configure multer
-const upload = multer({ storage: storage });
-
-
-
 
 //get all ticket_flight
 router.get("/tickets-flights", responsablecontoller.ticket_flight)
@@ -92,5 +76,18 @@ router.get("/edit-Hotel/:id", responsablecontoller.responsable_editHotell_id);
 router.put("/edit-Hotel/:id", responsablecontoller.responsable_editHotel);
 // delete_hotelbyid
 router.delete("/edit-Hotel/:id", responsablecontoller.responsable_deleteHotel);
+/*----------- Hotel Reservation---------*/
+// get_Hotel Reservation
+router.get("/HotelReservation", responsablecontoller.responsable_List_HotelReservation);
+// get_AddHotelReservation
+router.get("/add-HotelReservation", responsablecontoller.responsable_get_AddHotelReservation);
+// Route to handle adding HotelReservation
+router.post("/add-HotelReservation", upload.single('photo'), responsablecontoller.responsable_AddHotelReservation);
+// edit_hotelReservationbyid
+router.get("/edit_HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation_id);
+// Route to handle editing HotelReservation
+router.put("/edit_HotelReservation/:id", upload.single('photo'), responsablecontoller.responsable_edit_HotelReservation);
+// delete_hotelReservationbyid
+router.delete("/edit_HotelReservation/:id", responsablecontoller.responsable_delete_HotelReservation);
 module.exports = router;
 

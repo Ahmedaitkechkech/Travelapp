@@ -9,7 +9,7 @@ const HotelSchema = new Schema({
          },
          Adresse_Hotel:{
             type:String,
-            require:true,
+            required:true,
             unique:true
             },
         Username_Responsable:{
