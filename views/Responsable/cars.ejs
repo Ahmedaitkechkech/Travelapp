@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+   <!-- FontAwesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/Responables.css" rel="stylesheet">
+</head>
+<body>
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
+    <div class="table-controls">  
+        <a href="add-car">
+            <button class="button-primary">
+                <i class="button-Ajoute"></i> Ajouter car
+            </button>
+        </a>
+        <a href="/dashboard">
+            <i class="button-arrow"></i>
+        </a>
+    </div>
+    
+    
+   
+    <div class="card-body">
+  
+        <table>
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>UserName</th>
+                    <th>Car Model</th>
+                    <th>Nombre Seats</th>
+                    <th>Prix</th>
+                    <th>Type</th>
+                    <th>Lieu de Ramassage</th>
+                    <th>Date de Ramassage</th>
+                    <th>Temps</th>
+                    <th>Name Companies</th>
+                    <th>Name Car</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% cars.forEach(car => { %>
+                  <tr>
+                    <td><img src="<%= car.photo %>" alt="Car Photo" style="width:50%; height: 30%;"></td>
+                    <td><%= car.username %></td>
+                    <td><%= car.car_model %></td>
+                    <td><%= car.nombre_seats %></td>
+                    <td><%= car.prix %></td>
+                    <td><%= car.type %></td>
+                    <td><%= car.Lieu_de_ramassage %></td>
+                    <td><%= car.Date_de_ramassage %></td>
+                    <td><%= car.Temps %></td>
+                    <td><%= car.name_companies %></td>
+                    <td><%= car.name_car %></td>
+                    <td><%= car.description %></td>
+                    <td>
+                      <a href="/edite-car/<%= car._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                      <form action="/edite-car/<%= car._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
+                      </form>
+                    </td>
+                  </tr>               
+                   <% }); %>
+            </tbody>
+        </table>
+    </div>
+        <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>

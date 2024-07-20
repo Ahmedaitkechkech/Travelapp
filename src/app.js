@@ -51,6 +51,7 @@ app.set("view engine", "ejs");
 
 app.use("/", require("./routes/admin"));
 app.use("/", require("./routes/responsable"));
+app.use("/", require("./routes/client"));
 
 
 //test client affiche ligin and register
@@ -58,28 +59,6 @@ app.use("/", require("./routes/responsable"));
 
 
 
-app.get("/login",(req,res) => {
-    try {
-        res.render("client/login", {
-            title: "clinet",
-            query: req.query,
-            messages: req.flash(),
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
-app.get("/register",(req,res) => {
-    try {
-        res.render("client/Signup", {
-            title: "clinet",
-            query: req.query,
-            messages: req.flash(),
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
 
 // Start the server
 const PORT = process.env.PORT ;

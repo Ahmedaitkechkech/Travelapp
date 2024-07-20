@@ -1,9 +1,10 @@
-const TicketFlight = require("../models/Ticket_flight");
 const { cloudinary } = require("../../utils/cloudinary");
 
 const Responsableshema = require("../models/responsableShema"); 
 const flightshema = require("../models/flightsSchema"); 
 const Ticket_flight = require("../models/Ticket_flight"); 
+const carsShema = require("../models/carsShema"); 
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecretraespo = process.env.jwtSecretraespo;
@@ -78,6 +79,7 @@ const responsable_login = async (req, res) => {
             default:
                 const responsableToken = jwt.sign({ responsableId: responsable._id }, jwtSecretraespo);
                 res.cookie("responsableToken", responsableToken, { httpOnly: true });
+                req.session.username = responsable.username;
                 res.status(200).redirect("/dashboard-Responsable");
                 break;
         }
@@ -117,7 +119,7 @@ const responsable_get_Addflight = async (req, res) => {
 // get all flight
 const responsable_flight = async (req, res) => {
     try {
-        const flightinfo = await flightshema.find().sort({ createdAt: -1 });
+        const flightinfo = await flightshema.find({ username: req.session.username }).sort({ createdAt: -1 });
         res.render('Responsable/flights', {
             title: "Espace privé resmpnsable",
             flightinfo,
@@ -139,7 +141,9 @@ const responsable_Add_flight = async (req, res) => {
         }
 
         const newFlight = new flightshema({
-            username, name_companies, description
+            username: req.session.username,
+
+             name_companies, description
         });
 
         await newFlight.save();
@@ -217,14 +221,16 @@ const get_addTicket = async (req, res) => {
 
 
 
-// responsable-add-TicketFlight
+// Handle ticket creation
 const createTicketFlight = async (req, res, next) => {
   try {
     // Upload photo to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
 
     // Create ticket with Cloudinary URL
-    const newTicket = new TicketFlight({
+    const newTicket = new Ticket_flight({
+        username: req.session.username,
+
       name_compagnies: req.body.name_compagnies,
       photo: result.secure_url,
       prix: req.body.prix,
@@ -249,7 +255,7 @@ const createTicketFlight = async (req, res, next) => {
 //get all ticket to responsable
 const ticket_flight = async (req, res) => {
     try {
-        const flightinfoTecket = await Ticket_flight.find().sort({ createdAt: -1 });
+        const flightinfoTecket = await Ticket_flight.find({ username: req.session.username }).sort({ createdAt: -1 });
         res.render('Responsable/ticket-flight.ejs', {
             title: "Espace privé resmpnsable",
             flightinfoTecket,
@@ -274,8 +280,9 @@ const responsable_edit_ticket_flight_id = async (req, res) => {
 //edit in base bd
 const editTicketFlight = async (req, res) => {
     try {
-        const { name_compagnies,prix, lieu_depart, lieu_arrivee,heure_depart,heure_arrivee } = req.body;
-
+        const { name_compagnies, prix, lieu_depart, lieu_arrivee, heure_depart, heure_arrivee } = req.body;
+        
+      
     
         const updateObject = {};
         if (name_compagnies) updateObject.name_compagnies = name_compagnies;
@@ -284,25 +291,22 @@ const editTicketFlight = async (req, res) => {
         if (lieu_arrivee) updateObject.lieu_arrivee = lieu_arrivee;
         if (heure_depart) updateObject.heure_depart = heure_depart;
         if (heure_arrivee) updateObject.heure_arrivee = heure_arrivee;
-       
-        
-
-        await Ticket_flight.findByIdAndUpdate(req.params.id, updateObject);
-
-        res.send("edite succes in base de donne");
-    } catch (error) {
-        console.log(error);
-    }
-};
-      
-
-      
-        
-
     
-
-
-
+        if (req.file) {
+          const result = await cloudinary.uploader.upload(req.file.path);
+          updateObject.photo = result.secure_url;
+        }
+    
+         await Ticket_flight.findByIdAndUpdate(req.params.id, updateObject, { new: true });
+    
+      
+        res.redirect("/tickets-flights");
+      } catch (error) {
+        console.error("Error editing ticket:", error);
+        res.status(500).json({ error: "Server error" });
+      }
+    };
+      
 // delete Ticket-flight
 const responsable_delete_Ticket_flight= async (req, res) => {
     try {
@@ -313,6 +317,130 @@ const responsable_delete_Ticket_flight= async (req, res) => {
     }
 };
 
+//responsable get view add-car
+const responsable_get_add_car = async (req, res) => {
+    try {
+        res.render("Responsable/add-car", {
+            title: "Espace privé Admin",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const responsable_add_car = async (req, res, next) => {
+    try {
+      // Upload photo to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+  
+      // Create ticket with Cloudinary URL
+      const newCar = new carsShema({
+          username: req.session.username,
+  
+          name_companies: req.body.name_companies,
+        photo: result.secure_url,
+        prix: req.body.prix,
+        car_model:req.body.car_model,
+        nombre_seats: req.body.nombre_seats,
+        type: req.body.type,
+        Lieu_de_ramassage: req.body.Lieu_de_ramassage,
+        Date_de_ramassage: req.body.Date_de_ramassage,
+        Temps: req.body.Temps,
+        name_car: req.body.name_car,
+        description: req.body.description,
+      });
+  
+      // Save car to database
+      await newCar.save();
+  
+      // Respond with success
+      res.status(201).redirect("/cardcar")
+    } catch (err) {
+      console.error("Error creating car:", err);
+      res.status(500).json({ error: "Server error" });
+    }
+  };
+
+
+// get all cars
+const responsable_get_cars = async (req, res) => {
+    try {
+        const cars = await carsShema.find({ username: req.session.username }).sort({ createdAt: -1 });
+        res.render('Responsable/cars', {
+            title: "Espace privé resmpnsable",
+            cars,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+//responsable_edit_car_id get view add
+const responsable_edit_car_id = async (req, res) => {
+    try {
+        const carinfo = await carsShema.findOne({ _id: req.params.id });
+        res.render("Responsable/edite-car", {
+            carinfo,
+            title: "Espace privé resmpnsable",
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+/****************************************************** */
+// responsable_edit_car by id
+const responsable_edit_car = async (req, res) => {
+    try {
+        const { name_companies, prix, Lieu_de_ramassage, Date_de_ramassage,car_model, name_car,type,description,nombre_seats,Temps } = req.body;
+        
+      
+    
+        const updateObject = {};
+        if (name_companies) updateObject.name_companies = name_companies;
+        if (prix) updateObject.prix = prix;
+        if (Lieu_de_ramassage) updateObject.Lieu_de_ramassage = Lieu_de_ramassage;
+        if (Date_de_ramassage) updateObject.Date_de_ramassage = Date_de_ramassage;
+        if (name_car) updateObject.name_car = name_car;
+        if (type) updateObject.type = type;
+        if (description) updateObject.description = description;
+        if (car_model) updateObject.car_model = car_model;
+        if (nombre_seats) updateObject.nombre_seats = nombre_seats;
+        if (Temps) updateObject.Temps = Temps;
+    
+        if (req.file) {
+          const result = await cloudinary.uploader.upload(req.file.path);
+          updateObject.photo = result.secure_url;
+        }
+    
+         await carsShema.findByIdAndUpdate(req.params.id, updateObject, { new: true });
+    
+      
+        res.redirect("/cardcar");
+      } catch (error) {
+        console.error("Error editing  car:", error);
+        res.status(500).json({ error: "Server error" });
+      }
+};
+
+
+
+
+// delete car
+const responsable_delete_car = async (req, res) => {
+    try {
+        await carsShema.deleteOne({ _id: req.params.id });
+        res.redirect("/cardcar");
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
+
+
+
 //logout responsable 
 
 const responsable_logout = (req, res) => {
@@ -322,8 +450,21 @@ const responsable_logout = (req, res) => {
 
 
 
+//card car
+const cardcar = async (req, res) => {
+    const cars = await carsShema.find({ username: req.session.username }).sort({ createdAt: -1 });
 
+    try {
+        res.render("Responsable/cardcar", {
+            title: "Espace privé Reasponsable",
+            cars
 
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
 
@@ -350,6 +491,17 @@ module.exports = {
     responsable_edit_ticket_flight_id,
     editTicketFlight,
     responsable_delete_Ticket_flight,
+
+    //CRUD cars
+    responsable_get_add_car,
+    responsable_add_car,
+    responsable_get_cars,
+    responsable_edit_car_id,
+    responsable_edit_car,
+    responsable_delete_car,
+
+   //test card
+   cardcar,
     
 
     responsable_logout,

@@ -8,6 +8,10 @@ const Ticket_flightSchema = new Schema({
         required: true,
         ref: "flight" 
     },
+    username :{
+        type: String, 
+        required: false,
+    },
     photo: {
         type: String, 
         required: true,
