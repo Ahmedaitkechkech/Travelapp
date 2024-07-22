@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+  
+  <link rel="stylesheet" href="/css/add-responsable.css">
+  <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Edite Responsable</h5>
+          </div>
+
+          <div class="card-body">
+            <form method="POST" action="/edit-Hotel/<%= HotelInfo._id %>?_method=PUT">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nom Hotel</label>
+                  <input value="<%= HotelInfo.Nom_Hotel %>" class="form-control" type="text" name="Nom_Hotel" placeholder="Entrez Nom Entreprises">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Adresse_Hotel</label>
+                  <input value="<%= HotelInfo.Adresse_Hotel %>" class="form-control" type="text" name="Adresse_Hotel" placeholder="Entrez Lieu de Naissance">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Username_Responsable</label>
+                  <input value="<%= HotelInfo.Username_Responsable %>" class="form-control" type="text" name="Username_Responsable" placeholder="Entrez Date de Naissance">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Description</label>
+                  <input value="<%= HotelInfo.Description %>" class="form-control" type="text" name="Description" placeholder="Entrez Numéro de Téléphone">
+                </div>
+
+              </div>
+
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Souvgarder</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- JavaScript and dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>
