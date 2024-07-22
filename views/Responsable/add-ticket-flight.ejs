@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Example</title>
+  <title><%= title %></title>
    <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/add-responsable.css">
@@ -17,7 +17,7 @@
       <div class="container">
         <div class="card shadow">
           <div class="card-header border-bottom">
-            <h5 class="mb-0">Ajouter ticket</h5>
+            <h5 class="mb-0">Ajouter ticket Flight</h5>
           </div>
 
           <div class="card-body">
@@ -51,6 +51,10 @@
                 <div class="col-md-6">
                   <label class="form-label">Heure Arrivée</label>
                   <input class="form-control" type="time" name="heure_arrivee" placeholder="Entrez Heure Arrivée" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">username</label>
+                  <input class="form-control" type="text" name="username" placeholder="Entrez Nom d'utilisateur">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Photo</label>
