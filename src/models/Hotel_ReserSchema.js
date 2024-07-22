@@ -7,20 +7,29 @@ const HotelReservSchema = new Schema({
         ref: 'HotelSchema',
         required: true
     },
-    Photo: {
+    Nom:{
         type: String,
         required: true
     },
-    Date_Aller: {
+    Prénom: {
         type: String,
         required: true
     },
-    Date_Retour: {
+    Numéro_Téléphone:{
+        type: String,
+        required: true
+    },
+    Date_entre: {
+        type: String,
+        required: true
+    },
+    Date_sortie: {
         type: String,
         required: true
     },
     Nombre_Personne: {
         type: Number,
+        required: true
     },
     Nombre_Chambre: {
         type: Number,

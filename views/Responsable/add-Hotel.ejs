@@ -21,7 +21,7 @@
           </div>
 
           <div class="card-body">
-            <form action="/add-Hotel" method="POST">
+            <form action="/add-Hotel" method="POST" enctype="multipart/form-data">
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Nom Hotel</label>
@@ -36,11 +36,18 @@
                     <label class="form-label"> Nom de Responsable</label>
                     <input class="form-control" type="text" name="Username_Responsable" placeholder=" Description">
                   </div>
+                  <div class="col-md-6">
+                    <label class="form-label"> Prix</label>
+                    <input class="form-control" type="text" name="Prix" placeholder=" Prix">
+                  </div>
                  <div class="col-md-6">
                   <label class="form-label"> Description</label>
                   <input class="form-control" type="text" name="Description" placeholder=" Description">
                 </div>
-
+                <div class="col-md-6">
+                  <label class="form-label">Photo</label>
+                  <input class="form-control" type="file" name="photo" required>
+                </div>
               <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Souvgarder</button>
               </div>

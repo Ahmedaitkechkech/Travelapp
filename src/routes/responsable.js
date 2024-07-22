@@ -69,25 +69,22 @@ router.get("/Hotels", responsablecontoller.responsable_get_Hotels);
 // get_AddHotel
 router.get("/add-Hotel", responsablecontoller.responsable_get_AddHotel);
 // Add_Hotel
-router.post("/add-Hotel", responsablecontoller.responsable_AddHotel);
+router.post("/add-Hotel",upload.single('photo'), responsablecontoller.responsable_AddHotel);
 // edit_hotelbyid
 router.get("/edit-Hotel/:id", responsablecontoller.responsable_editHotell_id);
 // edit_hotel
-router.put("/edit-Hotel/:id", responsablecontoller.responsable_editHotel);
+router.put("/edit-Hotel/:id",upload.single('photo'), responsablecontoller.responsable_editHotel);
 // delete_hotelbyid
 router.delete("/edit-Hotel/:id", responsablecontoller.responsable_deleteHotel);
 /*----------- Hotel Reservation---------*/
-// get_Hotel Reservation
+
+// Hotel reservations routes
 router.get("/HotelReservation", responsablecontoller.responsable_List_HotelReservation);
-// get_AddHotelReservation
 router.get("/add-HotelReservation", responsablecontoller.responsable_get_AddHotelReservation);
-// Route to handle adding HotelReservation
-router.post("/add-HotelReservation", upload.single('photo'), responsablecontoller.responsable_AddHotelReservation);
-// edit_hotelReservationbyid
-router.get("/edit_HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation_id);
-// Route to handle editing HotelReservation
-router.put("/edit_HotelReservation/:id", upload.single('photo'), responsablecontoller.responsable_edit_HotelReservation);
-// delete_hotelReservationbyid
-router.delete("/edit_HotelReservation/:id", responsablecontoller.responsable_delete_HotelReservation);
+router.post("/add-HotelReservation", responsablecontoller.responsable_AddHotelReservation);
+router.get("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation_id);
+router.put("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation);
+router.delete("/edit-HotelReservation/:id", responsablecontoller.responsable_delete_HotelReservation);
+
 module.exports = router;
 

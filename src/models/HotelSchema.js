@@ -7,15 +7,23 @@ const HotelSchema = new Schema({
             required:true,
             unique:true
          },
+         Photo: {
+            type: String,
+            required: true
+        },
          Adresse_Hotel:{
             type:String,
             required:true,
-            unique:true
+            
             },
         Username_Responsable:{
             type:String,
             required:true,
             unique:true
+        },
+        Prix:{
+            type:Number,
+            required:true,
         },
         Description:{
             type:String,

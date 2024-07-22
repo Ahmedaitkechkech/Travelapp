@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travelista Tours Login</title>
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="TravelLoginPage">
@@ -18,23 +17,28 @@
         <div class="right-side">
             <h1 class="welcome">Welcome</h1>
             <p class="login-with-email">Register with Email</p>
-            <form>
+            <form action="/Signup" method="post">
                 <div class="input-group">
-                    <label for="email">Entre Email Id</label>
-                    <input type="email" id="email" placeholder="example@mail.com">
+                    <label for="username">Enter username</label>
+                    <input type="username" id="username" name="username" placeholder="Username" required>
                     <img src="/img/Message_Icon.png" alt="Mail Icon" class="icon">
                 </div>
                 <div class="input-group">
-                    <label for="password">Entre Password</label>
-                    <input type="password" id="password" placeholder="password">
+                <label for="email">Enter Email Id</label>
+                <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                <img src="/img/Message_Icon.png" alt="Mail Icon" class="icon">
+                </div>
+                <div class="input-group">
+                    <label for="password">Enter Password</label>
+                    <input type="password" id="password" name="password" placeholder="password" required>
                     <img src="/img/lock_icon.png" alt="Lock Icon" class="icon">
                 </div>
                 <div class="input-group">
-                    <label for="password">Confirm Password</label>
-                    <input type="password" id="password" placeholder="password">
+                    <label for="Confirm_Password">Confirm Password</label>
+                    <input type="password" id="Confirm_Password" name="Confirm_Password" placeholder="password" required>
                     <img src="/img/lock_icon.png" alt="Lock Icon" class="icon">
                 </div>
-                <button type="submit" class="login-btn">LOGIN</button>
+                <button type="submit" class="login-btn">SIGN UP</button>
                 <div class="or-divider"><span>OR</span></div>
                 <div class="google-btn">
                     <img src="/img/google_icon.png" alt="Google Logo" class="Google-icon">
@@ -42,18 +46,17 @@
                 </div>
             </form>
             <div class="register-link">
-                <span>Already a member? Log in</span>
+                <span>Already a member? <a href="/login">Log in</a></span>
             </div>
         </div>
         <div class="blue-icons">
             <img src="/img/3.png" alt="Icon 1" class="icon-1">
             <img src="/img/1.png" alt="Icon 2" class="blue-icon icon-2">
             <img src="/img/2.png" alt="Icon 3" class="blue-icon icon-3">
-
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

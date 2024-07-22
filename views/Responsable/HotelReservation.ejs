@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Example</title>
+  <title>Hotel Reservations</title>
    <!-- FontAwesome -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="/css/Responables.css" rel="stylesheet">
@@ -12,10 +12,11 @@
  <!-- Header -->
  <%- include('../partials/header.ejs') %>
  <!-- Header Ends!! -->
+ 
     <div class="table-controls">  
-        <a href="add-Hotel">
+        <a href="add-HotelReservation">
             <button class="button-primary">
-                <i class="button-Ajoute"></i> Ajouter Hotel
+                <i class="button-Ajoute"></i> Ajouter Réservation
             </button>
         </a>
         <a href="/dashboard">
@@ -23,42 +24,45 @@
         </a>
     </div>
     
-    
-   
     <div class="card-body">
-  
         <table>
             <thead>
                 <tr>
-                    <th>Name_Hotel</th>
-                    <th>Adresse_Hotel</th>
-                    <th>UserName</th>
-                    <th>Description</th>
-                    <th>action</th>
+                    <th>Nom de l'Hôtel</th>
+                    <th>Nom du client</th>
+                    <th>Prénom du client</th>
+                    <th>Numéro de Téléphone</th>
+                    <th>Date d'entrée</th>
+                    <th>Date de sortie</th>
+                    <th>Nombre de Personnes</th>
+                    <th>Nombre de Chambres</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <% Hotels.forEach(Hotel => { %>
+                <% ListHotel.forEach(reservation => { %>
                 <tr>
-                    <td><%= Hotel.Nom_Hotel %></td>
-                    <td><%= Hotel.Adresse_Hotel %></td>
-                    <td><%= Hotel.Username_Responsable %></td>
-                    <td><%= Hotel.Description %></td>
+                    <td><%= reservation.Nom_Hotel.Nom_Hotel %></td>
+                    <td><%= reservation.Nom %></td>
+                    <td><%= reservation.Prénom %></td>
+                    <td><%= reservation.Numéro_Téléphone %></td>
+                    <td><%= reservation.Date_entre %></td>
+                    <td><%= reservation.Date_sortie %></td>
+                    <td><%= reservation.Nombre_Personne %></td>
+                    <td><%= reservation.Nombre_Chambre %></td>
                     <td>
-                        <a href="/edit-Hotel/<%= Hotel._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
-                       
-                        <form action="/edit-Hotel/<%= Hotel._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <a href="/edit-HotelReservation/<%= reservation._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
+                        <form action="/edit-HotelReservation/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
                             <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
                         </form>
                     </td>
-                    
-                    
                 </tr>
                 <% }); %>
             </tbody>
         </table>
     </div>
-        <%- include('../partials/footer.ejs') %>
+
+    <%- include('../partials/footer.ejs') %>
 
 </body>
 </html>

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Example</title>
-   <!-- FontAwesome -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="/css/Responables.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Listings</title>
+      <!-- FontAwesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/Hotels.css">
 </head>
 <body>
- <!-- Header -->
- <%- include('../partials/header.ejs') %>
- <!-- Header Ends!! -->
+    <%- include('../partials/header.ejs') %>
+
     <div class="table-controls">  
         <a href="add-Hotel">
             <button class="button-primary">
@@ -22,43 +21,28 @@
             <i class="button-arrow"></i>
         </a>
     </div>
-    
-    
-   
-    <div class="card-body">
-  
-        <table>
-            <thead>
-                <tr>
-                    <th>Name_Hotel</th>
-                    <th>Adresse_Hotel</th>
-                    <th>UserName</th>
-                    <th>Description</th>
-                    <th>action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% Hotels.forEach(Hotel => { %>
-                <tr>
-                    <td><%= Hotel.Nom_Hotel %></td>
-                    <td><%= Hotel.Adresse_Hotel %></td>
-                    <td><%= Hotel.Username_Responsable %></td>
-                    <td><%= Hotel.Description %></td>
-                    <td>
-                        <a href="/edit-Hotel/<%= Hotel._id %>" class="btn btn-sm btn-light mb-0">Edit</a>
-                       
-                        <form action="/edit-Hotel/<%= Hotel._id %>?_method=DELETE" method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                    
-                    
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
-        <%- include('../partials/footer.ejs') %>
+    <div class="content">
+        <div class="container">
+            <h2>My Listings <span class="item-count">5 Items</span></h2>
+            <% Hotels.forEach(Hotel => { %>
+            <div class="listing">
+                <img src="<%= Hotel.Photo %>" alt="<%= Hotel.Nom_Hotel %>">
+                <div class="listing-details">
+                    <h3><%= Hotel.Nom_Hotel %></h3>
+                    <p><span class="location"><%= Hotel.Adresse_Hotel %></span></p>
+                    <p><span class="price">$<%= Hotel.Prix %></span>/day</p>
+                </div>
+                <div class="actions">
+                    <a href="/edit-Hotel/<%= Hotel._id %>" class="btn btn-sm btn-light mb-0"  >Edit</a>
 
+                    <form action="/edit-Hotel/<%= Hotel._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button class="btn btn-sm btn-danger mb-0">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <%- include('../partials/Footer.ejs') %>
 </body>
 </html>
