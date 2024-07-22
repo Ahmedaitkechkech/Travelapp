@@ -367,7 +367,7 @@ const responsable_add_car = async (req, res, next) => {
 const responsable_get_cars = async (req, res) => {
     try {
         const cars = await carsShema.find({ username: req.session.username }).sort({ createdAt: -1 });
-        res.render('Responsable/cars', {
+        res.render('Responsable/cardcar', {
             title: "Espace privé resmpnsable",
             cars,
         });
@@ -679,7 +679,7 @@ module.exports = {
     responsable_delete_car,
 
    //test card
-   cardcar,
+   
     //crud Hotel
     responsable_logout,
     responsable_get_AddHotel,

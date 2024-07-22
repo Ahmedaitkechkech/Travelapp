@@ -7,6 +7,7 @@ const { responsableMiddleware } = require("../middlewares/responsableMiddleware"
 const { upload } = require("../../utils/cloudinary");
 
 
+
 router.get("/", responsablecontoller.get_card)
 
 //get view login
@@ -40,8 +41,7 @@ router.put("/edit-flight/:id", responsableMiddleware,  responsablecontoller.admi
 /* Responsable delete flight */
 router.delete("/edit-flight/:id", responsableMiddleware,  responsablecontoller.responsable_delete_flight);
 
-// Configure multer
-const upload = multer({ storage: storage });
+
 //get all ticket_flight
 router.get("/tickets-flights", responsableMiddleware, responsablecontoller.ticket_flight)
 
@@ -65,7 +65,7 @@ router.get("/add-car", responsableMiddleware, responsablecontoller.responsable_g
 //store  bcar in base de donee
 router.post("/add-car",responsableMiddleware,upload.single('photo'), responsablecontoller.responsable_add_car)
 //get all cars
-router.get("/cardcar",responsableMiddleware, responsablecontoller.cardcar)
+router.get("/cardcar",responsableMiddleware, responsablecontoller.responsable_get_cars)
 //get view edit chaque car by id
 router.get("/edite-car/:id", responsableMiddleware,  responsablecontoller.responsable_edit_car_id);
 
