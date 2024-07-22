@@ -52,6 +52,13 @@ router.get("/admin_flights", adminMiddleware, adminTravel.admin_flights);
 router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
 
 
+/*AgentList*/ 
+router.get("/agent-list", adminMiddleware, adminTravel.admin_get_allAgennt_list);
+router.get('/agent-list/:id', adminMiddleware, adminTravel.admin_get_Agent_by_id);
+
+
+
+
 /*logout admin*/
 router.get("/logout", adminMiddleware, adminTravel.admin_logout);
 

@@ -1,5 +1,7 @@
 const Admintravel = require("../models/AdminTravelSchema");
 const Responsable = require("../models/responsableShema"); 
+const Car = require("../models/carsShema"); 
+const Flight = require("../models/Ticket_flight"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
@@ -253,9 +255,59 @@ const admin_flights = async (req, res) => {
 };
 
 
+//admin get agentList
 
 
+const admin_get_allAgennt_list = async (req, res) => {
+    try {
+        const agents = await Responsable.find();
+        
 
+        const agentDetails = await Promise.all(agents.map(async agent => {
+            const flightCount = await Flight.countDocuments({ username: agent.username });
+            const carCount = await Car.countDocuments({ username: agent.username });
+
+            return {
+                ...agent.toObject(),
+                flightCount,
+                carCount,
+            };
+        }));
+
+        res.render("admin/agantList", { title:"place admin",
+            agents: agentDetails });
+    } catch (err) { 
+        res.status(500).send(err.message);
+    }
+};
+
+
+const admin_get_Agent_by_id = async (req, res) => {
+    try {
+        const agentId = req.params.id; // Assuming the agent ID is passed as a URL parameter
+        const agent = await Responsable.findById(agentId);
+
+        if (!agent) {
+            return res.status(404).send("Agent not found");
+        }
+
+        // Count the number of flights and cars for the agent
+        const flightCount = await Flight.countDocuments({ username: agent.username });
+        const carCount = await Car.countDocuments({ username: agent.username });
+
+        res.render("admin/detail-Agent", {
+            agent: {
+                ...agent.toObject(),
+                flightCount,
+                carCount,
+            },
+            title: "Espace privé Admin",
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server error");
+    }
+};
 
 
 
@@ -283,6 +335,9 @@ module.exports = {
     //afiche les admin_flights to admin
     admin_flights,
 
+    //Agent List
+    admin_get_allAgennt_list,
+    admin_get_Agent_by_id,
 
     admin_logout,
     
