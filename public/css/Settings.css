@@ -2,10 +2,10 @@
 
 /* General styling */
 body {
-    background-color: #f8f9fa;
     color: #212529;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+   
+   
 }
 
 /* Card styling */
@@ -16,10 +16,11 @@ body {
     max-width: 800px; /* Largeur maximale de la carte */
     min-height: 800px; /* Hauteur minimale de la carte */
     margin: auto; /* Centrer la carte horizontalement */
+    
 }
 
 .card-header {
-    background-color:white;
+    background-color:gray;
     color :#009EE2;
     border-radius: 12px;
 }
@@ -72,3 +73,17 @@ body {
     font-size: 0.9rem;
 }
 
+.table-controls {
+    display: flex;
+    justify-content: space-between; /* Align controls to the right */
+    padding: 10px 70px;
+    margin-bottom: 1px;
+}
+
+.arrow{
+    font-size: 25px;
+}
+.arrow a{
+    font-size: 30px;
+    color: black;
+}

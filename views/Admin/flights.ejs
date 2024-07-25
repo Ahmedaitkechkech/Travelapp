@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clients</title>
-    <link rel="stylesheet" href="/css/Responables.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+   <!-- FontAwesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
    
+  <link href="/css/Responables.css" rel="stylesheet">
 </head>
+<style>
+    .table-controls {
+    display: flex;
+    justify-content: space-between; /* Align controls to the right */
+    padding: 10px 70px;
+    margin-bottom: 1px;
+}
+
+
+
+.arrow{
+    font-size: 25px;
+}
+.arrow a{
+    font-size: 30px;
+    color: black;
+}
+</style>
 <body>
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
 
-   
-      
+ <div class="table-controls">  
 
-    
-     <!-- Header -->
-     <%- include('../partials/header.ejs') %>
-     <!-- Header Ends!! -->
-    
-    
+    <div class="arrow">
+        <a href="/dashboard">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+</div> 
+
    
     <div class="card-body">
+
   
         <table>
             <thead>
                 <tr>
-                    <th>Name_responsable</th>
-                    <th>Name_companies</th>
-                    <th>birthday</th>
-                    <th>tele</th>
-                    <th>birthplace</th>
-                    <th>Email</th>
-                    <th>UserName</th>
-                    <th>type</th>
-                    <th>action</th>
+                    <th>Photo</th>
+                    <th>name_compagnies</th>
+                    <th>username</th>
+                    <th>prix</th>
+                    <th>lieu_depart</th>
+                    <th>lieu_arrivee</th>
+                    <th>heure_depart</th>
+                    <th>heure_arrivee</th>
+                   
+                    
                 </tr>
             </thead>
             <tbody>
-                
+                <% flights.forEach(flight => { %>
                 <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
+                    <td><img src="<%= flight.photo %>" alt="<%= flight.name_compagnies %>"></td>  
+                    <td><%= flight.name_compagnies %></td>
+                    <td><%= flight.username %></td>
+                    <td><%= flight.prix %></td>
+                    <td><%= flight.lieu_depart %></td>
+                    <td><%= flight.lieu_arrivee %></td>
+                    <td><%= flight.heure_depart %></td>
+                    <td><%= flight.heure_arrivee %></td>
+                    
+                   
+                   
+                    
+                    
                 </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-             
-               
+                <% }); %>
             </tbody>
         </table>
     </div>
-    <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
 
 </body>
 </html>

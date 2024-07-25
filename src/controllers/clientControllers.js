@@ -2,7 +2,7 @@ const ClientSchema = require("../models/ClientSchema");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecretClient = process.env.jwtSecretClient;
-
+const ClientReview = require('../models/clientReviewSchema');
 
 const Signup_Client = async (req, res) => {
     try {
@@ -58,7 +58,7 @@ const login_client = async (req, res) => {
             errorType = "missingCredentials";
         } else {
              client = await ClientSchema.findOne({ email });
-            console.log(client);
+          
             if (!client) {
                 errorType = "emailNotFound";
             } else if (password.length < 5) {
@@ -82,8 +82,10 @@ const login_client = async (req, res) => {
                 return res.status(401).json({ error: "Password is incorrect." });
             default:
                 const clientToken = jwt.sign({ clientId: client._id }, jwtSecretClient);
+                req.session.username = client.username;
+             
                 res.cookie("clientToken", clientToken, { httpOnly: true });
-                return res.status(200).json({ message: "Login successful." });
+                 res.status(200).redirect('/get-allReview');
         }
     } catch (error) {
         console.log(error);
@@ -92,9 +94,61 @@ const login_client = async (req, res) => {
 };
 
 
+//  form to add a new review
+const getAddReview = async  (req, res) => {
+
+        const username = req.session.username;
+        
+       
+
+        const reviews = await ClientReview.find({ username });
+    res.render('client/add-review', { title: 'Add Review',
+        reviews
+     });
+};
+
+//  POST request to add a new review
+const postAddReview = async (req, res) => {
+   
+        const { username,reviewText, rating } = req.body;
+    
+        
+    
+        try {
+            const newReview = new ClientReview({
+                username, 
+                reviewText,
+                rating,
+               
+            });
+            await newReview.save();
+            res.redirect('/get-allReview'); 
+        } catch (err) {
+            console.error(err);
+            res.render('error', { message: 'Error adding review' });
+        }
+    };
+    
+
+
+//   delete a review
+const deleteReview = async (req, res) => {
+  
+    try {
+        await ClientReview.findByIdAndDelete(req.params.id);
+        res.redirect('/get-allReview'); 
+    } catch (err) {
+        console.error(err);
+        res.render('error', { message: 'Error deleting review' });
+    }
+};
+
 module.exports = {
     Signup_Client,
     Signup,
     login_client,
-    login
+    login,
+    getAddReview,
+    postAddReview,
+    deleteReview,
 }

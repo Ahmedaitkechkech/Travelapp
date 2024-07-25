@@ -16,7 +16,7 @@ const HotelSchema = new Schema({
             required:true,
             
             },
-        Username_Responsable:{
+        username:{
             type:String,
             required:true,
             unique:true

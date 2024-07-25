@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+   <!-- FontAwesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/Responables.css" rel="stylesheet">
+</head>
+<body>
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
+ 
+    <div class="table-controls">  
+        <a href="carReservation">
+            <button class="button-primary">
+                <i class="button-Ajoute"></i> Ajouter Réservation
+            </button>
+        </a>
+        <a href="/dashboard">
+            <i class="button-arrow"></i>
+        </a>
+    </div>
+    
+    <div class="card-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>name_companies</th>
+                    <th>nombre_jour</th>
+                    <th>prix_total</th>
+                    <th>Email</th>
+                    <th>genre</th>
+                    <th>tele</th>
+                    <th>Action</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% ListCar.forEach(ListCar => { %>
+                <tr>
+                    <td><img src=<%= ListCar.name_companies.photo %> alt=""></td>
+                    <td><%= ListCar.nombre_jour %></td>
+                    <td><%= ListCar.prix_total %></td>
+                    <td><%= ListCar.Email %></td>
+                    <td><%= ListCar.genre %></td>
+                    <td><%= ListCar.tele %></td>
+                    <td>
+                        <a href="/edite_carReservation/<%= ListCar._id %>" class="btn btn-sm btn-light mb-0"  >Edit</a>
+
+                    <form action="/edite_carReservation/<%= ListCar._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button class="btn btn-sm btn-danger mb-0">Delete</button>
+                    </form>
+                    </td>
+                  
+                  
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>

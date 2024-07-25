@@ -78,18 +78,6 @@ router.delete("/edite-car/:id", responsableMiddleware,  responsablecontoller.res
 
 //test crad cae
 
-
-
-
-
-
-
-
-
-
-
-
-
 //logout responsable
 router.get("/logout-responsable", responsablecontoller.responsable_logout)
 
@@ -114,6 +102,26 @@ router.post("/add-HotelReservation", responsablecontoller.responsable_AddHotelRe
 router.get("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation_id);
 router.put("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation);
 router.delete("/edit-HotelReservation/:id", responsablecontoller.responsable_delete_HotelReservation);
+
+//review to responsable
+router.get("/responsable_reviws", responsablecontoller.responsable_getreview);
+router.delete("/responsable_delete_review/:id", responsablecontoller.responsable_deleteReview);
+
+//car reservation
+router.get("/carReservationList", responsablecontoller.responsable_List_CarReservation);
+
+router.get("/carReservation", responsablecontoller.responsable_get_AddcarReservation);
+router.post("/add-CarReservation", responsablecontoller.responsable_AddCarReservation);
+router.get("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation_id);
+router.put("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation);
+router.delete("/edite_carReservation/:id", responsablecontoller.responsable_delete_CarReservation);
+
+
+
+
+
+
+
 
 module.exports = router;
 

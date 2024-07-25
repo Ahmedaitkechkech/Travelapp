@@ -123,7 +123,17 @@ tbody tr:hover {
 /* Additional styles for the table controls */
 .table-controls {
     display: flex;
-    justify-content: flex-end; /* Align controls to the right */
+    justify-content: space-between; /* Align controls to the right */
     padding: 10px 70px;
     margin-bottom: 1px;
+}
+
+
+
+.arrow{
+    font-size: 25px;
+}
+.arrow a{
+    font-size: 30px;
+    color: black;
 }

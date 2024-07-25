@@ -48,3 +48,17 @@ body {
     background-color: #009EE2;
     border-color: #009EE2;
   }
+
+  .table-controls {
+    display: flex;
+    justify-content: space-between; /* Align controls to the right */
+    padding: 10px 70px;
+ 
+}
+.arrow{
+    font-size: 25px;
+}
+.arrow a{
+    font-size: 30px;
+    color: black;
+}

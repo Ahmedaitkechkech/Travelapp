@@ -113,8 +113,8 @@
                             <img class="avatar-img rounded-circle" src="/img/amin.png" alt="avatar">
                         </div>
                         <div class="ms-2">
-                            <h5 class="mb-1">Jacqueline Miller</h5>
-                            <p class="mb-0">Stayed 21 Dec 2022</p>
+                            <h5 class="mb-1"><%= review.username %></h5> <!-- Display reviewer's username -->
+                            <p class="mb-0">Stayed <%= review.createdAt.toDateString() %></p>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="#" class="btn btn-sm btn-primary-soft mb-0">Direct message</a>
-                            <a class="btn btn-sm btn-light mb-0" data-bs-toggle="collapse" href="#collapseComment" role="button" aria-expanded="false" aria-controls="collapseComment">
+                            <a class="btn btn-sm btn-light mb-0" data-bs-toggle="collapse" href="#collapseComment<%= review._id %>" role="button" aria-expanded="false" aria-controls="collapseComment<%= review._id %>">
                                 Reply
                             </a>
                         </div>
@@ -143,7 +143,7 @@
                             <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Delete</button>
                         </form>
                     </div>
-                    <div class="collapse show" id="collapseComment">
+                    <div class="collapse show" id="collapseComment<%= review._id %>">
                         <div class="d-flex mt-3">
                         </div>
                     </div>
@@ -156,6 +156,9 @@
             <!-- Rating input -->
             <div class="rating-input">
                 <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+            </div>
+            <div class="rating-input">
+                <input type="text" name="username" placeholder="Entrer userName"  required>
             </div>
             
             <!-- Submit button as an icon -->

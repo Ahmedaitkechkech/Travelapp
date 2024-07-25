@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const Car_reservation = new Schema({
-    name_compagnies: {
-        type: String,
+    name_companies: {
+        type: Schema.Types.ObjectId,
+        ref: 'car', 
         required: true,
-        
     },
-    nombre_jour :{
+    nombre_jour: {
         type: Number,
         required: true,
     },
-  
     prix_total: {
         type: Number,
         required: true,
@@ -21,18 +19,15 @@ const Car_reservation = new Schema({
         type: String,
         required: true,
     },
-    genre:{
-        enum:[
-            "se,dhj","hdhgdhg"
-         ]
+    genre: {
+        type: String,
+        enum: ["femme", "homme"],
+        required: true,
     },
     tele: {
         type: String,
         required: true,
     },
-   
-    
-  
     createdAt: {
         type: Date,
         default: Date.now,

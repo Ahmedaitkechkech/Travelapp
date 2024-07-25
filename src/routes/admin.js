@@ -56,6 +56,11 @@ router.get("/admin-cars", adminMiddleware, adminTravel.admin_cars);
 router.get("/agent-list", adminMiddleware, adminTravel.admin_get_allAgennt_list);
 router.get('/agent-list/:id', adminMiddleware, adminTravel.admin_get_Agent_by_id);
 
+//admin affiche review
+router.get("/reviws", adminMiddleware, adminTravel.admin_review);
+
+//admin delet reviw
+router.delete("/admin_delete_review/:id", adminMiddleware, adminTravel.admin_deleteReview);
 
 
 

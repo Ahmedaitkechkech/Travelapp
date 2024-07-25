@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/review.css">
+
+
+<body>
+      <!-- Header -->
+      <%- include('../partials/header.ejs') %>
+      <!-- Header Ends!! -->
+
+      <div class="table-controls">  
+        <div class="arrow">
+            <a href="/dashboard-Responsable">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+    </div> 
+    <div class="card">
+        <!-- Display existing reviews -->
+        <% reviws.forEach(review => { %>
+            <div class="review row g-3 g-lg-4">
+                <div class="col-md-4 col-xxl-3">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar avatar-xl me-2 flex-shrink-0">
+                            <img class="avatar-img rounded-circle" src="/img/amin.png" alt="avatar">
+                        </div>
+                        <div class="ms-2">
+                            <h5 class="mb-1"><%= review.username %></h5> <!-- Display reviewer's username -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-xxl-9">
+                    <ul class="list-inline mb-2">
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= review.rating) { %>
+                                <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+                            <% } else { %>
+                                <li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
+                            <% } %>
+                        <% } %>
+                    </ul>
+                    <h6><span class="text-body fw-light">Review on:</span> Deluxe Pool View with Breakfast</h6>
+                    <p><%= review.reviewText %></p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="#" class="btn btn-sm btn-primary-soft mb-0">Direct message</a>
+                            <a class="btn btn-sm btn-light mb-0" data-bs-toggle="collapse" href="#collapseComment<%= review._id %>" role="button" aria-expanded="false" aria-controls="collapseComment<%= review._id %>">
+                                Reply
+                            </a>
+                        </div>
+                        <form action="/responsable_delete_review/<%= review._id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Delete</button>
+                        </form>
+                    </div>
+                    <div class="collapse show" id="collapseComment<%= review._id %>">
+                        <div class="d-flex mt-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>

@@ -1,197 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clients</title>
-    <link rel="stylesheet" href="/css/Responables.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Header -->
-  <%- include('../partials/header.ejs') %>
-  <!-- Header Ends!! -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+   <!-- FontAwesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+   
+  <link href="/css/Responables.css" rel="stylesheet">
+</head>
+<body>
+ <!-- Header -->
+ <%- include('../partials/header.ejs') %>
+ <!-- Header Ends!! -->
+ <div class="table-controls">  
 
+    <div class="arrow">
+        <a href="/dashboard">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+</div>
+   
     <div class="card-body">
+  
         <table>
             <thead>
                 <tr>
-                    <th>Name_responsable</th>
-                    <th>Name_companies</th>
-                    <th>birthday</th>
-                    <th>tele</th>
-                    <th>birthplace</th>
-                    <th>Email</th>
-                    <th>UserName</th>
-                    <th>type</th>
-                    <th>action</th>
+                    <th>Photo</th>
+                    <th>name_companies</th>
+                    <th>username</th>
+                    <th>name_car</th>
+                    <th>Temps</th>
+                    <th>Lieu_de_ramassage</th>
+                    <th>Date_de_ramassage</th>
+                    <th>prix</th>
+                    <th>nombre_seats</th>
+                    <th>car_model</th>
+                    
+                  
+                    
                 </tr>
             </thead>
             <tbody>
+                <% cars.forEach(car => { %>
                 <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
+                    <td><img src="<%= car.photo %>" alt="<%= car.car_model %>"></td>  
+                    <td><%= car.name_companies %></td>
+                    <td><%= car.username %></td>
+                    <td><%=  car.name_car %></td>
+                    <td><%= car.Temps %></td>
+                    <td><%= car.Lieu_de_ramassage %></td>
+                    <td><%= car.Date_de_ramassage %></td>
+                    <td><%= car.prix %></td>
+                    <td><%= car.nombre_seats %></td>
+                    <td><%= car.car_model %></td>
+                    
+                   
+                   
+                    
+                    
                 </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>hggthgj</td>
-                    <td>jgfjfgj</td>
-                    <td>jgfjfg</td>
-                    <td>jfgjfg</td>
-                    <td>gfjfgj</td>
-                    <td>gfjnfgj</td>
-                    <td>jngfj,fg</td>
-                    <td>yttyt</td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-light mb-0">Edit</a>
-                        <form action="#" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger mb-0">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-               
+                <% }); %>
             </tbody>
         </table>
     </div>
-
-    <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const clientControllers = require('../controllers/clientControllers');
-const { adminMiddleware } = require("../middlewares/adminMiddleware");
+const { ClientMiddleware } = require("../middlewares/clientMiddlewares");
 
 /* Get Signup page */
 router.get("/Signup",clientControllers.Signup_Client);
@@ -11,4 +11,9 @@ router.post("/Signup",clientControllers.Signup);
 router.get("/login",clientControllers.login);
 /* Check client */
 router.post("/login",clientControllers.login_client);
+
+
+router.get("/get-allReview",ClientMiddleware,clientControllers.getAddReview);
+router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);
+router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteReview);
 module.exports = router;

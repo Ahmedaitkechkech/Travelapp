@@ -1,9 +1,11 @@
 const { cloudinary } = require("../../utils/cloudinary");
 const Responsableshema = require("../models/responsableShema");
 const HotelSchema = require("../models/HotelSchema");
+const Car_reservation = require("../models/Car_reservation");
 const flightshema = require("../models/flightsSchema"); 
 const Ticket_flight = require("../models/Ticket_flight"); 
 const carsShema = require("../models/carsShema"); 
+const reviews = require("../models/clientReviewSchema"); 
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -440,22 +442,6 @@ const responsable_delete_car = async (req, res) => {
 
 
 
-
-
-//logout responsable 
-
-const responsable_logout = (req, res) => {
-    res.clearCookie("responsableToken");
-    res.redirect("/responsable");
-};
-
-
-
-
-
-
-
-
 /*-------------- Hotel Crud -----------*/
 const responsable_get_AddHotel = async (req, res) => {
     try {
@@ -466,7 +452,7 @@ const responsable_get_AddHotel = async (req, res) => {
 }
 const responsable_AddHotel = async (req, res) => {
     try {
-        const { Nom_Hotel, Prix, Adresse_Hotel, Username_Responsable, Description } = req.body;
+        const { Nom_Hotel, Prix, Adresse_Hotel, username, Description } = req.body;
         if (!req.file) {
             return res.status(400).send('Photo is required.');
         }
@@ -478,7 +464,7 @@ const responsable_AddHotel = async (req, res) => {
             Adresse_Hotel,
             Photo: result.secure_url,
             Prix,
-            Username_Responsable,
+            username,
             Description
         });
         await Hotel.save();
@@ -492,7 +478,8 @@ const responsable_AddHotel = async (req, res) => {
 
 const responsable_get_Hotels = async (req, res) => {
     try {
-        const Hotels = await HotelSchema.find().sort({ createdAt: -1 });
+
+        const Hotels = await HotelSchema.find({ username: req.session.username }).sort({ createdAt: -1 });
         res.render('Responsable/Hotels', { Hotels });
     } catch (error) {
         console.log(error);
@@ -500,11 +487,11 @@ const responsable_get_Hotels = async (req, res) => {
 }
 const responsable_editHotel = async (req, res) => {
     try {
-        const { Nom_Hotel, Adresse_Hotel, Username_Responsable, Description, Prix } = req.body;
+        const { Nom_Hotel, Adresse_Hotel, username, Description, Prix } = req.body;
         const HotelUpdate = {
             Nom_Hotel,
             Adresse_Hotel,
-            Username_Responsable,
+            username,
             Description,
             Prix
         };
@@ -644,6 +631,151 @@ const responsable_delete_HotelReservation = async (req, res) => {
     }
 };
 
+//affiche review admin
+const responsable_getreview = async (req, res) => {
+    const reviws = await reviews.find({}).sort({ createdAt: -1 });
+
+    try {
+        res.render("responsable/Review", {
+           title: "Espace privé resmpnsable",
+            reviws,
+           
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//   delete a review
+const responsable_deleteReview = async (req, res) => {
+  
+    try {
+        await reviews.findByIdAndDelete(req.params.id);
+        res.redirect('/responsable_reviws'); 
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+
+//client reserevation integrer ici pour tester this in controller client
+const responsable_get_AddcarReservation = async (req, res) => {
+    try {
+        res.render('Responsable/add_carReservation');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const responsable_AddCarReservation = async (req, res) => {
+    try {
+        const { name_companies, nombre_jour, prix_total, Email, genre, tele } = req.body;
+
+        if (!name_companies) {
+            return res.status(400).send('name_companies is required.');
+        }
+
+       
+        const car = await carsShema.findOne({ name_companies:req.body.name_companies });
+
+        if (!car) {
+            return res.status(404).send('Car not found.');
+        }
+
+        // Create the reservation with the car's ObjectId
+        const reservationcar = new Car_reservation({
+            name_companies: car._id,
+            nombre_jour,
+            prix_total,
+            Email,
+            genre,
+            tele
+        });
+
+        await reservationcar.save();
+
+        res.redirect("/carReservationList");
+    } catch (error) {
+        console.log('Error creating reservationCar:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const responsable_List_CarReservation= async (req,res)=>{
+    try{
+    const ListCar = await Car_reservation.find().populate('name_companies').sort({ createdAt: -1 });
+    res.render('Responsable/carReservationList',
+        {
+            ListCar,
+            title: "Espace privé resmpnsable",
+     
+        });
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const responsable_edit_CarReservation_id = async (req, res) => {
+    try {
+        const CarReservInfo = await Car_reservation.findById(req.params.id).populate('name_companies');
+        if (!CarReservInfo) {
+            return res.status(404).send('Reservation not found.');
+        }
+      
+        res.render("Responsable/edit_CarReservation", { CarReservInfo });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const responsable_edit_CarReservation = async (req, res) => {
+    try {
+        const { name_companies, nombre_jour, prix_total, Email, genre, tele } = req.body;
+        const updateObject = {};
+
+        if (name_companies) {
+            const car = await carsShema.findOne({ name_companies });
+            if (!car) {
+                return res.status(404).send('car not found.');
+            }
+            updateObject.name_companies = name_companies._id;
+        }
+        if (nombre_jour) updateObject.nombre_jour = nombre_jour;
+        if (prix_total) updateObject.prix_total = prix_total;
+        if (Email) updateObject.Email = Email;
+        if (genre) updateObject.genre = genre;
+        if (tele) updateObject.tele = tele;
+        
+
+        await Car_reservation.findByIdAndUpdate(req.params.id, updateObject);
+        res.redirect("/carReservationList");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const responsable_delete_CarReservation = async (req, res) => {
+    try {
+        await Car_reservation.findByIdAndDelete(req.params.id);
+        res.redirect("/carReservationList");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+//logout responsable 
+
+const responsable_logout = (req, res) => {
+    res.clearCookie("responsableToken");
+    res.redirect("/responsable");
+};
+
 module.exports = {
     login_responsable,
     responsable_login,
@@ -691,4 +823,16 @@ module.exports = {
     responsable_edit_HotelReservation_id,
     responsable_edit_HotelReservation,
     responsable_delete_HotelReservation,
+
+    //responsable review
+    responsable_getreview,
+    responsable_deleteReview,
+
+    //Reservation Car
+    responsable_get_AddcarReservation,
+    responsable_AddCarReservation,
+    responsable_List_CarReservation,
+    responsable_edit_CarReservation_id,
+    responsable_edit_CarReservation,
+    responsable_delete_CarReservation,
 };

@@ -1,8 +1,9 @@
 const Admintravel = require("../models/AdminTravelSchema");
-const Hotel = require("../models/responsableShema"); 
 const Responsable = require("../models/responsableShema"); 
 const Car = require("../models/carsShema"); 
 const Flight = require("../models/Ticket_flight"); 
+const Hotel = require("../models/HotelSchema"); 
+const reviews = require("../models/clientReviewSchema"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
@@ -220,9 +221,11 @@ const admin_clients = async (req, res) => {
 //afiche les Hoteles to admin
 
 const admin_Hoteles = async (req, res) => {
+    const Hoteles = await Hotel.find({}).sort({ createdAt: -1 })
     try {
         res.render("Admin/hoteles", {
             title: "place admin",
+            Hoteles,
            
         });
     } catch (error) {
@@ -233,9 +236,13 @@ const admin_Hoteles = async (req, res) => {
 //afiche les cars to admin
 
 const admin_cars = async (req, res) => {
+    const cars = await Car.find({}).sort({ createdAt: -1 });
+
     try {
         res.render("Admin/cars", {
             title: "place admin",
+            cars,
+           
            
         });
     } catch (error) {
@@ -245,9 +252,12 @@ const admin_cars = async (req, res) => {
 //afiche les cars to admin
 
 const admin_flights = async (req, res) => {
+    const flights = await Flight.find({}).sort({ createdAt: -1 });
+
     try {
         res.render("Admin/flights", {
             title: "place admin",
+            flights,
            
         });
     } catch (error) {
@@ -267,12 +277,13 @@ const admin_get_allAgennt_list = async (req, res) => {
         const agentDetails = await Promise.all(agents.map(async agent => {
             const flightCount = await Flight.countDocuments({ username: agent.username });
             const carCount = await Car.countDocuments({ username: agent.username });
+            const hotelCount = await Hotel.countDocuments({ username: agent.username });
 
             return {
                 ...agent.toObject(),
                 flightCount,
                 carCount,
-               
+                hotelCount,
             };
         }));
 
@@ -288,6 +299,7 @@ const admin_get_Agent_by_id = async (req, res) => {
     try {
         const agentId = req.params.id; // Assuming the agent ID is passed as a URL parameter
         const agent = await Responsable.findById(agentId);
+       
 
         if (!agent) {
             return res.status(404).send("Agent not found");
@@ -296,12 +308,14 @@ const admin_get_Agent_by_id = async (req, res) => {
         // Count the number of flights and cars for the agent
         const flightCount = await Flight.countDocuments({ username: agent.username });
         const carCount = await Car.countDocuments({ username: agent.username });
+        const hotelCount = await Hotel.countDocuments({ username: agent.username });
 
         res.render("admin/detail-Agent", {
             agent: {
                 ...agent.toObject(),
                 flightCount,
                 carCount,
+                hotelCount,
             },
             title: "Espace privé Admin",
         });
@@ -311,6 +325,32 @@ const admin_get_Agent_by_id = async (req, res) => {
     }
 };
 
+
+const admin_review = async (req, res) => {
+    const reviws = await reviews.find({}).sort({ createdAt: -1 });
+
+    try {
+        res.render("Admin/Review", {
+            title: "place admin",
+            reviws,
+           
+           
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//   delete a review
+const admin_deleteReview = async (req, res) => {
+  
+    try {
+        await reviews.findByIdAndDelete(req.params.id);
+        res.redirect('/reviws'); 
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 
 
@@ -340,6 +380,10 @@ module.exports = {
     //Agent List
     admin_get_allAgennt_list,
     admin_get_Agent_by_id,
+
+    //affiche reviws
+    admin_review,
+    admin_deleteReview,
 
     admin_logout,
     

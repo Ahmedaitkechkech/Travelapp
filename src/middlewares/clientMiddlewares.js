@@ -4,10 +4,10 @@ require("dotenv").config();
 
 const ClientMiddleware = (req, res, next) => {
     // Check if ClientToken is present in cookies
-    const ClientToken = req.cookies.ClientToken;
+    const ClientToken = req.cookies.clientToken;
     if (!ClientToken) {
         req.flash("error", "Please log in first to access the dashboard.");
-        return res.redirect("/Client");
+        return res.redirect("/login");
     }
 
     try {
@@ -22,3 +22,8 @@ const ClientMiddleware = (req, res, next) => {
 };
 
 module.exports = { ClientMiddleware };
+
+
+
+
+

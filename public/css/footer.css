@@ -16,6 +16,7 @@ body {
 footer a {
     color:white;
     text-decoration: none;
+
 }
 footer a:hover {
     color:#009EE2;
@@ -28,9 +29,26 @@ footer a:hover {
 
 .footer-social-icons i {
     font-size: 1.2em;
-    margin-left: 0;
+    margin-left: 900%;
+
     transition: color 0.3s;
 }
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0%;
+    margin-top: 10%;
+}
+
 .footer-copyright {
     color: #c5c5c7;
     display: inline-block; 
