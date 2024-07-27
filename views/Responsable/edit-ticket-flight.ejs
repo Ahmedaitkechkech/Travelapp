@@ -8,10 +8,34 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/add-responsable.css">
 </head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
 <body>
   <!-- Header -->
   <%- include('../partials/header.ejs') %>
   <!-- Header Ends!! -->
+  <div class="table-controls">  
+
+    <div class="arrow">
+        <a href="/tickets-flights">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+</div>
   <div class="container center-card">
     <section>
       <div class="container">

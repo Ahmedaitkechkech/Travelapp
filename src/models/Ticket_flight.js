@@ -6,7 +6,7 @@ const Ticket_flightSchema = new Schema({
     name_compagnies: {
         type: String,
         required: true,
-        ref: "flight" 
+      
     },
     username :{
         type: String, 

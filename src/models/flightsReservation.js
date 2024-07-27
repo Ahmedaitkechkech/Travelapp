@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
-const Car_reservation = new Schema({
-    name_companies: {
+const flightsReservation = new Schema({
+    name_compagnies: {
         type: Schema.Types.ObjectId,
-        ref: 'car', 
+        ref: 'Ticket_flight', 
         required: true,
     },
-    nombre_jour: {
-        type: Number,
-        required: true,
-    },
+   
+  
     Email: {
         type: String,
         required: true,
@@ -24,10 +23,24 @@ const Car_reservation = new Schema({
         type: String,
         required: true,
     },
+    lieu_depart: {
+        type: String,
+        required: true,
+    },
+    heure_depart: {
+        type: String,
+        required: true,
+    },
+    lieu_arrivee: {
+        type: String,
+        required: true,
+    },
+    
+    
     createdAt: {
         type: Date,
         default: Date.now,
     },
 });
 
-module.exports = mongoose.model("Car_reservation", Car_reservation);
+module.exports = mongoose.model("flightReservation", flightsReservation);

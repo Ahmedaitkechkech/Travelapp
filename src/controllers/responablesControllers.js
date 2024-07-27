@@ -2,7 +2,7 @@ const { cloudinary } = require("../../utils/cloudinary");
 const Responsableshema = require("../models/responsableShema");
 const HotelSchema = require("../models/HotelSchema");
 const Car_reservation = require("../models/Car_reservation");
-const flightshema = require("../models/flightsSchema"); 
+const flightReservationshema = require("../models/flightsReservation"); 
 const Ticket_flight = require("../models/Ticket_flight"); 
 const carsShema = require("../models/carsShema"); 
 const reviews = require("../models/clientReviewSchema"); 
@@ -106,106 +106,6 @@ const get_dashboard_responsable = async (req, res) => {
     }
 };
 
-
-// get view add flight
-const responsable_get_Addflight = async (req, res) => {
-    try {
-        res.render("Responsable/add-flights", {
-            title: "Espace privé Admin",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
-// get all flight
-const responsable_flight = async (req, res) => {
-    try {
-        const flightinfo = await flightshema.find({ username: req.session.username }).sort({ createdAt: -1 });
-        res.render('Responsable/flights', {
-            title: "Espace privé resmpnsable",
-            flightinfo,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-// add flight to db
-const responsable_Add_flight = async (req, res) => {
-    try {
-        const { username, name_companies, description } = req.body;
-
-        // Validate required fields
-        if (!username || !name_companies || !description) {
-            return res.status(400).json({ error: "All required fields must be provided." });
-        }
-
-        const newFlight = new flightshema({
-            username: req.session.username,
-
-             name_companies, description
-        });
-
-        await newFlight.save();
-        req.flash("success", "Flight has been saved successfully!");
-
-        res.status(201).redirect("/flights");
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-};
-
-
-//responsable_edit_flight get view
-
-const responsable_edit_flight_id = async (req, res) => {
-    try {
-        const flightinfo = await flightshema.findOne({ _id: req.params.id });
-        res.render("Responsable/edite-flights", {
-            flightinfo,
-            title: "Espace privé resmpnsable",
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
-// responsable_edit_flight  by id
-const admin_edit_responsable = async (req, res) => {
-    try {
-        const { username, name_companies, description } = req.body;
-
-        const updateObject = {};
-        if (username) updateObject.username = username;
-        if (name_companies) updateObject.name_companies = name_companies;
-        if (description) updateObject.description = description;
-       
-        
-
-        await flightshema.findByIdAndUpdate(req.params.id, updateObject);
-
-        res.redirect("/flights");
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-// delete flight
-const responsable_delete_flight = async (req, res) => {
-    try {
-        await flightshema.deleteOne({ _id: req.params.id });
-        res.redirect("/flights");
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
 //get view add tecket 
 
 const get_addTicket = async (req, res) => {
@@ -219,10 +119,6 @@ const get_addTicket = async (req, res) => {
         console.log(error);
     }
 };
-
-
-
-
 
 // Handle ticket creation
 const createTicketFlight = async (req, res, next) => {
@@ -253,7 +149,6 @@ const createTicketFlight = async (req, res, next) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
 
 //get all ticket to responsable
 const ticket_flight = async (req, res) => {
@@ -488,28 +383,28 @@ const responsable_get_Hotels = async (req, res) => {
 const responsable_editHotel = async (req, res) => {
     try {
         const { Nom_Hotel, Adresse_Hotel, username, Description, Prix } = req.body;
-        const HotelUpdate = {
-            Nom_Hotel,
-            Adresse_Hotel,
-            username,
-            Description,
-            Prix
-        };
+        
+        const updateObject = {};
+        if (Nom_Hotel) updateObject.Nom_Hotel = Nom_Hotel;
+        if (Adresse_Hotel) updateObject.Adresse_Hotel = Adresse_Hotel;
+        if (username) updateObject.username = username;
+        if (Description) updateObject.Description = Description;
+        if (Prix) updateObject.Prix = Prix;
         
         if (req.file) {
             const result = await cloudinary.uploader.upload(req.file.path);
-            HotelUpdate.Photo = result.secure_url;
+            updateObject.Photo = result.secure_url;
         }
         
-        await HotelSchema.findByIdAndUpdate(req.params.id, HotelUpdate);
+        await HotelSchema.findByIdAndUpdate(req.params.id, updateObject, { new: true });
         
-        console.log("Hotel updated");
         res.redirect('/Hotels');
     } catch (error) {
-        console.log(error);
-        return res.status(500).send("An error occurred while updating the hotel");
+        console.error("Error editing hotel:", error);
+        res.status(500).send("An error occurred while updating the hotel");
     }
 }
+
 const responsable_editHotell_id = async (req, res) => {
     try {
         const HotelInfo = await HotelSchema.findOne({ _id: req.params.id });
@@ -659,7 +554,7 @@ const responsable_deleteReview = async (req, res) => {
 };
 
 
-//client reserevation integrer ici pour tester this in controller client
+//client reserevation car integrer ici pour tester this in controller client
 const responsable_get_AddcarReservation = async (req, res) => {
     try {
         res.render('Responsable/add_carReservation');
@@ -670,7 +565,7 @@ const responsable_get_AddcarReservation = async (req, res) => {
 
 const responsable_AddCarReservation = async (req, res) => {
     try {
-        const { name_companies, nombre_jour, prix_total, Email, genre, tele } = req.body;
+        const { name_companies, nombre_jour, Email, genre, tele } = req.body;
 
         if (!name_companies) {
             return res.status(400).send('name_companies is required.');
@@ -687,7 +582,6 @@ const responsable_AddCarReservation = async (req, res) => {
         const reservationcar = new Car_reservation({
             name_companies: car._id,
             nombre_jour,
-            prix_total,
             Email,
             genre,
             tele
@@ -732,7 +626,7 @@ const responsable_edit_CarReservation_id = async (req, res) => {
 
 const responsable_edit_CarReservation = async (req, res) => {
     try {
-        const { name_companies, nombre_jour, prix_total, Email, genre, tele } = req.body;
+        const { name_companies, nombre_jour, Email, genre, tele } = req.body;
         const updateObject = {};
 
         if (name_companies) {
@@ -743,7 +637,6 @@ const responsable_edit_CarReservation = async (req, res) => {
             updateObject.name_companies = name_companies._id;
         }
         if (nombre_jour) updateObject.nombre_jour = nombre_jour;
-        if (prix_total) updateObject.prix_total = prix_total;
         if (Email) updateObject.Email = Email;
         if (genre) updateObject.genre = genre;
         if (tele) updateObject.tele = tele;
@@ -769,6 +662,120 @@ const responsable_delete_CarReservation = async (req, res) => {
 
 
 
+////client reserevation flight integrer ici pour tester this in controller client
+const responsable_get_AddflightReservation = async (req, res) => {
+    try {
+        res.render('Responsable/add-flights',{
+            title:"xxxxxxxxx"
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+const responsable_AddflightReservation = async (req, res) => {
+    try {
+        const { name_compagnies, Email, genre, tele, lieu_depart,heure_depart,lieu_arrivee } = req.body;
+
+        if (!name_compagnies || !lieu_depart || !heure_depart || !lieu_arrivee) {
+            return res.status(400).send('champs feild is required.');
+        }
+
+       
+        const flight = await Ticket_flight.findOne({ name_compagnies,lieu_depart,heure_depart,lieu_arrivee });
+
+        if (!flight) {
+            return res.status(404).send('flight not found.');
+        }
+
+        
+        const reservationflight = new flightReservationshema({
+            name_compagnies: flight._id,
+            Email,
+            genre,
+            tele,
+            lieu_depart,
+            lieu_arrivee,
+            heure_depart
+        });
+
+        await reservationflight.save();
+
+        res.redirect("/FlightReservationList");
+    } catch (error) {
+        console.log('Error creating reservationFlight:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const responsable_List_FlightReservation= async (req,res)=>{
+    try{
+    const ListFlight = await flightReservationshema.find().populate('name_compagnies').sort({ createdAt: -1 });
+    res.render('Responsable/flightsReservation',
+        {
+            ListFlight,
+            title: "Espace privé resmpnsable",
+     
+        });
+    }catch(error){
+        console.log(error);
+    }
+}
+const responsable_edit_flightReservation_id = async (req, res) => {
+    try {
+        const flightReservInfo = await flightReservationshema.findById(req.params.id).populate('name_compagnies');
+        if (!flightReservInfo) {
+            return res.status(404).send('Reservation not found.');
+        }
+      
+        res.render("Responsable/edit_FlightReservation", { flightReservInfo });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const responsable_edit_flightReservation = async (req, res) => {
+    try {
+        const { name_compagnies, Email, genre, tele, lieu_depart, heure_depart, lieu_arrivee } = req.body;
+        const updateObject = {};
+
+        // Validate and set the name_compagnies field
+        if (name_compagnies) {
+            const flight = await Ticket_flight.findOne({ name_compagnies });
+            if (!flight) {
+                return res.status(404).send('Flight not found.');
+            }
+            updateObject.name_compagnies = flight._id;
+        }
+
+        // Set other fields if they are present in the request body
+        if (Email) updateObject.Email = Email;
+        if (genre) updateObject.genre = genre;
+        if (tele) updateObject.tele = tele;
+        if (lieu_depart) updateObject.lieu_depart = lieu_depart;
+        if (heure_depart) updateObject.heure_depart = heure_depart;
+        if (lieu_arrivee) updateObject.lieu_arrivee = lieu_arrivee;
+
+        // Update the flight reservation
+        await flightReservationshema.findByIdAndUpdate(req.params.id, updateObject, { new: true });
+        res.redirect("/flightReservationList");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const responsable_delete_flightReservation = async (req, res) => {
+    try {
+        await flightReservationshema.findByIdAndDelete(req.params.id);
+        res.redirect("/flightReservationList");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+
+
 //logout responsable 
 
 const responsable_logout = (req, res) => {
@@ -782,13 +789,14 @@ module.exports = {
     get_card,
     get_dashboard_responsable,
 
-    //CRUD FLIGHTS
-    responsable_flight,
-    responsable_get_Addflight,
-    responsable_Add_flight,
-    responsable_edit_flight_id,
-    admin_edit_responsable,
-    responsable_delete_flight,
+    //CRUD FLIGHTS-reservation
+    responsable_get_AddflightReservation,
+    responsable_AddflightReservation,
+    responsable_List_FlightReservation,
+    responsable_edit_flightReservation_id,
+    responsable_edit_flightReservation,
+    responsable_delete_flightReservation,
+    
 
     //crud ticket flight
     get_addTicket,

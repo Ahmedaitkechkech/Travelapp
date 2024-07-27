@@ -8,6 +8,22 @@
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link href="/css/Responables.css" rel="stylesheet">
 </head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
 <body>
  <!-- Header -->
  <%- include('../partials/header.ejs') %>
@@ -18,13 +34,10 @@
                 <i class="button-Ajoute"></i> Ajouter car
             </button>
         </a>
-        <a href="/dashboard">
-            <i class="button-arrow"></i>
-        </a>
+       
     </div>
-    
-    
    
+
     <div class="card-body">
   
         <table>

@@ -3,15 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Example</title>
-   <!-- FontAwesome -->
+  <title>Ajouter FlightReservation</title>
+  <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/add-responsable.css">
 </head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
 <body>
   <!-- Header -->
   <%- include('../partials/header.ejs') %>
   <!-- Header Ends!! -->
+
+  <div class="table-controls">  
+
+    <div class="arrow">
+        <a href="/FlightReservationList">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+</div>
   <div class="container center-card">
     <section>
       <div class="container">
@@ -19,30 +44,44 @@
           <div class="card-header border-bottom">
             <h5 class="mb-0">Ajouter Flight</h5>
           </div>
-
           <div class="card-body">
-            <form action="/add-flight" method="POST">
+            <form action="/add-flightReservation" method="POST">
               <div class="row g-3">
-           
-
                 <div class="col-md-6">
-                  <label class="form-label">username</label>
-                  <input class="form-control" type="text" name="username" placeholder="Entrez Nom d'utilisateur">
+                  <label class="form-label">Nom des Compagnies</label>
+                  <input class="form-control" type="text" name="name_compagnies" placeholder="Entrez Nom des Compagnies">
+                </div>
+            
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="email" name="Email" placeholder="Entrez l'Email">
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label">name_companies</label>
-                  <input class="form-control" type="text" name="name_companies" placeholder="Entrez Nom Entreprises">
+                  <label class="form-label">Genre</label>
+                  <select class="form-control" name="genre">
+                    <option value="femme">Femme</option>
+                    <option value="homme">Homme</option>
+                  </select>
                 </div>
-
-               
                 <div class="col-md-6">
-                  <label class="form-label">description</label>
-                  <input class="form-control" type="text" name="description" placeholder="Entrez description">
+                  <label class="form-label">Téléphone</label>
+                  <input class="form-control" type="text" name="tele" placeholder="Entrez le Numéro de Téléphone">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Lieu de Départ</label>
+                  <input class="form-control" type="text" name="lieu_depart" placeholder="Entrez le Lieu de Départ">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Heure de Départ</label>
+                  <input class="form-control" type="time" name="heure_depart" placeholder="Entrez l'Heure de Départ">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Lieu d'Arrivée</label>
+                  <input class="form-control" type="text" name="lieu_arrivee" placeholder="Entrez le Lieu d'Arrivée">
                 </div>
               </div>
-
               <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Souvgarder</button>
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
               </div>
             </form>
           </div>

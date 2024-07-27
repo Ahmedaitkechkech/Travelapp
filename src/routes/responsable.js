@@ -21,27 +21,6 @@ router.post("/responsable", responsablecontoller.responsable_login)
 //getdashboardresponsable
 router.get("/dashboard-Responsable",responsableMiddleware, responsablecontoller.get_dashboard_responsable)
 
-
-/* Get list of flight */
-router.get("/flights",responsableMiddleware, responsablecontoller.responsable_flight);
-
-//responsable_get_Addflight
-router.get("/add-flight", responsableMiddleware, responsablecontoller.responsable_get_Addflight)
-
-//responsable_Addflight
-router.post("/add-flight", responsableMiddleware, responsablecontoller.responsable_Add_flight)
-
-
-/* Responsable edit flight */
-router.get("/edit-flight/:id", responsableMiddleware,  responsablecontoller.responsable_edit_flight_id);
-
-/* Responsable edit flight */
-router.put("/edit-flight/:id", responsableMiddleware,  responsablecontoller.admin_edit_responsable);
-
-/* Responsable delete flight */
-router.delete("/edit-flight/:id", responsableMiddleware,  responsablecontoller.responsable_delete_flight);
-
-
 //get all ticket_flight
 router.get("/tickets-flights", responsableMiddleware, responsablecontoller.ticket_flight)
 
@@ -115,6 +94,19 @@ router.post("/add-CarReservation", responsablecontoller.responsable_AddCarReserv
 router.get("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation_id);
 router.put("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation);
 router.delete("/edite_carReservation/:id", responsablecontoller.responsable_delete_CarReservation);
+
+//flight reservation
+router.get("/FlightReservationList", responsablecontoller.responsable_List_FlightReservation);
+
+router.get("/flightReservation", responsablecontoller.responsable_get_AddflightReservation);
+router.post("/add-flightReservation", responsablecontoller.responsable_AddflightReservation);
+router.get("/edite_flightReservation/:id", responsablecontoller.responsable_edit_flightReservation_id);
+router.put("/edite_flightReservation/:id", responsablecontoller.responsable_edit_flightReservation);
+router.delete("/edite_flightReservation/:id", responsablecontoller.responsable_delete_flightReservation);
+
+
+
+
 
 
 

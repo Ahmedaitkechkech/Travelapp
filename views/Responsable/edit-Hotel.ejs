@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bootstrap Example</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
   
 
   <!-- Google Font -->
@@ -15,10 +17,34 @@
   <link rel="stylesheet" href="/css/add-responsable.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
 <body>
     <!-- Header -->
     <%- include('../partials/header.ejs') %>
     <!-- Header Ends!! -->
+    <div class="table-controls">  
+
+      <div class="arrow">
+          <a href="/Hotels">
+              <i class="fas fa-arrow-left"></i>
+          </a>
+      </div>
+  </div>
   <div class="container center-card">
     <section>
       <div class="container">
