@@ -96,6 +96,7 @@ input {
     font-weight: 300;
     border: 1px solid gray;
     border-radius: 10px;
+    color: black;
 }
 
 ::placeholder {

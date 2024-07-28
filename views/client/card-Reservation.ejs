@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body>
+
+    <section>
+        <div class="container">
+
+
+            <div class="row mb-4">
+
+                <div class="col-12 text-center">
+
+                    <h2 class="mb-0">Reservation  </h2>
+                 
+                  
+                </div>
+              
+            </div>
+
+            <div class="row g-4">
+                <% CardReservation.forEach(reservation => { %>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-img-scale overflow-hidden bg-transparent">
+                        <div class="card-img-scale-wrapper rounded-3" style="width: 100%;" >
+                            <img src="<%= reservation.Nom_Hotel.Photo %>" class="card-img" alt="hotel image" style="height: 55vh; width: 69vw;">
+  
+                            <div class="position-absolute bottom-0 start-0 p-3">
+                                <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                        class="bi bi-geo-alt me-2"></i><%= reservation.Nom_Hotel.Adresse_Hotel %> </div>
+                            </div>
+                        </div>
+                        <div class="card-body px-2">
+                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link"><%= reservation.Nom_Hotel.Nom_Hotel %></a></h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="text-success mb-0">$<%= reservation.Nom_Hotel.Prix %> <small class="fw-light">/starting at</small> </h6>
+                                
+                                <h6 class="mb-0">8.0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                            </div>
+                            <h6 class=" mb-0" style="color: #009EE2;">Nbr Chambre : <%= reservation.Nombre_Chambre %>  </h6>
+                            <h6 class=" mb-0" style="color: #009EE2;">Nbr personne : <%= reservation.Nombre_Personne %>  </h6>
+
+                        </div>
+                    </div>
+                    <a href="/edit-HotelReservation-cleint/<%=reservation._id %>"><i class="fas fa-edit icon icon-edit " style="color: #009EE2; cursor: pointer;" title="Edit"></i></a>
+                    <form action="/edit-HotelReservation-cleint/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" style="border:none; background:none; padding:0;">
+                            <i class="fas fa-trash icon icon-delete" style="color: red; cursor: pointer;" title="Delete"></i>
+                        </button>
+                    </form>            
+                </div>
+                
+                <% }) %>
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

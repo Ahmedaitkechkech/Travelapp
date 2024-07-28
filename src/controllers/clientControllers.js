@@ -1,8 +1,11 @@
 const ClientSchema = require("../models/ClientSchema");
+const HotelSchema = require("../models/HotelSchema");
+const HotelReservSchema = require("../models/Hotel_ReserSchema");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecretClient = process.env.jwtSecretClient;
 const ClientReview = require('../models/clientReviewSchema');
+const Hotel = require('../models/HotelSchema');
 
 const Signup_Client = async (req, res) => {
     try {
@@ -48,6 +51,7 @@ const login = async (req, res) => {
         console.log(error);
     }
 };
+
 const login_client = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -84,8 +88,9 @@ const login_client = async (req, res) => {
                 const clientToken = jwt.sign({ clientId: client._id }, jwtSecretClient);
                 req.session.username = client.username;
              
+             
                 res.cookie("clientToken", clientToken, { httpOnly: true });
-                 res.status(200).redirect('/get-allReview');
+                 res.status(200).redirect('/client-Hotel');
         }
     } catch (error) {
         console.log(error);
@@ -131,6 +136,8 @@ const postAddReview = async (req, res) => {
     
 
 
+
+
 //   delete a review
 const deleteReview = async (req, res) => {
   
@@ -143,6 +150,156 @@ const deleteReview = async (req, res) => {
     }
 };
 
+//get view client_Hotel
+const getIndexHotel = async (req, res) => {
+    const hotel = await Hotel.find({});
+
+ try{  
+        res.render("client/index", {
+        query: req.query,
+        messages: req.flash(),  
+        hotel  ,
+          title:'cardHotel'
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+//find Hotel
+const client_addhotelFind = async (req, res) => {
+try{
+    const { Nom_Hotel } = req.body;
+
+    const hotelfind = await Hotel.findOne({ Nom_Hotel });
+
+    if (!hotelfind) {
+        return res.status(404).send('Hotel not found.');
+    }
+
+    res.render('client/CardHotel', {
+       hotelfind,
+        title:'cardHotel'
+     });
+    }
+
+    catch (error) {
+        res.status(500).send('An error occurred while finding the hotel.');
+    }
+};
+//get view add reservatio
+const client_get_AddHotelReservation = async (req, res) => {
+    
+    try {
+        res.render('client/add-HotelReservation');
+    } catch (error) {
+        console.log(error);
+    }
+}
+//store reservation db
+const client_AddHotelReservation = async (req, res) => {
+    try {
+        const { Nom_Hotel, Nom, Prénom,username, Numéro_Téléphone, Date_entre, Date_sortie, Nombre_Personne, Nombre_Chambre } = req.body;
+
+        if (!Nom_Hotel) {
+            return res.status(400).send('Nom_Hotel is required.');
+        }
+
+        const hotel = await HotelSchema.findOne({ Nom_Hotel });
+
+        if (!hotel) {
+            return res.status(404).send('Hotel not found.');
+        }
+
+        const reservation = new HotelReservSchema({
+            Nom_Hotel: hotel._id,
+            Nom,
+            Prénom,
+            username,
+            Numéro_Téléphone,
+            Date_entre,
+            Date_sortie,
+            Nombre_Personne,
+            Nombre_Chambre
+        });
+
+        await reservation.save();
+
+        res.redirect("/Cards-reservation");
+    } catch (error) {
+        console.log('Error creating reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+//get All reservation Client
+
+const client_getAll_CardReservation = async (req, res) => {
+    const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel")
+
+
+ try{  
+        res.render("client/card-Reservation", { 
+        CardReservation,
+        title:'card Resrvation'
+
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+ //GET VIEW EDIT RESERVATION 
+ const client_edit_HotelReservation_id = async (req, res) => {
+    try {
+        const Hotel_ReservInfo = await HotelReservSchema.findById(req.params.id).populate('Nom_Hotel');
+        if (!Hotel_ReservInfo) {
+            return res.status(404).send('Reservation not found.');
+        }
+        res.render("client/edit_HotelReservation", { Hotel_ReservInfo });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+//put in db hotel reservation
+const client_edit_HotelReservation = async (req, res) => {
+    try {
+        const { Nom_Hotel, Nom, Prénom, Numéro_Téléphone, Date_entre, Date_sortie, Nombre_Personne, Nombre_Chambre } = req.body;
+        const updateObject = {};
+
+        if (Nom_Hotel) {
+            const hotel = await HotelSchema.findOne({ Nom_Hotel });
+            if (!hotel) {
+                return res.status(404).send('Hotel not found.');
+            }
+            updateObject.Nom_Hotel = hotel._id;
+        }
+        if (Nom) updateObject.Nom = Nom;
+        if (Prénom) updateObject.Prénom = Prénom;
+        if (Numéro_Téléphone) updateObject.Numéro_Téléphone = Numéro_Téléphone;
+        if (Date_entre) updateObject.Date_entre = Date_entre;
+        if (Date_sortie) updateObject.Date_sortie = Date_sortie;
+        if (Nombre_Personne) updateObject.Nombre_Personne = Nombre_Personne;
+        if (Nombre_Chambre) updateObject.Nombre_Chambre = Nombre_Chambre;
+
+        await HotelReservSchema.findByIdAndUpdate(req.params.id, updateObject);
+        res.redirect("/Cards-reservation");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+//Delete client hotel reserver
+const client_delete_HotelReservation = async (req, res) => {
+    try {
+        await HotelReservSchema.findByIdAndDelete(req.params.id);
+        res.redirect("/Cards-reservation");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
 module.exports = {
     Signup_Client,
     Signup,
@@ -151,4 +308,14 @@ module.exports = {
     getAddReview,
     postAddReview,
     deleteReview,
+    //client find hotel
+    getIndexHotel,
+    client_addhotelFind,
+    //CRUD Reservation Client Hotel
+    client_get_AddHotelReservation,
+    client_AddHotelReservation,
+    client_getAll_CardReservation,
+    client_edit_HotelReservation_id,
+    client_edit_HotelReservation,
+    client_delete_HotelReservation,
 }

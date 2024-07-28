@@ -15,6 +15,11 @@ const HotelReservSchema = new Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
+
     Numéro_Téléphone:{
         type: String,
         required: true

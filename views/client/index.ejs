@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+<style>
+    .form-fs-md .flatpickr {
+    font-weight: 500;
+    font-size: 1rem;
+    width: 308% !important;
+}
+.card_hotel{
+    height: 450px !important;
+    width: 146% !important;
+    
+   
+}
+
+</style>
+
+<body>
+ <section class="pt-3 pt-lg-5">
+        <div class="container">
+
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-6 position-relative mb-4 mb-md-0">
+                    <h1 class="mb-4 mt-md-5 display-5"> Trouvez les meilleurs.
+                        <span class="position-relative z-index-9"> Hôtels à proximité.</span>
+                    </h1>
+                    <p class="mb-4"> Nous vous proposons non seulement une option de séjour, mais une expérience dans votre budget pour profiter du luxe</p>
+
+                    <div class="hstack gap-4 flex-wrap align-items-center">
+                      
+                        <a data-glightbox="" data-gallery="office-tour" href="#" class="d-block">
+                            <div class="avatar avatar-md z-index-1 position-relative me-2">
+                                <img class="avatar-img rounded-circle" src="/img/06.jpg" alt="avatar">
+
+                            </div>
+
+                        </a>
+                        <a data-glightbox="" data-gallery="office-tour" href="#" class="d-block">
+                            <div class="avatar avatar-md z-index-1 position-relative me-2">
+                                <img class="avatar-img rounded-circle" src="/img/06.jpg" alt="avatar">
+
+                            </div>
+
+                        </a>
+                        <a data-glightbox="" data-gallery="office-tour" href="#" class="d-block">
+                            <div class="avatar avatar-md z-index-1 position-relative me-2">
+                                <img class="avatar-img rounded-circle" src="/img/06.jpg" alt="avatar">
+
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 position-relative">
+
+                    <img src="/img/06.jpg" class="rounded" alt="">
+
+
+
+
+
+
+
+                    <div
+                        class="vstack gap-5 align-items-center position-absolute top-0 start-0 d-none d-md-flex mt-4 ms-n3">
+                        <img class="icon-lg shadow-lg border border-3 border-white rounded-circle" src="/img/06.jpg"
+                            alt="avatar">
+                        <img class="icon-xl shadow-lg border border-3 border-white rounded-circle" src="/img/06.jpg"
+                            alt="avatar">
+                    </div>
+                </div>
+            </div>
+
+
+            
+		<div class="row">
+			<div class="col-xl-10 position-relative mt-n3 mt-xl-n9">
+				<!-- Title -->
+				<h6 class="d-none d-xl-block mb-3">Check Availability</h6>
+
+                <form action="/client-Hotel" method="post" class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-4">
+                            <div class="d-flex">
+                                <i class="bi bi-calendar fs-3 me-2 mt-2"></i>
+                                <div class="form-control-border form-control-transparent form-fs-md">
+                                    <label class="form-label">Nom Hotel</label>
+                                    <select name="Nom_Hotel" class="form-control flatpickr w-320% !important" placeholder="Select hotel">
+                                        <% hotel.forEach(hotel => { %>
+                                            <option value="<%= hotel.Nom_Hotel %>"><%= hotel.Nom_Hotel %></option>
+                                        <% }) %>
+                                    </select>
+                                    <button type="submit" class="btn-position-md-middle" style="border: none; background-color: transparent;">
+                                        <a class="icon-lg btn btn-round btn-primary mb-0" href="#"><i class="fa fa-search fa-fw"></i></a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                
+
+               
+
+                
+                
+				
+			</div>
+		</div>
+	
+        </div>
+
+ </section>
+
+
+
+  
+
+
+</body>
+
+</html>

@@ -382,28 +382,30 @@ const responsable_get_Hotels = async (req, res) => {
 }
 const responsable_editHotel = async (req, res) => {
     try {
-        const { Nom_Hotel, Adresse_Hotel, username, Description, Prix } = req.body;
-        
-        const updateObject = {};
-        if (Nom_Hotel) updateObject.Nom_Hotel = Nom_Hotel;
-        if (Adresse_Hotel) updateObject.Adresse_Hotel = Adresse_Hotel;
-        if (username) updateObject.username = username;
-        if (Description) updateObject.Description = Description;
-        if (Prix) updateObject.Prix = Prix;
-        
-        if (req.file) {
-            const result = await cloudinary.uploader.upload(req.file.path);
-            updateObject.Photo = result.secure_url;
+        if (!req.file) {
+            return res.status(400).send("Photo is required.");
         }
-        
+
+        // Upload the new photo to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+
+        // Initialize updateObject if not already initialized
+        const updateObject = {};
+
+        // Add the new photo URL to the updateObject
+        updateObject.Photo = result.secure_url;
+
+        // Update only the Photo field in the database
         await HotelSchema.findByIdAndUpdate(req.params.id, updateObject, { new: true });
-        
+
         res.redirect('/Hotels');
     } catch (error) {
         console.error("Error editing hotel:", error);
         res.status(500).send("An error occurred while updating the hotel");
     }
 }
+
+
 
 const responsable_editHotell_id = async (req, res) => {
     try {
@@ -555,6 +557,7 @@ const responsable_deleteReview = async (req, res) => {
 
 
 //client reserevation car integrer ici pour tester this in controller client
+
 const responsable_get_AddcarReservation = async (req, res) => {
     try {
         res.render('Responsable/add_carReservation');
@@ -676,6 +679,7 @@ const responsable_AddflightReservation = async (req, res) => {
     try {
         const { name_compagnies, Email, genre, tele, lieu_depart,heure_depart,lieu_arrivee } = req.body;
 
+
         if (!name_compagnies || !lieu_depart || !heure_depart || !lieu_arrivee) {
             return res.status(400).send('champs feild is required.');
         }
@@ -695,7 +699,7 @@ const responsable_AddflightReservation = async (req, res) => {
             tele,
             lieu_depart,
             lieu_arrivee,
-            heure_depart
+            heure_depart,
         });
 
         await reservationflight.save();

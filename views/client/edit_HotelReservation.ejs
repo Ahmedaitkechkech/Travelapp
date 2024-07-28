@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Hotel Reservation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="/css/add-responsable.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
+<body>
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %>
+    <!-- Header Ends!! -->
+    <div class="table-controls">  
+
+      
+  </div>
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Edit Hotel Reservation</h5>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="/edit-HotelReservation-cleint/<%= Hotel_ReservInfo._id %>?_method=PUT">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nom Hotel</label>
+                  <input value="<%= Hotel_ReservInfo.Nom_Hotel.Nom_Hotel %>" class="form-control" type="text" name="Nom_Hotel" placeholder="Entrez Nom Hotel" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nom</label>
+                  <input value="<%= Hotel_ReservInfo.Nom %>" class="form-control" type="text" name="Nom" placeholder="Entrez Nom">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Prénom</label>
+                  <input value="<%= Hotel_ReservInfo.Prénom %>" class="form-control" type="text" name="Prénom" placeholder="Entrez Prénom">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Numéro Téléphone</label>
+                  <input value="<%= Hotel_ReservInfo.Numéro_Téléphone %>" class="form-control" type="tel" name="Numéro_Téléphone" placeholder="Entrez Numéro de Téléphone">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date d'entrée</label>
+                  <input value="<%= Hotel_ReservInfo.Date_entre %>" class="form-control" type="date" name="Date_entre" placeholder="Date d'entrée">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date de sortie</label>
+                  <input value="<%= Hotel_ReservInfo.Date_sortie %>" class="form-control" type="date" name="Date_sortie" placeholder="Date de sortie">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nombre de Personnes</label>
+                  <input value="<%= Hotel_ReservInfo.Nombre_Personne %>" class="form-control" type="number" name="Nombre_Personne" placeholder="Nombre de Personnes">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nombre de Chambres</label>
+                  <input value="<%= Hotel_ReservInfo.Nombre_Chambre %>" class="form-control" type="number" name="Nombre_Chambre" placeholder="Nombre de Chambres">
+                </div>
+              </div>
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

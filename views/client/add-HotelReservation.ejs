@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation D'Hotel</title>
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/add-responsable.css">
+</head>
+<style>
+  .table-controls {
+   display: flex;
+   justify-content: space-between; /* Align controls to the right */
+   padding: 10px 70px;
+   margin-bottom: 1px;
+}
+
+.arrow{
+   font-size: 25px;
+}
+.arrow a{
+   font-size: 30px;
+   color: black;
+}
+</style>
+<body>
+  <!-- Header -->
+  <%- include('../partials/header.ejs') %>
+  <!-- Header Ends!! -->
+
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Réservation D'Hotel</h5>
+          </div>
+          <div class="card-body">
+            <form action="/add-ReservationClient" method="POST">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nom Hotel</label>
+                  <input class="form-control" type="text" name="Nom_Hotel" placeholder="Entrez Nom Hotel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nom</label>
+                  <input class="form-control" type="text" name="Nom" placeholder="Entrez votre Nom" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Prénom</label>
+                  <input class="form-control" type="text" name="Prénom" placeholder="Entrez votre Prénom" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">username</label>
+                  <input class="form-control" type="text" name="username" placeholder="Entrez votre username" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Numéro Téléphone</label>
+                  <input class="form-control" type="tel" name="Numéro_Téléphone" placeholder="Numéro Téléphone" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nombre de Chambres</label>
+                  <input class="form-control" type="number" name="Nombre_Chambre" placeholder="Nombre de Chambres" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date d'entrée</label>
+                  <input class="form-control" type="date" name="Date_entre" placeholder="Date d'entrée" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nombre de Personnes</label>
+                  <input class="form-control" type="number" name="Nombre_Personne" placeholder="Nombre de Personnes" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date de sortie</label>
+                  <input class="form-control" type="date" name="Date_sortie" placeholder="Date de sortie" required>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Footer -->
+  <%- include('../partials/footer.ejs') %>
+  <!-- Footer End !! -->
+</body>
+</html>
+

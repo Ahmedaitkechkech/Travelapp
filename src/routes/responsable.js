@@ -69,7 +69,8 @@ router.post("/add-Hotel",upload.single('photo'), responsablecontoller.responsabl
 // edit_hotelbyid
 router.get("/edit-Hotel/:id", responsablecontoller.responsable_editHotell_id);
 // edit_hotel
-router.put("/edit-Hotel/:id",upload.single('photo'), responsablecontoller.responsable_editHotel);
+router.put("/edit-Hotel/:id", upload.single('photo'), responsablecontoller.responsable_editHotel);
+
 // delete_hotelbyid
 router.delete("/edit-Hotel/:id", responsablecontoller.responsable_deleteHotel);
 /*----------- Hotel Reservation---------*/
