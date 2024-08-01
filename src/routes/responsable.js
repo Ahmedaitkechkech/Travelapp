@@ -61,50 +61,51 @@ router.delete("/edite-car/:id", responsableMiddleware,  responsablecontoller.res
 router.get("/logout-responsable", responsablecontoller.responsable_logout)
 
 // get_Hotels
-router.get("/Hotels", responsablecontoller.responsable_get_Hotels);
+router.get("/Hotels",responsableMiddleware, responsablecontoller.responsable_get_Hotels);
 // get_AddHotel
-router.get("/add-Hotel", responsablecontoller.responsable_get_AddHotel);
+router.get("/add-Hotel",responsableMiddleware, responsablecontoller.responsable_get_AddHotel);
 // Add_Hotel
-router.post("/add-Hotel",upload.single('photo'), responsablecontoller.responsable_AddHotel);
+router.post("/add-Hotel",responsableMiddleware,upload.single('photo'), responsablecontoller.responsable_AddHotel);
 // edit_hotelbyid
-router.get("/edit-Hotel/:id", responsablecontoller.responsable_editHotell_id);
+router.get("/edit-Hotel/:id",responsableMiddleware, responsablecontoller.responsable_editHotell_id);
 // edit_hotel
-router.put("/edit-Hotel/:id", upload.single('photo'), responsablecontoller.responsable_editHotel);
+router.put("/edit-Hotel/:id",responsableMiddleware, upload.single('photo'), responsablecontoller.responsable_editHotel);
 
 // delete_hotelbyid
-router.delete("/edit-Hotel/:id", responsablecontoller.responsable_deleteHotel);
+router.delete("/edit-Hotel/:id",responsableMiddleware, responsablecontoller.responsable_deleteHotel);
 /*----------- Hotel Reservation---------*/
 
 // Hotel reservations routes
-router.get("/HotelReservation", responsablecontoller.responsable_List_HotelReservation);
-router.get("/add-HotelReservation", responsablecontoller.responsable_get_AddHotelReservation);
-router.post("/add-HotelReservation", responsablecontoller.responsable_AddHotelReservation);
-router.get("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation_id);
-router.put("/edit-HotelReservation/:id", responsablecontoller.responsable_edit_HotelReservation);
-router.delete("/edit-HotelReservation/:id", responsablecontoller.responsable_delete_HotelReservation);
+router.get("/HotelReservation",responsableMiddleware, responsablecontoller.responsable_List_HotelReservation);
+router.get("/add-HotelReservation",responsableMiddleware, responsablecontoller.responsable_get_AddHotelReservation);
+router.post("/add-HotelReservation",responsableMiddleware, responsablecontoller.responsable_AddHotelReservation);
+router.get("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_HotelReservation_id);
+router.put("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_HotelReservation);
+router.delete("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_HotelReservation);
 
 //review to responsable
-router.get("/responsable_reviws", responsablecontoller.responsable_getreview);
-router.delete("/responsable_delete_review/:id", responsablecontoller.responsable_deleteReview);
+router.get("/responsable_reviws",responsableMiddleware, responsablecontoller.responsable_getreview);
+router.delete("/responsable_delete_review/:id",responsableMiddleware, responsablecontoller.responsable_deleteReview);
 
 //car reservation
-router.get("/carReservationList", responsablecontoller.responsable_List_CarReservation);
+router.get("/carReservationList",responsableMiddleware, responsablecontoller.responsable_List_CarReservation);
 
-router.get("/carReservation", responsablecontoller.responsable_get_AddcarReservation);
-router.post("/add-CarReservation", responsablecontoller.responsable_AddCarReservation);
-router.get("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation_id);
-router.put("/edite_carReservation/:id", responsablecontoller.responsable_edit_CarReservation);
-router.delete("/edite_carReservation/:id", responsablecontoller.responsable_delete_CarReservation);
+router.get("/carReservation",responsableMiddleware, responsablecontoller.responsable_get_AddcarReservation);
+router.post("/add-CarReservation",responsableMiddleware, responsablecontoller.responsable_AddCarReservation);
+router.get("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_CarReservation_id);
+router.put("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_CarReservation);
+router.delete("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_CarReservation);
 
 //flight reservation
-router.get("/FlightReservationList", responsablecontoller.responsable_List_FlightReservation);
+router.get("/FlightReservationList",responsableMiddleware, responsablecontoller.responsable_List_FlightReservation);
 
-router.get("/flightReservation", responsablecontoller.responsable_get_AddflightReservation);
-router.post("/add-flightReservation", responsablecontoller.responsable_AddflightReservation);
-router.get("/edite_flightReservation/:id", responsablecontoller.responsable_edit_flightReservation_id);
-router.put("/edite_flightReservation/:id", responsablecontoller.responsable_edit_flightReservation);
-router.delete("/edite_flightReservation/:id", responsablecontoller.responsable_delete_flightReservation);
+router.get("/flightReservation",responsableMiddleware, responsablecontoller.responsable_get_AddflightReservation);
+router.post("/add-flightReservation",responsableMiddleware, responsablecontoller.responsable_AddflightReservation);
+router.get("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation_id);
+router.put("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation);
+router.delete("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_flightReservation);
 
+router.get('/reservations',responsableMiddleware, responsablecontoller.getClientReservations);
 
 
 

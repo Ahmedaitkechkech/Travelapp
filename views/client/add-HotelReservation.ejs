@@ -40,8 +40,14 @@
             <form action="/add-ReservationClient" method="POST">
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label">Nom Hotel</label>
-                  <input class="form-control" type="text" name="Nom_Hotel" placeholder="Entrez Nom Hotel" required>
+                  <label class="form-label">Nom_Hotel</label>
+                  <select class="form-control" name="Nom_Hotel" required>
+                    <option value="" disabled selected>Select a Hotel</option>
+                    <% hotelInfo.forEach(hotel => { %>
+                      <option value="<%= hotel.Nom_Hotel %>"><%= hotel.Nom_Hotel %></option>
+                    <% }) %>
+                  </select>
+                  
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Nom</label>

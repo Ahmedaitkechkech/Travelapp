@@ -15,8 +15,13 @@ const ClientSchema = new Schema({
         type: String,
         require:true,
         unique:true
-    }
+    },
+    reservations: [{
+        type: Schema.Types.ObjectId,
+        ref: 'HotelReservSchema'
+    }],
 })
+
 ClientSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     this.password = await bcrypt.hash(this.password, 10);

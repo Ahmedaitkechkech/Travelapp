@@ -9,67 +9,118 @@
     </title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 
 <body>
 
-    <section>
+    <section class="pt-0">
         <div class="container">
-
-
-            <div class="row mb-4">
-
-                <div class="col-12 text-center">
-
-                    <h2 class="mb-0">Reservation  </h2>
-                 
-                  
-                </div>
-              
-            </div>
-
             <div class="row g-4">
+    
+    
+                <!-- Card item START -->
                 <% CardReservation.forEach(reservation => { %>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <div class="card-img-scale-wrapper rounded-3" style="width: 100%;" >
-                            <img src="<%= reservation.Nom_Hotel.Photo %>" class="card-img" alt="hotel image" style="height: 55vh; width: 69vw;">
-  
-                            <div class="position-absolute bottom-0 start-0 p-3">
-                                <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                        class="bi bi-geo-alt me-2"></i><%= reservation.Nom_Hotel.Adresse_Hotel %> </div>
-                            </div>
-                        </div>
-                        <div class="card-body px-2">
-                            <h5 class="card-title"><a href="hotel-detail.html" class="stretched-link"><%= reservation.Nom_Hotel.Nom_Hotel %></a></h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success mb-0">$<%= reservation.Nom_Hotel.Prix %> <small class="fw-light">/starting at</small> </h6>
-                                
-                                <h6 class="mb-0">8.0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
-                            </div>
-                            <h6 class=" mb-0" style="color: #009EE2;">Nbr Chambre : <%= reservation.Nombre_Chambre %>  </h6>
-                            <h6 class=" mb-0" style="color: #009EE2;">Nbr personne : <%= reservation.Nombre_Personne %>  </h6>
+                    <div class="col-md-6 col-xl-4 mt-9">
+                        <div class="card shadow p-1 pb-0  ">
+                            <!-- Image -->
+                            <img style="height: 30vh; "  src=<%= reservation.Nom_Hotel.Photo %> class="rounded-2" alt="Card image" >
+        
+                            <!-- Card body START -->
+                            <div class="card-body px-3 pb-0">
+                                <!-- Rating and cart -->
+                                <div class="d-flex justify-content-between mb-3">
+                                    <a href="#" class="badge bg-dark text-white"><i class="bi fa-fw bi-star-fill me-2 text-warning"></i>4.0</a>
+                                    <div>
+                                        <a href="/edit-HotelReservation-cleint/<%= reservation._id %>">
+                                            <i class="bi bi-pencil-square" style="color: #009EE2; cursor: pointer;" title="Edit"></i>
+                                        </a>
+                                        <form action="/edit-HotelReservation-cleint/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
+                                            <button type="submit" style="border:none; background:none; padding:0;">
+                                                <i class="bi bi-trash" style="color: red; cursor: pointer;" title="Delete"></i>
+                                            </button>
+                                        </form>
 
+                                    </div>
+                                   
+                                </div>
+        
+                                <!-- Title -->
+                                <h5 class="card-title"><%= reservation.Nom_Hotel.Nom_Hotel %> </h5>
+        
+                                <!-- List -->
+                                <ul class="nav nav-divider mb-2 mb-sm-3">
+                                    <li class="nav-item">Air Conditioning</li>
+                                    <li class="nav-item">Wifi</li>
+                                    <li class="nav-item">Pool</li>
+                                    <li class="nav-item">More+</li>
+                                </ul>
+                            </div>
+                            <!-- Card body END -->
+        
+                            <!-- Card footer START-->
+                            <div class="card-footer pt-0">
+                                <!-- Price and Button -->
+                                <div class="d-sm-flex justify-content-sm-between align-items-center">
+                                    <!-- Price -->
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="fw-normal  mb-0 me-1" style="color: #009EE2;">$<%= reservation.Nom_Hotel.Prix %></h5>
+                                        <span class="mb-0 me-2">/day</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i style="color: #009EE2;" class="fas fa-bed  me-2"></i>
+                                        <h5 class="fw-normal  mb-0 me-1" style="color: #009EE2;"><%= reservation.Nombre_Chambre %></h5>
+                                     
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i  style="color: #009EE2;" class="fas fa-user  me-2"></i>
+                                        <h5 class="fw-normal  mb-0 me-1" style="color: #009EE2;"><%= reservation.Nombre_Personne %></h5>
+                                     
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h5  class="fw-normal  mb-0 me-1" style="color: #009EE2;"><%= reservation.totalPrice %></h5>
+                                        <span class="mb-0 me-2">/Total</span>
+                                    </div>
+                                                 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <a href="/edit-HotelReservation-cleint/<%=reservation._id %>"><i class="fas fa-edit icon icon-edit " style="color: #009EE2; cursor: pointer;" title="Edit"></i></a>
-                    <form action="/edit-HotelReservation-cleint/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
-                        <button type="submit" style="border:none; background:none; padding:0;">
-                            <i class="fas fa-trash icon icon-delete" style="color: red; cursor: pointer;" title="Delete"></i>
-                        </button>
-                    </form>            
-                </div>
-                
-                <% }) %>
-
-
-
-
-            </div>
+                 <% }) %>
+              
+                <!-- Card item END -->
+    
+                        
         </div>
     </section>
+
+    <!-- Book now START -->
+    <div class="card card-body border" style="width: 38%;margin-left: auto;margin-right: auto;">
+						
+        <!-- Title -->
+        <div class="d-sm-flex justify-content-sm-between align-items-center mb-3">
+            <div>
+                <span>Total Reservation</span>
+                <h4 class="card-title mb-0"><%= reservationLength %> </h4>
+            </div>
+            <div>
+                <h6 class="fw-normal mb-0">price Total</h6>
+                <small> $<%= overallTotalPrice %> </small>
+            </div>
+        </div>		
+
+   
+       
+
+        <!-- Button -->
+        <div class="d-grid " style="width: 40%; margin-right: auto; margin-left: auto; padding-top: 10px; padding-bottom:10px ;">
+            <a href="" class="btn btn-primary-soft mb-0">Confirmation reservation</a>
+        </div>
+    </div>
+    <!-- Book now END -->
 
 
 </body>

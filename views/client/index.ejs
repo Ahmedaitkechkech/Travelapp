@@ -15,7 +15,7 @@
     .form-fs-md .flatpickr {
     font-weight: 500;
     font-size: 1rem;
-    width: 308% !important;
+    
 }
 .card_hotel{
     height: 450px !important;
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-
+         
             
 		<div class="row">
 			<div class="col-xl-10 position-relative mt-n3 mt-xl-n9">
@@ -91,22 +91,40 @@
 				<h6 class="d-none d-xl-block mb-3">Check Availability</h6>
 
                 <form action="/client-Hotel" method="post" class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-lg-4">
-                            <div class="d-flex">
-                                <i class="bi bi-calendar fs-3 me-2 mt-2"></i>
-                                <div class="form-control-border form-control-transparent form-fs-md">
-                                    <label class="form-label">Nom Hotel</label>
-                                    <select name="Nom_Hotel" class="form-control flatpickr w-320% !important" placeholder="Select hotel">
-                                        <% hotel.forEach(hotel => { %>
-                                            <option value="<%= hotel.Nom_Hotel %>"><%= hotel.Nom_Hotel %></option>
-                                        <% }) %>
+                    <div class="row g-4 align-items-center justify-content-center" >
+                        <div class="col-lg-4" style="width: 18vw;">
+							<div class="d-flex">
+								<!-- Icon -->
+								<i class="bi bi-calendar fs-3 me-2 mt-2"></i>
+								<!-- Date input -->
+								<div class="form-control-border form-control-transparent form-fs-md">
+                                    <label class="form-label">Location</label>
+                                    <select name="Adresse_Hotel" class="form-control flatpickr " placeholder="Select hotel">
+                                        <% 
+                                        const uniqueAddresses = new Set(hotel.map(h => h.Adresse_Hotel));
+                                        uniqueAddresses.forEach(address => { 
+                                      %>
+                                        <option value="<%= address %>"><%= address %></option>
+                                      <% }) %>
                                     </select>
-                                    <button type="submit" class="btn-position-md-middle" style="border: none; background-color: transparent;">
-                                        <a class="icon-lg btn btn-round btn-primary mb-0" href="#"><i class="fa fa-search fa-fw"></i></a>
-                                    </button>
-                                </div>
-                            </div>
+                                    </div>
+							</div>
+						</div>
+						<!-- Check in -->
+						<div class="col-lg-4" style="width: 18vw;" >
+							<div class="d-flex">
+								<!-- Icon -->
+								<i class="bi bi-calendar fs-3 me-2 mt-2"></i>
+								<!-- Date input -->
+								<div class="form-control-border form-control-transparent form-fs-md">
+									<label class="form-label">Check in - out</label>
+									<input type="date" class="form-control flatpickr" data-mode="range" placeholder="Select date" value="19 Sep to 28 Sep">
+								</div>
+                                <button type="submit" class="btn-position-md-middle" style="border: none; background-color: transparent;">
+                                    <a class="icon-lg btn btn-round btn-primary mb-0" href="#"><i class="fa fa-search fa-fw"></i></a>
+                                </button>
+							</div>
+						</div>
                         </div>
                     </div>
                 </form>

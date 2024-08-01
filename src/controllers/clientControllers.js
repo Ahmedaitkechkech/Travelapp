@@ -169,9 +169,12 @@ const getIndexHotel = async (req, res) => {
 //find Hotel
 const client_addhotelFind = async (req, res) => {
 try{
-    const { Nom_Hotel } = req.body;
+    const { Adresse_Hotel } = req.body;
 
-    const hotelfind = await Hotel.findOne({ Nom_Hotel });
+
+    const hotelfind = await Hotel.find({ Adresse_Hotel }); 
+
+  
 
     if (!hotelfind) {
         return res.status(404).send('Hotel not found.');
@@ -179,6 +182,7 @@ try{
 
     res.render('client/CardHotel', {
        hotelfind,
+       
         title:'cardHotel'
      });
     }
@@ -189,9 +193,13 @@ try{
 };
 //get view add reservatio
 const client_get_AddHotelReservation = async (req, res) => {
-    
+    const hotelInfo = await Hotel.find({}); 
+
     try {
-        res.render('client/add-HotelReservation');
+       
+        res.render('client/add-HotelReservation',{
+            hotelInfo,
+        });
     } catch (error) {
         console.log(error);
     }
@@ -234,19 +242,39 @@ const client_AddHotelReservation = async (req, res) => {
 //get All reservation Client
 
 const client_getAll_CardReservation = async (req, res) => {
-    const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel")
+    try {
+        const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
+        // Calculate the total price for each reservation
+        let overallTotalPrice = 0;
+        const reservationsWithPrice = CardReservation.map(reservation => {
+            const dateEntre = new Date(reservation.Date_entre);
+            const dateSortie = new Date(reservation.Date_sortie);
+            const days = Math.ceil((dateSortie - dateEntre) / (1000 * 60 * 60 * 24)); //pour convert egalement dateSortie - dateEntre  to days
+            const totalPrice = days * reservation.Nom_Hotel.Prix; // Calculate total prix
+            overallTotalPrice = overallTotalPrice + totalPrice; // calculate all reservation
 
 
- try{  
+
+            return {
+                ...reservation.toObject(),
+                totalPrice
+            };
+        });
+        const reservationLength = reservationsWithPrice.length;
+
+
         res.render("client/card-Reservation", { 
-        CardReservation,
-        title:'card Resrvation'
-
+            CardReservation: reservationsWithPrice,
+            overallTotalPrice,
+            reservationLength,
+            title: 'card Reservation'
         });
     } catch (error) {
         console.log(error);
+        res.status(500).send('Internal Server Error');
     }
-}
+};
+
  //GET VIEW EDIT RESERVATION 
  const client_edit_HotelReservation_id = async (req, res) => {
     try {

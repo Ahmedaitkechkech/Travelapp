@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const jwtSecretraespo = process.env.jwtSecretraespo;
+const Responsableshema = require('../models/responsableShema'); // Adjust path as needed
 require("dotenv").config();
 
-const responsableMiddleware = (req, res, next) => {
+const responsableMiddleware = async (req, res, next) => {
     // Check if responsableToken is present in cookies
     const responsableToken = req.cookies.responsableToken;
     if (!responsableToken) {
@@ -12,8 +13,16 @@ const responsableMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(responsableToken, jwtSecretraespo);
-        req.responsableToken = decoded.responsableId;
+        const responsable = await Responsableshema.findById(decoded.responsableId);
+       /* tcheck session responsaple*/  
+        if (!responsable) {
+            req.flash("error", "Invalid session.");
+            return res.redirect("/responsable");
+        }
+
+        req.user = responsable; // Set req.user to the authenticated responsable
         next();
+         /**************/ 
     } catch (error) {
         console.error("JWT Verification Error:", error);
         req.flash("error", "Session expired, please log in again.");

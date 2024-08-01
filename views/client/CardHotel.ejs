@@ -4,113 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Details</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .hotel-image {
-            width: auto; 
-            height: 100%; 
-            max-height: 500px; 
-            object-fit: cover;
-        }
-        .image-container {
-            height: 500px;
-            flex: 1;
-        }
-        .text-container {
-            flex: 1;
-            padding-left: 20px;
-            margin-left: 12%;
-        }
-        .strong {
-            color: #009EE2;
-            font-size: 30px;
-        }
-        .flex-container {
-            display: flex;
-            align-items: center;
-        }
-        .reservation-btn {
-            background-color: #009EE2;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .reservation-btn i {
-            margin-right: 10px;
-        }
-        .reservation-btn:hover {
-            background-color: #007bb5;
-        }
-    </style>
+   
 </head>
 <body>
-    <section class="pb-0 pb-xl-5">
+    <section class="pt-0">
         <div class="container">
-            <div class="row g-2 justify-content-between align-items-center flex-container">
-                <!-- Left side START -->
-                <div class="col-lg-5 position-relative image-container">
-                    <!-- Svg Decoration -->
-                    <figure class="position-absolute top-0 start-0 translate-middle z-index-1 ms-4">
-                        <svg class="fill-warning" width="77px" height="77px">
-                            <path d="M76.997,41.258 L45.173,41.258 L67.676,63.760 L63.763,67.673 L41.261,45.171 L41.261,76.994 L35.728,76.994 L35.728,45.171 L13.226,67.673 L9.313,63.760 L31.816,41.258 L-0.007,41.258 L-0.007,35.725 L31.816,35.725 L9.313,13.223 L13.226,9.311 L35.728,31.813 L35.728,-0.010 L41.261,-0.010 L41.261,31.813 L63.763,9.311 L67.676,13.223 L45.174,35.725 L76.997,35.725 L76.997,41.258 Z"></path>
-                        </svg>
-                    </figure>
-                    <img src="<%= hotelfind.Photo %>" class="hotel-image rounded-3 position-relative" alt="">
-                </div>
-                <!-- Right side START -->
-                <div class="col-lg-6 text-container">
-                    <h2 class="mb-3 mb-lg-5 ">Nom_Hotel: <%= hotelfind.Nom_Hotel %></h2>
-                    <p class="mb-3 mb-lg-5" style="font-size: 25px;"><strong class="strong">Adresse_Hotel:</strong> <%= hotelfind.Adresse_Hotel %>.</p>
-                    <p class="mb-3 mb-lg-5" style="font-size: 25px;"><strong class="strong">Prix:</strong> $<%= hotelfind.Prix %></p>
-
-                    <!-- Features START -->
-                    <div class="row g-4">
-                        <!-- Item -->
-                        <div class="col-sm-6">
-                            <div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle"><i class="fa-solid fa-utensils"></i></div>
-                            <h5 class="mt-2">Quality Food</h5>
-                            <p class="mb-0">Departure defective arranging rapturous did. Conduct denied adding worthy little.</p>
-                        </div>
-                        <!-- Item -->
-                        <div class="col-sm-6">
-                            <div class="icon-lg bg-danger bg-opacity-10 text-danger rounded-circle"><i class="bi bi-stopwatch-fill"></i></div>
-                            <h5 class="mt-2">Quick Services</h5>
-                            <p class="mb-0">Supposing so be resolving breakfast am or perfectly.</p>
-                        </div>
-                        <!-- Item -->
-                        <div class="col-sm-6">
-                            <div class="icon-lg bg-orange bg-opacity-10 text-orange rounded-circle"><i class="bi bi-shield-fill-check"></i></div>
-                            <h5 class="mt-2">High Security</h5>
-                            <p class="mb-0">Arranging rapturous did believe him all had supported.</p>
-                        </div>
-                        <!-- Item -->
-                        <div class="col-sm-6">
-                            <div class="icon-lg bg-info bg-opacity-10 text-info rounded-circle"><i class="bi bi-lightning-fill"></i></div>
-                            <h5 class="mt-2">24 Hours Alert</h5>
-                            <p class="mb-0">Rapturous did believe him all had supported.</p>
+            <div class="row g-4">
+    
+    
+                <!-- Card item START -->
+                 <% hotelfind.forEach(hotelfind => { %>
+                    <div class="col-md-6 col-xl-4 mt-9">
+                        <div class="card shadow p-1 pb-0  ">
+                            <!-- Image -->
+                            <img style="height: 30vh;"  src=<%= hotelfind.Photo %> class="rounded-2" alt="Card image" >
+        
+                            <!-- Card body START -->
+                            <div class="card-body px-3 pb-0">
+                                <!-- Rating and cart -->
+                                <div class="d-flex justify-content-between mb-3">
+                                    <a href="#" class="badge bg-dark text-white"><i class="bi fa-fw bi-star-fill me-2 text-warning"></i>4.0</a>
+                                    <a href="#" class="h6 mb-0 z-index-2"><i class="bi bi-heart"></i></a>
+                                </div>
+        
+                                <!-- Title -->
+                                <h5 class="card-title"><%= hotelfind.Nom_Hotel %> </h5>
+        
+                                <!-- List -->
+                                <ul class="nav nav-divider mb-2 mb-sm-3">
+                                    <li class="nav-item">Air Conditioning</li>
+                                    <li class="nav-item">Wifi</li>
+                                    <li class="nav-item">Pool</li>
+                                    <li class="nav-item">More+</li>
+                                </ul>
+                            </div>
+                            <!-- Card body END -->
+        
+                            <!-- Card footer START-->
+                            <div class="card-footer pt-0">
+                                <!-- Price and Button -->
+                                <div class="d-sm-flex justify-content-sm-between align-items-center">
+                                    <!-- Price -->
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="fw-normal text-success mb-0 me-1">$<%= hotelfind.Prix %></h5>
+                                        <span class="mb-0 me-2">/day</span>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="mt-2 mt-sm-0 z-index-2">
+                                        <a href="reserver-Hotel " class="btn btn-sm btn-primary-soft mb-0 w-100">Reservé<i class="bi bi-arrow-right ms-2"></i></a>    
+                                    </div>                  
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Features END -->
-                    <!-- Reservation Button START -->
-                    <div class="mt-4">
-                        <a href="reserver-Hotel">
-                        <button class="reservation-btn">
-                            <i class="fas fa-calendar-check"></i> Réserver
-                        </button>
-                    </a>
-                    </div>
-                
-                    <!-- Reservation Button END -->
-                </div>
-                <!-- Right side END -->
-            </div>
+                 <% }) %>
+              
+                <!-- Card item END -->
+    
+                        
         </div>
     </section>
+   
 </body>
 </html>
