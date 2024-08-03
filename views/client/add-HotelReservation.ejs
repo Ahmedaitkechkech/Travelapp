@@ -7,6 +7,7 @@
   <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/add-responsable.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <style>
   .table-controls {
@@ -25,9 +26,7 @@
 }
 </style>
 <body>
-  <!-- Header -->
-  <%- include('../partials/header.ejs') %>
-  <!-- Header Ends!! -->
+
 
   <div class="container center-card">
     <section>
@@ -82,7 +81,7 @@
                   <input class="form-control" type="date" name="Date_sortie" placeholder="Date de sortie" required>
                 </div>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                  <button type="submit" class="btn" style="background-color: #009EE2; color: white;">Sauvegarder</button>
                 </div>
               </div>
             </form>
@@ -91,9 +90,7 @@
       </div>
     </section>
   </div>
-  <!-- Footer -->
-  <%- include('../partials/footer.ejs') %>
-  <!-- Footer End !! -->
+ 
 </body>
 </html>
 

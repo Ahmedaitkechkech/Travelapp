@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -24,10 +26,16 @@
    
 }
 
+        .control-buttons {
+            visibility: hidden;
+        }
+
+
 </style>
 
 <body>
- <section class="pt-3 pt-lg-5">
+    <!-- affiche form find location Hotel-->
+ <section class="bg-light" class="pt- pt-lg-5">
         <div class="container">
 
             <div class="row g-4 g-lg-5">
@@ -95,7 +103,7 @@
                         <div class="col-lg-4" style="width: 18vw;">
 							<div class="d-flex">
 								<!-- Icon -->
-								<i class="bi bi-calendar fs-3 me-2 mt-2"></i>
+								<i class="bi bi-geo-alt fs-3 me-2 mt-2"></i>
 								<!-- Date input -->
 								<div class="form-control-border form-control-transparent form-fs-md">
                                     <label class="form-label">Location</label>
@@ -126,16 +134,8 @@
 							</div>
 						</div>
                         </div>
-                    </div>
-                </form>
-                
-                
-
-               
-
-                
-                
-				
+            </div>
+            </form>
 			</div>
 		</div>
 	
@@ -143,10 +143,167 @@
 
  </section>
 
+ <!-- data statique -->
+ <section class="py-0 py-md-5" style="margin-top: 4%;">
+	<div class="container">
+		<div class="row g-4 g-lg-7 justify-content-center align-items-center">
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/01.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/02.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/03.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/04.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/05.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/06.svg" class="grayscale" alt="">
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- slide and foreach data-->
+ <section class="bg-light" class="pb-0 py-md-5" style="margin-top: 4%;">
+    <div class="container">
+        <div class="row">
+            <!-- Slider START -->
+            <div class="col-lg-11 mx-auto">
+                <div class="tiny-slider arrow-round arrow-border arrow-hover">
+                    <div class="tiny-slider-inner" id="testimonial-slider" data-edge="2" data-items="1">
+                        <!-- Slide item START -->
+                        <% hotel.forEach(hotel => { %>
+                            <div class="px-4 px-md-5">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-md-6 col-lg-5 position-relative">
+                                        <!-- Image -->
+                                        <img style="width: 100%;" src="<%= hotel.Photo %>" class="rounded-3 position-relative" alt="">
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <!-- Quote -->
+                                        <span class="display-3 mb-0 text-primary"><i class="bi bi-quote"></i></span>
+                                        <!-- Content -->
+                                        <h5 class="fw-light"><%= hotel.Description %></h5>
+                                        <!-- Rating -->
+                                        <ul class="list-inline small mb-2">
+                                            <li class="list-inline-item me-0"><i class="fa-solid fa-star text-warning"></i></li>
+                                            <li class="list-inline-item me-0"><i class="fa-solid fa-star text-warning"></i></li>
+                                            <li class="list-inline-item me-0"><i class="fa-solid fa-star text-warning"></i></li>
+                                            <li class="list-inline-item me-0"><i class="fa-solid fa-star text-warning"></i></li>
+                                            <li class="list-inline-item"><i class="fa-solid fa-star text-warning"></i></li>
+                                        </ul>
+                                        <!-- Title -->
+                                        <h6 class="mb-0"><%= hotel.Nom_Hotel %></h6>
+                                        <span>Ceo of Google</span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  data affiche Hotel Top foeeachdata-->
+<section style="margin-top: 4%;width: 90vw">
+	<div class="container">
+		<!-- Title -->
+		<div class="row mb-4"  >
+			<div class="col-12 text-center">
+				<h2  class="mb-5">Mieux Hoteles</h2>
+			</div>
+		</div>
+
+        <div class="row g-4 g-md-5">
+    <% hotel.forEach(hotel => { %>
+        <div class="col-6 col-sm-4 col-lg-3 col-xl-2" style="width: 20%; height: 40%;">
+            <div class="card bg-transparent text-center p-1 h-100">
+                <!-- Image -->
+                <img style="border-radius: 50%; width: 100%; height: 150px  !important;" src="<%= hotel.Photo %>"  alt="">
+                <div class="card-body p-0 pt-3" style="width: 100%;">
+                    <h5  class="card-title"><%= hotel.Nom_Hotel %></a></h5>
+                    <span>30 min drive</span>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+        
+    
+		
+
+			
+
+		</div>
+	</div>
+</section>
+
+<!--  data statique-->
+
+<section class="bg-light ">
+	<div class="container ">
+		<div class="row g-4 d-flex justify-content-between">
+
+			<!-- Help -->
+			<div class="col-md-6 col-xxl-4 d-flex ">
+				<div class="bg-body d-flex  rounded-3 h-100 p-4 ">
+					<h3><i class="fa-solid fa-hand-holding-heart"></i></h3>
+					<div class="ms-3">
+						<h5>24x7 Help</h5>
+						<p class="mb-0">If we fall short of your expectation in any way, let us know</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Trust -->
+			<div class="col-md-6 col-xxl-4">
+				<div class="bg-body d-flex rounded-3 h-100 p-4">
+					<h3><i class="fa-solid fa-hand-holding-usd"></i></h3>
+					<div class="ms-3">
+						<h5>Payment Trust</h5>
+						<p class="mb-0">All refunds come with no questions asked guarantee</p>
+					</div>
+				</div>
+			</div>
+			
+
+			
+
+		</div>
+	</div>
+</section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let slider = tns({
+            container: '#testimonial-slider',
+            controlsText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],//affiche les icon la place next a,d prev
+        });
+    });
+</script>
+
 
 
   
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
 
 </body>
 

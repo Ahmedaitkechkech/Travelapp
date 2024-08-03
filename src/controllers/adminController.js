@@ -4,6 +4,7 @@ const Car = require("../models/carsShema");
 const Flight = require("../models/Ticket_flight"); 
 const Hotel = require("../models/HotelSchema"); 
 const reviews = require("../models/clientReviewSchema"); 
+const HotelResrvation = require("../models/Hotel_ReserSchema"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
@@ -350,7 +351,24 @@ const admin_deleteReview = async (req, res) => {
     } catch (err) {
         console.error(err);
     }
-};
+}
+
+// get All reservation Hoteles to admin
+const admin_get_Allhoteles_Booking = async (req, res) => {
+    try{
+        const hotelReservationAdmin =  await HotelResrvation.find({}).populate('Nom_Hotel')
+        res.render('Admin/Hoteles-Rservation',{
+            title:"Place Admin",
+            hotelReservationAdmin,
+
+        })
+    } catch (err) {
+        console.error("Error fetching hotel reservations:", err);
+        res.status(500).send("Internal Server Error");
+    }
+  
+}
+
 
 
 
@@ -384,6 +402,9 @@ module.exports = {
     //affiche reviws
     admin_review,
     admin_deleteReview,
+
+    //afiche hotelesRervation and cars and flight
+    admin_get_Allhoteles_Booking,
 
     admin_logout,
     
