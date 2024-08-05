@@ -33,8 +33,24 @@ router.put("/edit-HotelReservation-cleint/:id",ClientMiddleware,clientController
 //delet hotel reserver
 router.delete("/edit-HotelReservation-cleint/:id",ClientMiddleware,clientControllers.client_delete_HotelReservation);
 
+//get view index car
+router.get("/index-car",ClientMiddleware,clientControllers.client_getIndex_car);
+//finf car in db
+router.post("/client-cars",ClientMiddleware,clientControllers.client_add_Find_car);
 
+//Crud CAR RESERVATION
+router.get("/add-carReservation",ClientMiddleware,clientControllers.client_get_AddCarReservation);
+//stire car Reservation
+router.post("/add-ReservationCar",ClientMiddleware,clientControllers.client_AddCarReservation);
+//get all reservation car
+router.get("/Cards-reservationCar",ClientMiddleware,clientControllers.client_getAll_CardReservationCar);
+//get view edit car reservation 
+router.get("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_edit_carReservation_id);
 
+//put   car reservation 
+router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_edit_CarReservation);
+//delete   car reservation 
+router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
 
 

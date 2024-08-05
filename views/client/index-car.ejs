@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <section class="pt-0 pt-lg-5">
+        <div class="container">
+            <div class="row" style="width:105%;">
+    
+                <div class="col-lg-10 ms-auto position-relative">
+                        <img src="/img/03.jpg" class="rounded-3" alt="">
+
+                    <!-- Search START -->
+                    <div class="col-11 col-sm-10 col-lg-8 col-xl-6 position-lg-middle ms-lg-8 ms-xl-7">
+                        <div class="card shadow pb-0 mt-n7 mt-sm-n8 mt-lg-0" style="width: 126%;">
+    
+                            <!-- Card header -->
+                            <div class="card-header border-bottom p-3 p-sm-4">
+                                <h5 class="card-title mb-0">Find Car</h5>
+                            </div>
+    
+                            <!-- Card body START -->
+                            <form action="/client-cars" method="post"  class="card-body form-control-border p-3 p-sm-4">
+                              
+    
+                                <!-- Tabs content START -->
+                                <div class="tab-content my-4" id="pills-tabContent">
+                                    <!-- One way START -->
+                                    <div class="tab-pane fade show active" id="cab2-one-way" role="tabpanel" aria-labelledby="cab2-one-way-tab">
+                                        <div class="row g-2 g-md-4">
+                                           <!-- car_model -->
+                                            <div class="col-md-6">
+                                                <div class="form-fs-lg form-control-transparent">
+                                                <label class="form-label small">name_car</label>
+                                                <select class="form-control flatpickr" name="name_companies">
+                                                    <% 
+                                                    const uniqueAddresses = new Set(carinfo.map(h => h.name_companies));
+                                                    uniqueAddresses.forEach(name_car => { 
+                                                  %>
+                                                    <option value="<%= name_car %>"><%= name_car %></option>
+                                                  <% }) %>
+                                                </select>
+                                                </div>
+                                            </div>
+  
+                                            <!-- Lieu_de_ramassage -->
+                                            <div class="col-md-6">
+                                                <div class="form-fs-lg form-control-transparent">
+                                                <label class="form-label small">Lieu de Ramassage</label>
+                                                <select class="form-control flatpickr" name="Lieu_de_ramassage">
+                                                    <% 
+                                                    const uniqueLieu_de_ramassage = new Set(carinfo.map(h => h.Lieu_de_ramassage));
+                                                    uniqueLieu_de_ramassage.forEach(Lieu_de_ramassage => { 
+                                                  %>
+                                                    <option value="<%= Lieu_de_ramassage %>"><%= Lieu_de_ramassage %></option>
+                                                  <% }) %>
+                                                </select>
+                                                </div>
+                                            </div>
+  
+                                            <!-- Date_de_ramassage -->
+                                            <div class="col-md-6">
+                                                <div class="form-fs-lg form-control-transparent">
+                                                <label class="form-label small">Date de Ramassage</label>
+                                                <select class="form-control flatpickr" name="Date_de_ramassage">
+                                                    <% 
+                                                    const uniqueDate_de_ramassage = new Set(carinfo.map(h => h.Date_de_ramassage));
+                                                    uniqueDate_de_ramassage.forEach(Date_de_ramassage => { 
+                                                  %>
+                                                    <option value="<%= Date_de_ramassage %>"><%= Date_de_ramassage %></option>
+                                                  <% }) %>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Temps -->
+                                             <div class="col-md-6">
+                                                    <div class="form-fs-lg form-control-transparent">
+                                                    <label class="form-label small">Temps</label>
+                                                    <select class="form-control flatpickr" name="Temps">
+                                                        <% 
+                                                    const uniqueTemps = new Set(carinfo.map(h => h.Temps));
+                                                    uniqueTemps.forEach(Temps => { 
+                                                  %>
+                                                    <option value="<%= Temps %>"><%= Temps %></option>
+                                                  <% }) %>
+                                                    </select>
+                                                    </div>
+                                            </div>
+  
+                                        </div>
+                                    </div>
+                                    
+    
+                                <!-- Button -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn  mt-4" style="background-color: #009EE2; color: white;">Search Cabs</button>
+                                </div>
+                                   <!-- Button -->
+    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+    
+</body>
+</html>

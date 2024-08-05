@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body>
+
+    <section class="pt-0">
+        <div class="container">
+            <div class="row g-4">
+    
+    
+                <!-- Card item START -->
+           <% CardReservationCar.forEach(reservation => { %>
+    <div class="col-md-6 col-xl-4 mt-9">
+        <div class="card shadow p-1 pb-0">
+            <!-- Image -->
+            <img style="height: 30vh;" src="<%= reservation.name_companies.photo  %>" class="rounded-2" alt="Card image">
+    
+            <!-- Card body START -->
+            <div class="card-body px-3 pb-0">
+                <!-- Rating and cart -->
+                <div class="d-flex justify-content-between mb-3">
+                    <a href="#" class="badge bg-dark text-white"><i class="bi fa-fw bi-star-fill me-2 text-warning"></i>4.0</a>
+                    <div>
+                        <a href="/edite_Reservation_car/<%= reservation._id %>">
+                            <i class="bi bi-pencil-square" style="color: #009EE2; cursor: pointer;" title="Edit"></i>
+                        </a>
+                        <form action="/edite_Reservation_car/<%= reservation._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" style="border:none; background:none; padding:0;">
+                                <i class="bi bi-trash" style="color: red; cursor: pointer;" title="Delete"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+    
+                <!-- Title -->
+                <h5 class="card-title"><%= reservation.car_model %></h5>
+    
+                <!-- List -->
+            </div>
+            <!-- Card body END -->
+    
+            <!-- Card footer START-->
+            <div class="card-footer pt-0">
+                <!-- Price and Button -->
+                <div class="d-sm-flex justify-content-sm-between align-items-center">
+                    <!-- Price -->
+                    <div class="d-flex align-items-center">
+                        <h5 class="fw-normal mb-0 me-1" style="color: #009EE2;">$<%= reservation.name_companies.prix %></h5>
+                        <span class="mb-0 me-2">/day</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i style="color: #009EE2;" class="fas fa-car me-2"></i>
+                        <h5 class="fw-normal mb-0 me-1" style="color: #009EE2;"><%= reservation.name_companies.nombre_seats %> seats</h5>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i style="color: #009EE2;" class="fas fa-cogs me-2"></i>
+                        <h5 class="fw-normal mb-0 me-1" style="color: #009EE2;"><%= reservation.name_companies.type %></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>
+
+    </section>
+
+    <!-- Book now START -->
+    <div class="card card-body border" style="width: 38%;margin-left: auto;margin-right: auto;">
+						
+        <!-- Title -->
+        <div class="d-sm-flex justify-content-sm-between align-items-center mb-3">
+            <div>
+                <span>Total Reservation</span>
+                <h4 class="card-title mb-0">5 </h4>
+            </div>
+            <div>
+                <h6 class="fw-normal mb-0">price Total</h6>
+                <small> $5</small>
+            </div>
+        </div>		
+
+   
+       
+
+        <!-- Button -->
+        <div class="d-grid " style="width: 40%; margin-right: auto; margin-left: auto; padding-top: 10px; padding-bottom:10px ;">
+            <a href="" class="btn btn-primary-soft mb-0">Confirmation reservation</a>
+        </div>
+    </div>
+    <!-- Book now END -->
+
+
+</body>
+
+</html>

@@ -1,6 +1,8 @@
 const ClientSchema = require("../models/ClientSchema");
 const HotelSchema = require("../models/HotelSchema");
+const Cars = require("../models/carsShema");
 const HotelReservSchema = require("../models/Hotel_ReserSchema");
+const Car_reservation = require("../models/Car_reservation");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecretClient = process.env.jwtSecretClient;
@@ -166,13 +168,15 @@ const getIndexHotel = async (req, res) => {
         console.log(error);
     }
 }
+
+
 //find Hotel
 const client_addhotelFind = async (req, res) => {
 try{
     const { Adresse_Hotel } = req.body;
+    const hotelfind = await Hotel.find({Adresse_Hotel}); 
+    
 
-
-    const hotelfind = await Hotel.find({ Adresse_Hotel }); 
 
   
 
@@ -181,7 +185,8 @@ try{
     }
 
     res.render('client/CardHotel', {
-       hotelfind,
+        hotelfind,
+    
        
         title:'cardHotel'
      });
@@ -204,7 +209,7 @@ const client_get_AddHotelReservation = async (req, res) => {
         console.log(error);
     }
 }
-//store reservation db
+//store reservation  Hotel db
 const client_AddHotelReservation = async (req, res) => {
     try {
         const { Nom_Hotel, Nom, Prénom,username, Numéro_Téléphone, Date_entre, Date_sortie, Nombre_Personne, Nombre_Chambre } = req.body;
@@ -327,6 +332,179 @@ const client_delete_HotelReservation = async (req, res) => {
     }
 };
 
+//get view index page car
+const client_getIndex_car = async (req, res) => {
+    const carinfo = await Cars.find({}); 
+
+
+ try{  
+        res.render("client/index-car", {
+          title:'client Service',
+          carinfo,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//client Find Car
+const client_add_Find_car = async (req, res) => {
+    try {
+      const { name_companies, Date_de_ramassage, Lieu_de_ramassage, Temps } = req.body;
+  
+      
+      if (!name_companies || !Date_de_ramassage || !Lieu_de_ramassage || !Temps) {
+        return res.status(400).send("All fields are required.");
+      }
+  
+      
+      const carfind = await Cars.find({ name_companies });
+  
+     
+      if (carfind.length === 0) {
+        return res.status(404).send('Car not found.');
+      }
+      const carfindLength = carfind.length;
+  
+      res.render("client/cardCars",{
+        carfind,
+        carfindLength,
+        title:"client cards"
+      })
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('An error occurred while finding the car.');
+    }
+};
+
+//CRUD RESRVATION CAR*****************
+//GET VIEW ADD CAR RESERVATION
+const client_get_AddCarReservation = async (req, res) => {
+    const cars = await Cars.find({}) 
+
+    try {
+       
+        res.render('client/add_carReservation',{
+            cars,
+            title:"Service Client"
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//store reservation  Hotel db
+const client_AddCarReservation = async (req, res) => {
+    try {
+        const { name_companies, date_sortie_car, date_retourne,Email, genre, tele,Prenom,Nom,username} = req.body;
+
+        if (!name_companies) {
+            return res.status(400).send('Nom-Car is required.');
+        }
+
+        const car= await Cars.findOne({ name_companies });
+       
+
+        if (!car) {
+            return res.status(404).send('car not found.');
+        }
+
+        const reservationCar = new Car_reservation({
+            name_companies: car._id,
+            date_sortie_car,
+            date_retourne,
+            Email,
+            genre,
+            tele,
+            Prenom,
+            Nom,
+            username,
+          
+        });
+
+        await reservationCar.save();
+        
+
+        res.redirect("/Cards-reservationCar")
+    } catch (error) {
+        console.log('Error creating reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+//get All reservation Client
+
+const client_getAll_CardReservationCar = async (req, res) => {
+    try {
+        const CardReservationCar = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
+    
+
+        res.render("client/card-ReservationCar", { 
+            CardReservationCar,
+            
+            
+            title: 'card Reservation car'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+ //GET VIEW EDIT RESERVATION 
+ const client_edit_carReservation_id = async (req, res) => {
+    try {
+        const Car_ReservInfo = await Car_reservation.findById(req.params.id).populate('name_companies');
+        if (!Car_ReservInfo) {
+            return res.status(404).send('Reservation not found.');
+        }
+        res.render("client/edit_carReservation", { Car_ReservInfo, title:"Service client" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+//put in db hotel reservation
+const client_edit_CarReservation = async (req, res) => {
+    try {
+        const { name_companies, date_sortie_car, date_retourne,Email, genre, tele,Prenom,Nom} = req.body;
+        const updateObject = {};
+
+        if (name_companies) {
+            const car = await Cars.findOne({ name_companies });
+            if (!car) {
+                return res.status(404).send('Hotel not found.');
+            }
+            updateObject.name_companies = car._id;
+        }
+        if (date_sortie_car) updateObject.date_sortie_car = date_sortie_car;
+        if (date_retourne) updateObject.date_retourne = date_retourne;
+        if (Email) updateObject.Email = Email;
+        if (genre) updateObject.genre = genre;
+        if (tele) updateObject.tele = tele;
+        if (Prenom) updateObject.Prenom = Prenom;
+        if (Nom) updateObject.Nom = Nom;
+       
+
+        await Car_reservation.findByIdAndUpdate(req.params.id, updateObject);
+        res.redirect("/Cards-reservationCar");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+//Delete client hotel reserver
+const client_delete_CarReservation = async (req, res) => {
+    try {
+        await Car_reservation.findByIdAndDelete(req.params.id);
+        res.redirect("/Cards-reservationCar");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 
 module.exports = {
     Signup_Client,
@@ -346,4 +524,15 @@ module.exports = {
     client_edit_HotelReservation_id,
     client_edit_HotelReservation,
     client_delete_HotelReservation,
+    //get index car
+    client_getIndex_car,
+    //find car
+    client_add_Find_car,
+   //CRUD CAR RESERVATION
+   client_get_AddCarReservation,
+   client_AddCarReservation,
+   client_getAll_CardReservationCar,
+   client_edit_carReservation_id,
+   client_edit_CarReservation,
+   client_delete_CarReservation,
 }

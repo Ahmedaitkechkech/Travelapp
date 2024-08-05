@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const carsShema = new Schema({
+    name_companies: {
+        type: String,  
+        required: false,
+    },
     username: {
         type: String,
         required: true,
@@ -40,14 +44,8 @@ const carsShema = new Schema({
         type: String,
         required: true,
     },
-    name_companies: {
-        type: String,
-        required: false,
-    },
-    name_car: {
-        type: String,
-        required: false,
-    },
+  
+   
     description: {
         type: String,
         required: true,

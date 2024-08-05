@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Title-->
+    <section class="pt-6">
+        <div class="container position-relative">
+            <!-- Title and button START -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-sm-flex justify-content-sm-between align-items-center">
+                        <!-- Title -->
+                        <div class="mb-2 mb-sm-0">
+                            <h1 class="fs-3 mb-2"><%= carfindLength %> Cabs Available</h1>
+                            <!-- Divider -->
+                            <ul class="nav nav-divider h6 mb-0">
+                                <li class="nav-item">152 kms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Title and button END -->
+        </div>
+    </section>
+
+    <!-- Card find with footer card -->
+    <section class="pt-0">
+        <div class="container" data-sticky-container="">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-xl-8 col-xxl-9">
+                    <div class="vstack gap-4">
+                        <% carfind.forEach(car => { %>
+                        <div class="card border p-4">
+                            <!-- Card body START -->
+                            <div class="card-body p-0">
+                                <div class="row g-2 g-sm-4 mb-4">
+                                    <!-- Card image -->
+                                    <div class="col-md-4 col-xl-3">
+                                        <div class="bg-light rounded-3 px-4 py-5">
+                                            <img src="<%= car.photo %>" alt="<%= car.name_car %>" class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <!-- Card title -->
+                                    <div class="col-sm-6 col-md-4 col-xl-6">
+                                        <h4 class="card-title mb-2"><%= car.name_companies %></h4>
+                                        <!-- Car Model -->
+                                        <ul class="nav nav-divider h6 fw-normal mb-2">
+                                            <li class="nav-item"><%= car.car_model %></li>
+                                        </ul>
+                                        <!-- Seats -->
+                                        <ul class="nav nav-divider h6 fw-normal mb-2">
+                                            <li class="nav-item"><%= car.nombre_seats %> Seats</li>
+                                        </ul>
+                                        <!-- Price -->
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item h5 mb-0">$<%= car.prix %></li>
+                                        </ul>
+                                        <!-- Book Button -->
+                                        <a href="add-carReservation"  class="btn mb-0" style="background-color: #009EE2; color: white;margin-left: 70%;">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card footer START -->
+                            <div class="card-footer border-top p-0 pt-3">
+                                <div class="row">
+                                    <!-- List -->
+                                    <div class="col-md-6">
+                                        <ul class="list-group list-group-borderless mb-0">
+                                            <li class="list-group-item d-flex pb-0 mb-0">
+                                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>600Kms included. After that $15/Kms</span>
+                                            </li>
+                                            <li class="list-group-item d-flex pb-0 mb-0">
+                                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>2 luggage bags</span>
+                                            </li>
+                                            <li class="list-group-item d-flex pb-0 mb-0">
+                                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>Diesel Car</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Info -->
+                                    <div class="col-md-6">
+                                        <ul class="list-group list-group-borderless mb-0">
+                                            <li class="list-group-item d-flex h6 fw-light text-success pb-0 mb-0">
+                                                Free Cancellation, till 1 hour of Pick up
+                                            </li>
+                                            <li class="list-group-item d-flex h6 fw-light text-success pb-0 mb-0">
+                                                Free waiting up to 45 minutes
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card footer END -->
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

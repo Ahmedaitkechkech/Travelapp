@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/add-responsable.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 70px;
+      margin-bottom: 1px;
+    }
+
+    .arrow {
+      font-size: 25px;
+    }
+
+    .arrow a {
+      font-size: 30px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="table-controls">  
+    <div class="arrow">
+        <a href="/">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+  </div>
+
+  <div class="container center-card">
+    <section>
+      <div class="container">
+        <div class="card shadow">
+          <div class="card-header border-bottom">
+            <h5 class="mb-0">Éditer Réservation Voiture</h5>
+          </div>
+          <div class="card-body">
+                <form method="POST" action="/edite_Reservation_car/<%= Car_ReservInfo._id %>?_method=PUT">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nom</label>
+                  <input class="form-control" type="text" name="Nom" value="<%= Car_ReservInfo.Nom %>" placeholder="Entrez votre nom" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Prénom</label>
+                  <input class="form-control" type="text" name="Prenom" value="<%= Car_ReservInfo.Prenom %>" placeholder="Entrez votre prénom" required>
+                </div>
+              
+                <div class="col-md-6">
+                  <label class="form-label">Nom Voiture</label>
+                  <input class="form-control" type="text" name="name_companies" value="<%= Car_ReservInfo.name_companies.name_companies%>" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date de Sortie de la Voiture</label>
+                  <input class="form-control" type="date" name="date_sortie_car" value="<%= Car_ReservInfo.date_sortie_car.toISOString().split('T')[0] %>" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date de Retour</label>
+                  <input class="form-control" type="date" name="date_retourne" value="<%= Car_ReservInfo.date_retourne.toISOString().split('T')[0] %>" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="email" name="Email" value="<%= Car_ReservInfo.Email %>" placeholder="Entrez votre Email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Numéro Téléphone</label>
+                  <input class="form-control" type="tel" name="tele" value="<%= Car_ReservInfo.tele %>" placeholder="Numéro Téléphone" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="genre">Genre:</label>
+                  <select id="genre" name="genre" class="form-control" required>
+                    <option value="" disabled selected>Choisissez votre genre</option>
+                    <option value="femme" <%= Car_ReservInfo.genre === 'femme' ? 'selected' : '' %>>Femme</option>
+                    <option value="homme" <%= Car_ReservInfo.genre === 'homme' ? 'selected' : '' %>>Homme</option>
+                  </select>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

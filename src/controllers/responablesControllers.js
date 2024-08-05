@@ -246,7 +246,6 @@ const responsable_add_car = async (req, res, next) => {
         Lieu_de_ramassage: req.body.Lieu_de_ramassage,
         Date_de_ramassage: req.body.Date_de_ramassage,
         Temps: req.body.Temps,
-        name_car: req.body.name_car,
         description: req.body.description,
       });
   
@@ -292,7 +291,7 @@ const responsable_edit_car_id = async (req, res) => {
 // responsable_edit_car by id
 const responsable_edit_car = async (req, res) => {
     try {
-        const { name_companies, prix, Lieu_de_ramassage, Date_de_ramassage,car_model, name_car,type,description,nombre_seats,Temps } = req.body;
+        const { name_companies, prix, Lieu_de_ramassage, Date_de_ramassage,car_model,type,description,nombre_seats,Temps } = req.body;
         
       
     
@@ -301,7 +300,6 @@ const responsable_edit_car = async (req, res) => {
         if (prix) updateObject.prix = prix;
         if (Lieu_de_ramassage) updateObject.Lieu_de_ramassage = Lieu_de_ramassage;
         if (Date_de_ramassage) updateObject.Date_de_ramassage = Date_de_ramassage;
-        if (name_car) updateObject.name_car = name_car;
         if (type) updateObject.type = type;
         if (description) updateObject.description = description;
         if (car_model) updateObject.car_model = car_model;
