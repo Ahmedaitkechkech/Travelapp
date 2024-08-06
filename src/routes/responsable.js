@@ -76,11 +76,7 @@ router.delete("/edit-Hotel/:id",responsableMiddleware, responsablecontoller.resp
 /*----------- Hotel Reservation---------*/
 
 // Hotel reservations routes
-router.get("/HotelReservation",responsableMiddleware, responsablecontoller.responsable_List_HotelReservation);
-router.get("/add-HotelReservation",responsableMiddleware, responsablecontoller.responsable_get_AddHotelReservation);
-router.post("/add-HotelReservation",responsableMiddleware, responsablecontoller.responsable_AddHotelReservation);
-router.get("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_HotelReservation_id);
-router.put("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_HotelReservation);
+router.get('/reservations',responsableMiddleware, responsablecontoller.getClientReservations);
 router.delete("/edit-HotelReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_HotelReservation);
 
 //review to responsable
@@ -88,12 +84,7 @@ router.get("/responsable_reviws",responsableMiddleware, responsablecontoller.res
 router.delete("/responsable_delete_review/:id",responsableMiddleware, responsablecontoller.responsable_deleteReview);
 
 //car reservation
-router.get("/carReservationList",responsableMiddleware, responsablecontoller.responsable_List_CarReservation);
-
-router.get("/carReservation",responsableMiddleware, responsablecontoller.responsable_get_AddcarReservation);
-router.post("/add-CarReservation",responsableMiddleware, responsablecontoller.responsable_AddCarReservation);
-router.get("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_CarReservation_id);
-router.put("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_CarReservation);
+router.get("/carReservationList",responsableMiddleware, responsablecontoller.getClientReservationsCar);
 router.delete("/edite_carReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_CarReservation);
 
 //flight reservation
@@ -105,7 +96,6 @@ router.get("/edite_flightReservation/:id",responsableMiddleware, responsablecont
 router.put("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation);
 router.delete("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_flightReservation);
 
-router.get('/reservations',responsableMiddleware, responsablecontoller.getClientReservations);
 
 
 

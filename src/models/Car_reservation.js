@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Car_reservation = new Schema({
 	name_companies: { 
-        type: String, 
+        type: Schema.Types.ObjectId, 
         required: false,
         ref: 'car', 
     },

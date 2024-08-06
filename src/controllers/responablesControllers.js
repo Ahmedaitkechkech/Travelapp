@@ -1,8 +1,7 @@
 const { cloudinary } = require("../../utils/cloudinary");
 const Responsableshema = require("../models/responsableShema");
 const HotelSchema = require("../models/HotelSchema");
-const Hotel_ReserSchema  = require("../models/HotelSchema");
-const Car_reservation = require("../models/Hotel_ReserSchema");
+const CarReservation = require("../models/Car_reservation");
 const flightReservationshema = require("../models/flightsReservation"); 
 const Ticket_flight = require("../models/Ticket_flight"); 
 const carsShema = require("../models/carsShema"); 
@@ -42,8 +41,6 @@ const login_responsable = async (req, res) => {
         console.log(error);
     }
 };
-
-
 
 // responsable-login
 const responsable_login = async (req, res) => {
@@ -94,7 +91,6 @@ const responsable_login = async (req, res) => {
         res.redirect("/responsable");
     }
 };
-
 
 // get dashboard
 const get_dashboard_responsable = async (req, res) => {
@@ -369,8 +365,6 @@ const responsable_AddHotel = async (req, res) => {
         console.log(error);
     }
 };
-
-
 const responsable_get_Hotels = async (req, res) => {
     try {
 
@@ -404,8 +398,6 @@ const responsable_editHotel = async (req, res) => {
         res.status(500).send("An error occurred while updating the hotel");
     }
 }
-
-
 
 const responsable_editHotell_id = async (req, res) => {
     try {
@@ -456,102 +448,32 @@ const responsable_deleteReview = async (req, res) => {
 };
 
 
-//client reserevation car integrer ici pour tester this in controller client
 
-const responsable_get_AddcarReservation = async (req, res) => {
+
+
+const getClientReservationsCar = async (req, res) => {
     try {
-        res.render('Responsable/add_carReservation');
-    } catch (error) {
-        console.log(error);
-    }
-}
+        const responsableUsername = req.user.username; // Logged-in responsable username
 
-const responsable_AddCarReservation = async (req, res) => {
-    try {
-        const { name_companies, nombre_jour, Email, genre, tele } = req.body;
+        const cars = await carsShema.find({ username: responsableUsername })
 
-        if (!name_companies) {
-            return res.status(400).send('name_companies is required.');
-        }
+        const Listcarsbyresponsable = cars.map(car => car._id);
 
-       
-        const car = await carsShema.findOne({ name_companies:req.body.name_companies });
 
-        if (!car) {
-            return res.status(404).send('Car not found.');
-        }
-
-        // Create the reservation with the car's ObjectId
-        const reservationcar = new Car_reservation({
-            name_companies: car._id,
-            nombre_jour,
-            Email,
-            genre,
-            tele
-        });
-
-        await reservationcar.save();
-
-        res.redirect("/carReservationList");
-    } catch (error) {
-        console.log('Error creating reservationCar:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-
-const responsable_List_CarReservation= async (req,res)=>{
-    try{
-    const ListCar = await Car_reservation.find().populate('name_companies').sort({ createdAt: -1 });
-    res.render('Responsable/carReservationList',
-        {
-            ListCar,
-            title: "Espace privé resmpnsable",
+        const carReservations = await CarReservation.find({ name_companies: { $in: Listcarsbyresponsable } })
+            .populate('name_companies')  
      
-        });
-    }catch(error){
-        console.log(error);
-    }
-}
+           
 
-const responsable_edit_CarReservation_id = async (req, res) => {
-    try {
-        const CarReservInfo = await Car_reservation.findById(req.params.id).populate('name_companies');
-        if (!CarReservInfo) {
-            return res.status(404).send('Reservation not found.');
-        }
+
       
-        res.render("Responsable/edit_CarReservation", { CarReservInfo });
+        res.render('Responsable/CarsReservation', { carReservations });
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
+        console.error(error);
+        res.status(500).send('Server Error');
     }
 };
 
-const responsable_edit_CarReservation = async (req, res) => {
-    try {
-        const { name_companies, nombre_jour, Email, genre, tele } = req.body;
-        const updateObject = {};
-
-        if (name_companies) {
-            const car = await carsShema.findOne({ name_companies });
-            if (!car) {
-                return res.status(404).send('car not found.');
-            }
-            updateObject.name_companies = name_companies._id;
-        }
-        if (nombre_jour) updateObject.nombre_jour = nombre_jour;
-        if (Email) updateObject.Email = Email;
-        if (genre) updateObject.genre = genre;
-        if (tele) updateObject.tele = tele;
-        
-
-        await Car_reservation.findByIdAndUpdate(req.params.id, updateObject);
-        res.redirect("/carReservationList");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-};
 
 const responsable_delete_CarReservation = async (req, res) => {
     try {
@@ -694,6 +616,7 @@ const getClientReservations = async (req, res) => {
 
         const reservations = await HotelReservSchema.find({ Nom_Hotel: { $in: Listhotelesbyresponsable } })
             .populate('Nom_Hotel')  
+            console.log(reservations)
            
 
 
@@ -704,98 +627,7 @@ const getClientReservations = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
-//****** */
-const responsable_get_AddHotelReservation = async (req, res) => {
-    try {
-        res.render('Responsable/add-HotelReservation');
-    } catch (error) {
-        console.log(error);
-    }
-}
 
-const responsable_AddHotelReservation = async (req, res) => {
-    try {
-        const { Nom_Hotel, Nom, Prénom, Numéro_Téléphone, Date_entre, Date_sortie, Nombre_Personne, Nombre_Chambre } = req.body;
-
-        if (!Nom_Hotel) {
-            return res.status(400).send('Nom_Hotel is required.');
-        }
-
-        const hotel = await HotelSchema.findOne({ Nom_Hotel });
-
-        if (!hotel) {
-            return res.status(404).send('Hotel not found.');
-        }
-
-        const reservation = new HotelReservSchema({
-            Nom_Hotel: hotel._id,
-            Nom,
-            Prénom,
-            Numéro_Téléphone,
-            Date_entre,
-            Date_sortie,
-            Nombre_Personne,
-            Nombre_Chambre
-        });
-
-        await reservation.save();
-
-        res.redirect("/HotelReservation");
-    } catch (error) {
-        console.log('Error creating reservation:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-
-const responsable_List_HotelReservation= async (req,res)=>{
-    try{
-    const ListHotel = await HotelReservSchema.find().populate('Nom_Hotel').sort({ createdAt: -1 });
-    res.render('Responsable/HotelReservation',{ListHotel});
-    }catch(error){
-        console.log(error);
-    }
-}
-const responsable_edit_HotelReservation_id = async (req, res) => {
-    try {
-        const Hotel_ReservInfo = await HotelReservSchema.findById(req.params.id).populate('Nom_Hotel');
-        if (!Hotel_ReservInfo) {
-            return res.status(404).send('Reservation not found.');
-        }
-        console.log(Hotel_ReservInfo); // Add this line
-        res.render("Responsable/edit_HotelReservation", { Hotel_ReservInfo });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-
-const responsable_edit_HotelReservation = async (req, res) => {
-    try {
-        const { Nom_Hotel, Nom, Prénom, Numéro_Téléphone, Date_entre, Date_sortie, Nombre_Personne, Nombre_Chambre } = req.body;
-        const updateObject = {};
-
-        if (Nom_Hotel) {
-            const hotel = await HotelSchema.findOne({ Nom_Hotel });
-            if (!hotel) {
-                return res.status(404).send('Hotel not found.');
-            }
-            updateObject.Nom_Hotel = hotel._id;
-        }
-        if (Nom) updateObject.Nom = Nom;
-        if (Prénom) updateObject.Prénom = Prénom;
-        if (Numéro_Téléphone) updateObject.Numéro_Téléphone = Numéro_Téléphone;
-        if (Date_entre) updateObject.Date_entre = Date_entre;
-        if (Date_sortie) updateObject.Date_sortie = Date_sortie;
-        if (Nombre_Personne) updateObject.Nombre_Personne = Nombre_Personne;
-        if (Nombre_Chambre) updateObject.Nombre_Chambre = Nombre_Chambre;
-
-        await HotelReservSchema.findByIdAndUpdate(req.params.id, updateObject);
-        res.redirect("/HotelReservation");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-};
 
 const responsable_delete_HotelReservation = async (req, res) => {
     try {
@@ -858,11 +690,7 @@ module.exports = {
     responsable_editHotell_id,
     responsable_deleteHotel,
     //Crud Hotel_Reservation
-    responsable_get_AddHotelReservation,
-    responsable_AddHotelReservation,
-    responsable_List_HotelReservation,
-    responsable_edit_HotelReservation_id,
-    responsable_edit_HotelReservation,
+  
     responsable_delete_HotelReservation,
 
     //responsable review
@@ -870,13 +698,10 @@ module.exports = {
     responsable_deleteReview,
 
     //Reservation Car
-    responsable_get_AddcarReservation,
-    responsable_AddCarReservation,
-    responsable_List_CarReservation,
-    responsable_edit_CarReservation_id,
-    responsable_edit_CarReservation,
+  
     responsable_delete_CarReservation,
 
-    //test
-    getClientReservations,
+      //get reservation car and hotel by responsable
+      getClientReservations,
+      getClientReservationsCar,
 };

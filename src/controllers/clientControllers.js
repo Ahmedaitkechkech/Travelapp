@@ -436,17 +436,29 @@ const client_AddCarReservation = async (req, res) => {
 
 const client_getAll_CardReservationCar = async (req, res) => {
     try {
-        const CardReservationCar = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
-    
-
+        let totalallcarsReservation = 0;
+        const cardReservationCars = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
+        const reservationsCarWithPrice = cardReservationCars.map(reservationcar => {
+            const dateSortieVoiture = new Date(reservationcar.date_sortie_car);
+            const dateRetourneVoiture = new Date(reservationcar.date_retourne);
+            const days = Math.ceil((dateRetourneVoiture - dateSortieVoiture) / (1000 * 60 * 60 * 24)); // Convert date difference to days
+            const totalPriceCar = days * reservationcar.name_companies.prix; // Calculate total price using name_companies.prix
+            totalallcarsReservation = totalallcarsReservation + totalPriceCar
+            return {
+                ...reservationcar.toObject(),
+                totalPriceCar
+            };
+        });
+        const ReservationLenghtCar= reservationsCarWithPrice.length
         res.render("client/card-ReservationCar", { 
-            CardReservationCar,
-            
-            
-            title: 'card Reservation car'
+            cardReservationCars,
+            reservationsCarWithPrice,
+            totalallcarsReservation,
+            ReservationLenghtCar,
+            title: 'Card Reservation Car'
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send('Internal Server Error');
     }
 };

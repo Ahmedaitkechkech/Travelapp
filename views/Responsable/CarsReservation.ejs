@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Reservations</title>
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/css/Responables.css" rel="stylesheet">
+  <style>
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 70px;
+      margin-bottom: 1px;
+    }
+
+    .arrow {
+      font-size: 25px;
+    }
+    .arrow a {
+      font-size: 30px;
+      color: black;
+      text-decoration: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <%- include('../partials/header.ejs') %>
+  <!-- Header Ends!! -->
+  
+  <div class="table-controls">  
+    <div class="arrow">
+      <a href="/dashboard-Responsable">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </div>
+  </div>
+   
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Nom de Voiture</th>
+          <th>Nom du client</th>
+          <th>Prénom du client</th>
+          <th>Numéro de Téléphone</th>
+          <th>Date de Réservation</th>
+          <th>Date de Retour</th>
+          <th>Nombre de Places</th>
+          <th>Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% carReservations.forEach(reservation => { %>
+        <tr>
+          <td><img src="<%= reservation.name_companies.photo %>" alt="Car Image"></td>
+          <td><%= reservation.name_companies.name_companies %></td>
+          <td><%= reservation.Nom %></td>
+          <td><%= reservation.Prenom %></td>
+          <td><%= reservation.tele %></td>
+          <td><%= new Date(reservation.date_sortie_car).toLocaleDateString('fr-FR') %></td>
+          <td><%= new Date(reservation.date_retourne).toLocaleDateString('fr-FR') %></td>
+          <td><%= reservation.name_companies.nombre_seats %></td>
+          <td><%= reservation.name_companies.prix %> €</td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>
