@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecretClient = process.env.jwtSecretClient;
 const ClientReview = require('../models/clientReviewSchema');
+const Ticket_flight = require("../models/Ticket_flight"); 
 const Hotel = require('../models/HotelSchema');
 
 const Signup_Client = async (req, res) => {
@@ -151,6 +152,65 @@ const deleteReview = async (req, res) => {
         res.render('error', { message: 'Error deleting review' });
     }
 };
+//Get Home Page
+const getHome_Flight = async (req,res)=>{
+    try{
+        res.render("client/Home");
+
+    }catch(error){
+        console.log(error);
+    }
+}
+/** const getHome_Flight = async (req,res)=>{
+    try{
+        const flightInfo = await Ticket_flight.find().sort({ createdAt: -1 });
+        res.render("client/Home",flightInfo);
+
+    }catch(error){
+        console.log(error);
+    }
+} */
+//Get findTicket 
+const findTicket = async (req, res) => {
+    try {
+        const findList = await Ticket_flight.find({}, 'lieu_depart lieu_arrivee Travel_Class ');
+        console.log(findList);
+        res.render('client/Home', { findList });
+    } catch (err) {
+        console.error(err);
+        res.render('error', { message: 'Error fetching ticket list' });
+    }
+}
+const getTicketList = async (req, res) => {
+    try {
+        const { Travel_Class, lieu_depart, lieu_arrivee, Date_depart } = req.body;
+        const ObjectList = req.body;
+        console.log(ObjectList);
+        const ticketList = await Ticket_flight.find({lieu_depart, lieu_arrivee, Date_depart, Travel_Class});
+        console.log(ticketList);
+        res.render("client/flight-list",{ ObjectList,
+            ticketList
+        });
+    } catch(err){
+        console.error(err);
+    }
+}
+const ListAllTicket = async (req,res) => {
+    try{
+        const ListTicket = await Ticket_flight.find({_id:req.params.id});
+        res.render('client/flight-list',{ListTicket});
+    }catch(err){
+        console.error(err);
+    }
+}
+const About = (req,res)=>{
+   try{
+    res.render("client/About");
+   }catch(err){
+    console.log(err)
+   }
+}
+
 
 //get view client_Hotel
 const getIndexHotel = async (req, res) => {
@@ -523,9 +583,16 @@ module.exports = {
     Signup,
     login_client,
     login,
+    //Review
     getAddReview,
     postAddReview,
     deleteReview,
+
+    findTicket,
+    getTicketList,
+    ListAllTicket,
+    //About
+    About,
     //client find hotel
     getIndexHotel,
     client_addhotelFind,

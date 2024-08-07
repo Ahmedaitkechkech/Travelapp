@@ -16,6 +16,12 @@ router.post("/login",clientControllers.login_client);
 router.get("/get-allReview",ClientMiddleware,clientControllers.getAddReview);
 router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);
 router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteReview);
+
+router.get("/Home",clientControllers.findTicket);
+router.post("/flight-list",clientControllers.getTicketList);
+
+//About Page 
+router.get("/About",clientControllers.About);
 //get view Recherche
 router.get("/client-Hotel",ClientMiddleware,clientControllers.getIndexHotel);
 //get data a partir db
