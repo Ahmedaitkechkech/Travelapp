@@ -174,7 +174,6 @@ const getHome_Flight = async (req,res)=>{
 const findTicket = async (req, res) => {
     try {
         const findList = await Ticket_flight.find({}, 'lieu_depart lieu_arrivee Travel_Class ');
-        console.log(findList);
         res.render('client/Home', { findList });
     } catch (err) {
         console.error(err);
@@ -184,17 +183,17 @@ const findTicket = async (req, res) => {
 const getTicketList = async (req, res) => {
     try {
         const { Travel_Class, lieu_depart, lieu_arrivee, Date_depart } = req.body;
+        console.log(req.body); // Log the request body for debugging
+
         const ObjectList = req.body;
-        console.log(ObjectList);
-        const ticketList = await Ticket_flight.find({lieu_depart, lieu_arrivee, Date_depart, Travel_Class});
-        console.log(ticketList);
-        res.render("client/flight-list",{ ObjectList,
-            ticketList
-        });
-    } catch(err){
+        const ticketList = await Ticket_flight.find({ lieu_depart, lieu_arrivee, Date_depart, Travel_Class });
+
+        res.render("client/flight-list", { ObjectList, ticketList });
+    } catch (err) {
         console.error(err);
+        res.status(500).send('Internal Server Error');
     }
-}
+};
 const ListAllTicket = async (req,res) => {
     try{
         const ListTicket = await Ticket_flight.find({_id:req.params.id});

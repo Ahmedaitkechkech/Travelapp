@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const clientControllers = require('../controllers/clientControllers');
 const { ClientMiddleware } = require("../middlewares/clientMiddlewares");
-
+const multer = require("multer");
+// Configure Multer for parsing multipart/form-data
+const upload = multer();
 /* Get Signup page */
 router.get("/Signup",clientControllers.Signup_Client);
 /* Check client */
@@ -18,7 +20,7 @@ router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);
 router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteReview);
 
 router.get("/Home",clientControllers.findTicket);
-router.post("/flight-list",clientControllers.getTicketList);
+router.post("/flight-list", upload.array(),clientControllers.getTicketList);
 
 //About Page 
 router.get("/About",clientControllers.About);

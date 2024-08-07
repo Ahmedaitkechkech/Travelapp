@@ -1,4 +1,3 @@
-// app.js
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoStore = require("connect-mongo");
@@ -33,7 +32,6 @@ app.use(
     })
 );
 
-
 // Flash messages middleware
 app.use(flash());
 
@@ -43,25 +41,16 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Specify the views directory
 app.set("views", path.join(__dirname, "../views"));
 
-
-
 // Register view engine
 app.set("view engine", "ejs");
 
-
+// Routes
 app.use("/", require("./routes/admin"));
 app.use("/", require("./routes/responsable"));
 app.use("/", require("./routes/client"));
 
-
-//test client affiche login and register
-
-
-
-
-
 // Start the server
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
-    console.log(`http://localhost/${PORT}`);
+    console.log(`http://localhost:${PORT}`);
 });
