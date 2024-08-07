@@ -83,6 +83,23 @@
                   <input class="form-control" type="text" name="username" placeholder="Entrez Nom d'utilisateur">
                 </div>
                 <div class="col-md-6">
+                  <label class="form-label">Date Départ</label>
+                  <input class="form-control" type="date" name="Date_depart" placeholder="Entrez Heure Départ" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date Arrivée</label>
+                  <input class="form-control" type="date" name="Date_arrivee" placeholder="Entrez Heure Arrivée" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Travel_Class</label>
+                  <select class="form-control" name="Travel_Class" required>
+                      <option value="Economy">Economy</option>
+                      <option value="Business">Business</option>
+                      <option value="First Class">First Class</option>
+                  </select>
+              </div>
+
+                <div class="col-md-6">
                   <label class="form-label">Photo</label>
                   <input class="form-control" type="file" name="photo" required>
                 </div>

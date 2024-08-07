@@ -72,6 +72,26 @@
                   <input value="<%= flighTecketinfo.heure_arrivee %>" class="form-control" type="time" name="heure_arrivee" required>
                 </div>
                 <div class="col-md-6">
+                  <label class="form-label">username</label>
+                  <input  value="<%= flighTecketinfo.username %>" class="form-control" type="text" name="username" >
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date Départ</label>
+                  <input  value="<%= flighTecketinfo.Date_depart %>" class="form-control" type="date" name="Date_depart"  required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date Arrivée</label>
+                  <input  value="<%= flighTecketinfo.Date_arrivee %>" class="form-control" type="date" name="Date_arrivee" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Travel_Class</label>
+                  <select class="form-control" name="Travel_Class" required>
+                      <option value="Economy" <%= flighTecketinfo.Travel_Class === 'Economy' ? 'selected' : '' %>>Economy</option>
+                      <option value="Business" <%= flighTecketinfo.Travel_Class === 'Business' ? 'selected' : '' %> >Business</option>
+                      <option value="First Class"  <%= flighTecketinfo.Travel_Class === 'First Class' ? 'selected' : '' %>>First Class</option>
+                  </select>
+              </div>
+                <div class="col-md-6">
                   <label class="form-label">Photo</label>
                   <input  value="<%= flighTecketinfo.photo %>" class="form-control" type="file" name="photo" >
                 </div>
