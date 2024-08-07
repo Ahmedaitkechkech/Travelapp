@@ -576,6 +576,12 @@ const client_delete_CarReservation = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+//logout responsable 
+
+const client_logout = (req, res) => {
+    res.clearCookie("clientToken");
+    res.redirect("/login");
+};
 
 
 module.exports = {
@@ -583,6 +589,7 @@ module.exports = {
     Signup,
     login_client,
     login,
+    client_logout,
     //Review
     getAddReview,
     postAddReview,

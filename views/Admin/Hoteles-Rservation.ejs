@@ -75,12 +75,20 @@
                             <td><%= hotelRes.Date_sortie %></td>
                             <td><%= hotelRes.Nombre_Personne %></td>
                             <td><%= hotelRes.Nombre_Chambre %></td>
-                            <td>$<%= hotelRes.Nom_Hotel.Prix %></td>
+                            <% 
+                                const dateEntre = new Date(hotelRes.Date_entre);
+                                const dateSortie = new Date(hotelRes.Date_sortie);
+                                const diffTime = Math.abs(dateSortie - dateEntre);
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                const totalPrice = hotelRes.Nom_Hotel.Prix * diffDays;
+                            %>
+                            <td>$<%= totalPrice %></td>
                         <% } else { %>
-                            <td colspan="10">Hoteles Reservation</td>
+                            <td colspan="10">Hotel Reservation</td>
                         <% } %>
                     </tr>
                 <% }); %>
+                
                 
             </tbody>
         </table>

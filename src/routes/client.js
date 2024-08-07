@@ -59,6 +59,8 @@ router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.clien
 router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
 
+//client logout 
+router.get("/logout-client", clientControllers.client_logout)
 
 
 
