@@ -19,11 +19,16 @@ router.get("/get-allReview",ClientMiddleware,clientControllers.getAddReview);
 router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);
 router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteReview);
 
-router.get("/Home",clientControllers.findTicket);
-router.post("/flight-list", upload.array(),clientControllers.getTicketList);
+router.get("/Home",ClientMiddleware,clientControllers.findTicket);
+router.post("/flight-list",ClientMiddleware, upload.array(),clientControllers.getTicketList);
 
-//About Page 
-router.get("/About",clientControllers.About);
+//About Page  and contact and team
+router.get("/Contact",ClientMiddleware,clientControllers.Contact);
+//post contact 
+router.post("/add_contact",ClientMiddleware,clientControllers.client_add_contact);
+router.get("/About",ClientMiddleware,clientControllers.About);
+router.get("/Team",ClientMiddleware,clientControllers.Teamworeked);
+
 //get view Recherche
 router.get("/client-Hotel",ClientMiddleware,clientControllers.getIndexHotel);
 //get data a partir db
@@ -61,12 +66,14 @@ router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.clien
 router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
 
+
 //client logout 
 router.get("/logout-client", clientControllers.client_logout)
 
 
 
-
+//404
+router.use('*', clientControllers.error404); 
 
 
 module.exports = router;

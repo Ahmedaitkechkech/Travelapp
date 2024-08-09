@@ -9,6 +9,7 @@ const jwtSecretClient = process.env.jwtSecretClient;
 const ClientReview = require('../models/clientReviewSchema');
 const Ticket_flight = require("../models/Ticket_flight"); 
 const Hotel = require('../models/HotelSchema');
+const ContactShema = require('../models/contactSchema');
 
 const Signup_Client = async (req, res) => {
     try {
@@ -575,12 +576,62 @@ const client_delete_CarReservation = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+//contact 
+const Contact =  (req,res)=>{
+    try{
+     res.render("client/Contact",{
+        title : "service client"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+ //post contact
+ const client_add_contact = async (req,res)=>{
+    try{
+     
+     const {nomComplet,adresseEmail,message} = req.body
+     const addContact = new ContactShema ({
+        nomComplet,
+        adresseEmail,
+        message,
+        
+      
+    });
+
+    await addContact.save();
+    res.redirect("/contact")
+    }catch(err){
+     console.log(err)
+    }
+ }
+//contact 
+const Teamworeked = (req,res)=>{
+    try{
+     res.render("client/TeamWorked",{
+        title : "service client"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
 //logout responsable 
 
 const client_logout = (req, res) => {
     res.clearCookie("clientToken");
     res.redirect("/login");
 };
+
+const error404 = (req,res)=>{
+    try{
+     res.render("page404",{
+        title : "404 Page"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+
 
 
 module.exports = {
@@ -597,8 +648,12 @@ module.exports = {
     findTicket,
     getTicketList,
     ListAllTicket,
-    //About
+    //About and Contact and team
     About,
+    Contact,
+    Teamworeked,
+    //post ciontact 
+    client_add_contact,
     //client find hotel
     getIndexHotel,
     client_addhotelFind,
@@ -620,4 +675,8 @@ module.exports = {
    client_edit_carReservation_id,
    client_edit_CarReservation,
    client_delete_CarReservation,
+
+
+   error404,
+
 }

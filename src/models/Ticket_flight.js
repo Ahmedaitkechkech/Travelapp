@@ -38,16 +38,16 @@ const Ticket_flightSchema = new Schema({
     },
     Date_depart: {
         type: String,
-        required: false,
+        required: true,
     },
     Date_arrivee: {
         type: String,
-        required: false,
+        required: true,
     },
     Travel_Class:{
         type: String,
         enum:[ "Economy","Business","First Class"],
-        required: false,
+        required: true,
     },
     createdAt: {
         type: Date,
