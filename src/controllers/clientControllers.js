@@ -9,6 +9,8 @@ const jwtSecretClient = process.env.jwtSecretClient;
 const ClientReview = require('../models/clientReviewSchema');
 const Ticket_flight = require("../models/Ticket_flight"); 
 const Hotel = require('../models/HotelSchema');
+const ContactShema = require('../models/contactSchema');
+const Stripe = require("stripe")(process.env.SCRET_STRIP_key);
 const flightReservationshema = require("../models/flightsReservation"); 
 const mongoose = require('mongoose');
 
@@ -635,12 +637,232 @@ const client_delete_CarReservation = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+//contact 
+const Contact =  (req,res)=>{
+    try{
+     res.render("client/Contact",{
+        title : "service client"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+ //post contact
+ const client_add_contact = async (req,res)=>{
+    try{
+     
+     const {nomComplet,adresseEmail,message} = req.body
+     const addContact = new ContactShema ({
+        nomComplet,
+        adresseEmail,
+        message,
+        
+      
+    });
+
+    await addContact.save();
+    res.redirect("/contact")
+    }catch(err){
+     console.log(err)
+    }
+ }
+//contact 
+const Teamworeked = (req,res)=>{
+    try{
+     res.render("client/TeamWorked",{
+        title : "service client"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+
+ //integer stripe checkout car
+ const checkoutCar= async (req, res) => {
+    try {
+        // Calculate the total amount
+        let totalAmount = 0;
+        const cardReservationCars = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
+
+        cardReservationCars.forEach(reservationcar => {
+            const dateSortieVoiture = new Date(reservationcar.date_sortie_car);
+            const dateRetourneVoiture = new Date(reservationcar.date_retourne);
+            const days = Math.ceil((dateRetourneVoiture - dateSortieVoiture) / (1000 * 60 * 60 * 24)); // Convert date difference to days
+            const totalPriceCar = days * (reservationcar.name_companies.prix ); // Calculate total price
+            totalAmount += totalPriceCar;
+        });
+
+        // Create a Stripe Checkout session
+        const session = await Stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Car Reservation Payment', 
+                        },
+                        unit_amount: totalAmount * 100, // Convert dollars to cents
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:2002/completeCar',
+            cancel_url: 'http://localhost:2002/cancelCar',
+        });
+       
+
+        // Redirect to Stripe Checkout
+        res.redirect(session.url);
+    } catch (error) {
+        console.error('Error creating Stripe Checkout session:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const completeCar = async (req, res) => {
+    res.send( 'Payment Successful', 'Thank you for your payment!' );
+}
+const cancelCar = async (req, res) => {
+    res.redirect('/Cards-reservationCar' );
+};
+//integer stripe checkout hotel
+//************** */
+ const checkoutHotel= async (req, res) => {
+    try {
+       
+
+            const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
+            // Calculate the total price for each reservation
+            let totalAmount = 0;
+            CardReservation.forEach(reservation => {
+                const dateEntre = new Date(reservation.Date_entre);
+                const dateSortie = new Date(reservation.Date_sortie);
+                const days = Math.ceil((dateSortie - dateEntre) / (1000 * 60 * 60 * 24)); //pour convert egalement dateSortie - dateEntre  to days
+                const totalPrice = days * reservation.Nom_Hotel.Prix; // Calculate total prix
+                totalAmount = totalAmount + totalPrice; // calculate all reservation
+        });
+
+        // Create a Stripe Checkout session
+        const session = await Stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Hotel Reservation Payment', 
+                        },
+                        unit_amount: totalAmount * 100, // Convert dollars to cents
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:2002/completeHotel',
+            cancel_url: 'http://localhost:2002/cancelHotel',
+        });
+       
+       
+
+        // Redirect to Stripe Checkout
+        res.redirect(session.url);
+    } catch (error) {
+        console.error('Error creating Stripe Checkout session:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const completeHotel = async (req, res) => {
+    res.send( 'Payment Successful', 'Thank you for your payment!' );
+}
+const cancelHotel = async (req, res) => {
+    res.redirect('/Cards-reservationCar' );
+};
+//************** */
+//settings client 
+const client_settings = async (req, res) => {
+    try {
+        const client=  req.session.username;
+
+        const clientx = await ClientSchema.findOne({ username: client });
+        console.log(clientx)
+        if (!clientx) {
+            return res.status(404).send('User not found');
+        }
+
+      
+        res.render('client/Settings', { 
+            title: 'Settings',
+            clientx
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+//clinet_myBooking  
+const clinet_myBooking = async (req, res) => {
+    const hoteldBookingClient = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
+    const CarBookingClient = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
+
+    try {
+    
+    
+        res.render("client/MyBooking", { 
+            CarBookingClient,
+            hoteldBookingClient,
+            title: 'card Reservation'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+//get view delete profile
+//view get alert deleteù
+const popaup_delete =  async (req,res)=>{
+
+
+    try{
+        res.render('client/deleteProfile')
+        
+
+    }catch(err){
+     console.log(err)
+    }
+ }
+
+const deleteProfile =  async (req,res)=>{
+    const client=  req.session.username;
+
+
+    try{
+        await ClientSchema.deleteOne({ username: client });
+      res.redirect("/login")
+    }catch(err){
+     console.log(err)
+    }
+ }
+
+
+
 //logout responsable 
 
 const client_logout = (req, res) => {
     res.clearCookie("clientToken");
     res.redirect("/login");
 };
+
+const error404 = (req,res)=>{
+    try{
+     res.render("page404",{
+        title : "404 Page"
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+
 
 
 module.exports = {
@@ -659,8 +881,12 @@ module.exports = {
     ListAllTicket,
     getFlight_detail,
     client_AddflightReservation,
-    //About
+    //About and Contact and team
     About,
+    Contact,
+    Teamworeked,
+    //post ciontact 
+    client_add_contact,
     //client find hotel
     getIndexHotel,
     client_addhotelFind,
@@ -682,4 +908,22 @@ module.exports = {
    client_edit_carReservation_id,
    client_edit_CarReservation,
    client_delete_CarReservation,
+//strip Car
+   checkoutCar,
+   completeCar,
+   cancelCar,
+   //strip Hotel
+   checkoutHotel,
+   completeHotel,
+   cancelHotel,
+
+   //settings 
+   client_settings,
+   clinet_myBooking,
+   popaup_delete,
+   deleteProfile,
+
+   error404,
+   
+
 }

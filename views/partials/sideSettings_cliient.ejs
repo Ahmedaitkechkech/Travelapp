@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"  href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+<body>
+    <section class=" w-100">
+        <div class="">
+            <div class="row">
+                <!-- Sidebar START -->
+                <div class="" style="margin-top: 10%;">
+                    <!-- Responsive offcanvas body START -->
+                    <div class="offcanvas-lg offcanvas-end bg-light shadow-sm" tabindex="-1" id="offcanvasSidebar">
+                        <!-- Offcanvas header -->
+                        <div class="offcanvas-header justify-content-end pb-2">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+                        </div>
+    
+                        <!-- Offcanvas body -->
+                        <div class="offcanvas-body p-4 p-lg-0">
+                            <div class="card bg-light border-0 w-100 shadow-sm rounded-3">
+                                <!-- Card body START -->
+                                <div class="card-body p-4" style="height: 60vh">
+                                    <!-- Avatar and content -->
+                                    <div class="text-center mb-4">
+                                        <!-- Avatar -->
+                                        <div class="avatar avatar-xl mb-3">
+                                            <img class="avatar-img rounded-circle border border-2 border-white shadow-sm" src="/img/Amin.png" alt="">
+                                        </div>
+                                       
+                                        <hr class="my-4">
+                                    </div>
+    
+                                    <!-- Sidebar menu item START -->
+                                    <ul class="nav nav-pills-primary-soft flex-column">
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link rounded-pill px-3 py-2" href="/client_settings">
+                                                <i class="bi bi-ticket-perforated fa-fw me-2"></i>Profile
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link rounded-pill px-3 py-2" href="/myBooking">
+                                                <i class="bi bi-ticket-perforated fa-fw me-2"></i>Mes Réservations
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link rounded-pill px-3 py-2" href="/delete">
+                                                <i class="bi bi-trash fa-fw me-2"></i>Supprimer Profil
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-danger bg-danger-soft-hover rounded-pill px-3 py-2" href="logout-client">
+                                                <i class="fas fa-sign-out-alt fa-fw me-2"></i>Déconnexion
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Sidebar menu item END -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                    <!-- Responsive offcanvas body END -->    
+                </div>
+                <!-- Sidebar END -->
+    
+                <!-- Main content START -->
+                <div class="col-lg-8 col-xl-9">
+                    <!-- Offcanvas menu button -->
+                    <div class="d-grid mb-0 d-lg-none w-100">
+                        <button class="btn btn-primary mb-4 rounded-pill shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="fas fa-sliders-h"></i> Menu
+                        </button>
+                    </div>
+    
+                    <!-- Your main content goes here -->
+    
+                </div>
+                <!-- Main content END -->
+    
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="assets/js/functions.js"></script>
+</body>
+</html>

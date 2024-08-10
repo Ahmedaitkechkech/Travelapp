@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet"  href="/css/style.css">
+
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+
+    <section class="pt-5 w-100">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Sidebar START -->
+                <div class="col-lg-4 col-xl-3 mb-4">
+                    
+                    <%- include('../partials/sideSettings_cliient.ejs' ) %>
+                </div>
+                <!-- Sidebar END -->
+    
+                <!-- Main content START -->
+                <div class="col-lg-8 col-xl-9">
+                    <!-- Personal info START -->
+                    <div class="card border flex-grow-1" style="margin-top: 13%;">
+                        <!-- Card header -->
+                        <div class="card-header border-bottom">
+                            <h4 class="card-header-title">Informations personnelles</h4>
+                        </div>
+    
+                        <!-- Card body START -->
+                        <div class="card-body">
+                            <!-- Form START -->
+                            <form class="row g-3">
+                             
+                        
+                                <!-- Name -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Nom complet<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" value="<%= clientx.username %>">
+                                </div>
+                        
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Adresse email<span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" value="<%= clientx.email %>">
+                                </div>
+                        
+                                <!-- Mobile -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Numéro de mobile<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" value="222 555 666" placeholder="Entrez votre numéro de mobile">
+                                </div>
+                        
+                                <!-- Nationality -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Nationalité<span class="text-danger">*</span></label>
+                                    <select class="form-select js-choice">
+                                        <option value="">Sélectionnez votre pays</option>
+                                        <option>États-Unis</option>
+                                        <option selected>Paris</option>
+                                        <option>Inde</option>
+                                        <option>Royaume-Uni</option>
+                                    </select>
+                                </div>
+                        
+                                <!-- Date of birth -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Date de naissance<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control flatpickr" value="29 Août 1996" placeholder="Entrez votre date de naissance" data-date-format="d M Y">
+                                </div>
+                        
+                                <!-- Button -->
+                                <div class="col-12 text-end">
+                                    <a href="#" class="btn btn-primary mb-0">Sauvegarder</a>
+                                </div>
+                            </form>
+                            <!-- Form END -->
+                        </div>
+                        
+                        <!-- Card body END -->
+                    </div>
+                    <!-- Personal info END -->
+    
+                </div>
+                <!-- Main content END -->
+            </div>
+        </div>
+    </section>
+    
+    <%- include('../partials/footer-client.ejs') %>
+    
+    
+
+
+
+
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="assets/js/functions.js"></script>
+</body>
+</html>

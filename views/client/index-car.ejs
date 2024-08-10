@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +11,35 @@
 <body>
     <%- include('../partials/header-client.ejs') %>
 
-    <section class="pt-0 pt-lg-5">
+    <section class="pt-0 pt-lg-5 bg-light">
         <div class="container">
             <div class="row" style="width:105%;">
     
                 <div class="col-lg-10 ms-auto position-relative">
-                        <img src="/img/indexCar.jpg" class="rounded-3" alt="">
+                    <img src="/img/indexCar.jpg" class="rounded-3" alt="">
 
-                    <!-- Search START -->
+                    <!-- Recherche START -->
                     <div class="col-11 col-sm-10 col-lg-8 col-xl-6 position-lg-middle ms-lg-8 ms-xl-7">
                         <div class="card shadow pb-0 mt-n7 mt-sm-n8 mt-lg-0" style="width: 126%;">
     
-                            <!-- Card header -->
+                            <!-- En-tête de la carte -->
                             <div class="card-header border-bottom p-3 p-sm-4">
-                                <h5 class="card-title mb-0">Find Car</h5>
+                                <h5 class="card-title mb-0">Trouver une voiture</h5>
                             </div>
     
-                            <!-- Card body START -->
+                            <!-- Corps de la carte START -->
                             <form action="/client-cars" method="post"  class="card-body form-control-border p-3 p-sm-4">
                               
     
-                                <!-- Tabs content START -->
+                                <!-- Contenu des onglets START -->
                                 <div class="tab-content my-4" id="pills-tabContent">
                                     <!-- One way START -->
                                     <div class="tab-pane fade show active" id="cab2-one-way" role="tabpanel" aria-labelledby="cab2-one-way-tab">
                                         <div class="row g-2 g-md-4">
-                                           <!-- car_model -->
+                                           <!-- Modèle de voiture -->
                                             <div class="col-md-6">
                                                 <div class="form-fs-lg form-control-transparent">
-                                                <label class="form-label small">name_car</label>
+                                                <label class="form-label small">Nom de la voiture</label>
                                                 <select class="form-control flatpickr" name="name_companies">
                                                     <% 
                                                     const uniqueAddresses = new Set(carinfo.map(h => h.name_companies));
@@ -51,10 +51,10 @@
                                                 </div>
                                             </div>
   
-                                            <!-- Lieu_de_ramassage -->
+                                            <!-- Lieu de ramassage -->
                                             <div class="col-md-6">
                                                 <div class="form-fs-lg form-control-transparent">
-                                                <label class="form-label small">Lieu de Ramassage</label>
+                                                <label class="form-label small">Lieu de ramassage</label>
                                                 <select class="form-control flatpickr" name="Lieu_de_ramassage">
                                                     <% 
                                                     const uniqueLieu_de_ramassage = new Set(carinfo.map(h => h.Lieu_de_ramassage));
@@ -66,10 +66,10 @@
                                                 </div>
                                             </div>
   
-                                            <!-- Date_de_ramassage -->
+                                            <!-- Date de ramassage -->
                                             <div class="col-md-6">
                                                 <div class="form-fs-lg form-control-transparent">
-                                                <label class="form-label small">Date de Ramassage</label>
+                                                <label class="form-label small">Date de ramassage</label>
                                                 <select class="form-control flatpickr" name="Date_de_ramassage">
                                                     <% 
                                                     const uniqueDate_de_ramassage = new Set(carinfo.map(h => h.Date_de_ramassage));
@@ -83,28 +83,27 @@
                                             
                                             <!-- Temps -->
                                              <div class="col-md-6">
-                                                    <div class="form-fs-lg form-control-transparent">
-                                                    <label class="form-label small">Temps</label>
-                                                    <select class="form-control flatpickr" name="Temps">
-                                                        <% 
+                                                <div class="form-fs-lg form-control-transparent">
+                                                <label class="form-label small">Temps</label>
+                                                <select class="form-control flatpickr" name="Temps">
+                                                    <% 
                                                     const uniqueTemps = new Set(carinfo.map(h => h.Temps));
                                                     uniqueTemps.forEach(Temps => { 
                                                   %>
                                                     <option value="<%= Temps %>"><%= Temps %></option>
                                                   <% }) %>
-                                                    </select>
-                                                    </div>
+                                                </select>
+                                                </div>
                                             </div>
   
                                         </div>
                                     </div>
                                     
     
-                                <!-- Button -->
+                                <!-- Bouton -->
                                 <div class="d-grid">
-                                    <button type="submit" class="btn  mt-4" style="background-color: #009EE2; color: white;">Search Cabs</button>
+                                    <button type="submit" class="btn  mt-4" style="background-color: #009EE2; color: white;">Rechercher des voitures</button>
                                 </div>
-                                   <!-- Button -->
     
                             </form>
                         </div>
@@ -113,6 +112,156 @@
             </div> 
         </div>
     </section>
+
+     
+<section class="pt-0 pt-md-5 ">
+	<div class="container">
+	<div class="row mb-4">
+		<div class="col-12 text-center">
+			<h2 class="mb-0">Voitures</h2>
+		</div>
+	</div>
+
+	<div class="row g-4" style="display: flex;align-items: center;justify-content: center;">
+		<% carinfo.forEach(car => { %>
+			<div class="col-sm-4 col-xl-2">
+				<div class="card shadow text-center align-items-center h-100 p-4">
+					<!-- Image -->
+					<div class="icon-xxl bg-light rounded-circle">
+						<img style="border-radius: 50%;" src="<%= car.photo %>" class="w-90px" alt="">
+					</div>
+					<!-- Corps de la carte -->
+					<div class="card-body px-0 pb-0">
+						<h5 class="card-title"><a href="#" class="stretched-link"><%= car.car_model %></a></h5>
+						<span>(<%= car.nombre_seats %> Sièges)</span>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+	</div>
+</div>
+
+</section>
+
+<section class="pt-0 pt-xl-5 bg-light">
+	<div class="container">
+		<!-- Titre -->
+		<div class="row mb-3 mb-sm-4">
+			<div class="col-12 text-center">
+				<h2>Pourquoi nous choisir</h2>
+			</div>
+		</div>
+
+		<div class="row g-4">
+		
+			<div class="col-sm-6 col-lg-4">
+				
+				<div class="card card-body shadow p-4 h-100">
+				
+					<div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle mb-4"><i class="bi bi-lightning-fill fs-5"></i></div>
+					<h5>Réservation anticipée</h5>
+					<p class="mb-0">Le bonheur prospère a laissé une impression convaincante pour chaque retard. </p>
+				</div>
+				
+			</div>
+
+			
+			<div class="col-sm-6 col-lg-4">
+				
+				<div class="card card-body shadow p-4 h-100">
+				
+					<div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle mb-4"><i class="fa-solid fa-leaf fs-5"></i></div>
+					<h5>Voyage économique</h5>
+					<p class="mb-0">L'extrémité de maintenant contenait le petit-déjeuner dans un discours sincère.</p>
+				</div>
+				
+			</div>
+
+			
+			<div class="col-sm-6 col-lg-4">
+			
+				<div class="card card-body shadow p-4 h-100">
+				
+					<div class="icon-lg bg-warning bg-opacity-15 text-warning rounded-circle mb-4"><i class="bi bi-life-preserver fs-5"></i></div>
+					<h5>Sécurité et sûreté</h5>
+					<p class="mb-0">Perpétuelle extrémité maintenant contenait le petit-déjeuner dans un discours sincère.</p>
+				</div>
+			
+			</div>
+
+		
+			<div class="col-sm-6 col-lg-4">
+				
+				<div class="card card-body shadow p-4 h-100">
+					
+					<div class="icon-lg bg-danger bg-opacity-10 text-danger rounded-circle mb-4"><i class="fa-solid fa-car fs-5"></i></div>
+					<h5>Options de véhicules</h5>
+					<p class="mb-0">Une impression prospère a laissé une conviction pour chaque retard.</p>
+				</div>
+				
+			</div>
+
+		
+			<div class="col-sm-6 col-lg-4">
+			
+				<div class="card card-body shadow p-4 h-100">
+				
+					<div class="icon-lg bg-orange bg-opacity-10 text-orange rounded-circle mb-4"><i class="fa-solid fa-wifi fs-5"></i></div>
+					<h5>Divertissement en voiture</h5>
+					<p class="mb-0">L'extrémité de maintenant contenait le petit-déjeuner dans un discours sincère.</p>
+				</div>
+			
+			</div>
+
+		
+			<div class="col-sm-6 col-lg-4">
+				
+				<div class="card card-body shadow p-4 h-100">
+					<!-- Icône -->
+					<div class="icon-lg bg-info bg-opacity-10 text-info rounded-circle mb-4"><i class="fa-solid fa-wheelchair fs-5"></i></div>
+					<h5>Chauffeur poli</h5>
+					<p class="mb-0">Perpétuelle extrémité maintenant contenait le petit-déjeuner dans un discours sincère.</p>
+				</div>
+				
+			</div>
+
+		</div> 
+
+	</div>
+</section>
+
+
+<section class="py-0 py-md-5" style="margin-top: 4%;">
+	<div class="container">
+		<div class="row g-4 g-lg-7 justify-content-center align-items-center">
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/01.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/02.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/03.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/04.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/05.svg" class="grayscale" alt="">
+			</div>
+			<!-- Image -->
+			<div class="col-5 col-sm-3 col-xl-2">
+				<img src="/img/06.svg" class="grayscale" alt="">
+			</div>
+		</div>
+	</div>
+</section>
+
     <%- include('../partials/footer-client.ejs') %>
 
 </body>

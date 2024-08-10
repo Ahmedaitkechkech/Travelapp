@@ -95,6 +95,9 @@ router.get("/edite_flightReservation/:id",responsableMiddleware, responsablecont
 router.put("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation);
 router.delete("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_flightReservation);
 
+//responsable settings
+router.get("/Responsable_Settings",responsableMiddleware, responsablecontoller.responsable_Settings);
+
 
 
 

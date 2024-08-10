@@ -135,6 +135,10 @@ const createTicketFlight = async (req, res, next) => {
       lieu_arrivee: req.body.lieu_arrivee,
       heure_depart: req.body.heure_depart,
       heure_arrivee: req.body.heure_arrivee,
+      Date_depart: req.body.Date_depart,
+      Date_arrivee: req.body.Date_arrivee,
+      Travel_Class: req.body.Travel_Class,
+
     });
 
     // Save ticket to database
@@ -176,7 +180,7 @@ const responsable_edit_ticket_flight_id = async (req, res) => {
 //edit in base bd
 const editTicketFlight = async (req, res) => {
     try {
-        const { name_compagnies, prix, lieu_depart, lieu_arrivee, heure_depart, heure_arrivee } = req.body;
+        const { name_compagnies, prix, lieu_depart, lieu_arrivee, heure_depart, heure_arrivee,Date_depart,Date_arrivee,Travel_Class} = req.body;
         
       
     
@@ -187,6 +191,9 @@ const editTicketFlight = async (req, res) => {
         if (lieu_arrivee) updateObject.lieu_arrivee = lieu_arrivee;
         if (heure_depart) updateObject.heure_depart = heure_depart;
         if (heure_arrivee) updateObject.heure_arrivee = heure_arrivee;
+        if (Date_depart) updateObject.Date_depart = Date_depart;
+        if (Date_arrivee) updateObject.Date_arrivee = Date_arrivee;
+        if (Travel_Class) updateObject.Travel_Class = Travel_Class;
     
         if (req.file) {
           const result = await cloudinary.uploader.upload(req.file.path);
@@ -639,6 +646,24 @@ const responsable_delete_HotelReservation = async (req, res) => {
     }
 };
 
+//settings responsable
+const responsable_Settings= async (req,res)=>{
+    const {username} = req.user
+    const responsable = await Responsableshema.findOne({ username });
+   
+    try{
+    res.render('Responsable/responsableSettings',
+      
+        {
+            responsable, 
+            title: "Espace privé resmpnsable",
+     
+        });
+    }catch(error){
+        console.log(error);
+    }
+}
+
 
 
 //logout responsable 
@@ -704,4 +729,6 @@ module.exports = {
       //get reservation car and hotel by responsable
       getClientReservations,
       getClientReservationsCar,
+      //settings responsable
+      responsable_Settings,
 };

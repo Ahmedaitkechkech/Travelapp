@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>delete Profole</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+<body>
+
+    <%- include('../partials/header-client.ejs') %>
+    <section class="pt-5 w-100">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Sidebar START -->
+                <div class="col-lg-4 col-xl-3 mb-4">
+                    
+                    <%- include('../partials/sideSettings_cliient') %>
+                </div>
+                <!-- Sidebar END -->
+    
+    <!-- Card START -->
+<div class="col-lg-8 col-xl-9 ps-xl-5 mt-8">
+    <div class="card border">
+        <!-- Card header -->
+        <div class="card-header border-bottom">
+            <h4 class="card-header-title">Delete Account</h4>
+        </div>
+
+        <!-- Card body START -->
+         
+        <div class="card-body">
+            <h6>Before you go...</h6>
+            <ul>
+                <li>Take a backup of your data <a href="#">Here</a> </li>
+                <li>If you delete your account, you will lose your all data.</li>
+            </ul>
+            <div class="form-check form-check-md my-4">
+                <input class="form-check-input" type="checkbox" value="" id="deleteaccountCheck">
+                <label class="form-check-label" for="deleteaccountCheck">Yes, I'd like to delete my account</label>
+            </div>
+            <a href="/client_settings" class="btn btn-success-soft btn-sm mb-2 mb-sm-0">Keep my account</a>
+            <form action="/deleteProfile" style="display: inline;">
+                <button type="submit" class="btn btn-danger btn-sm mb-0">Delete my account</button>
+            </form>
+        </div>
+        <!-- Card body END -->
+    </div>
+    <!-- Card END -->
+</div>
+</div>
+</section>
+<%- include('../partials/footer-client.ejs') %>
+
+</body>
+</html>

@@ -99,8 +99,8 @@
     </section>
 
     <!-- Book now START -->
-    <div class="card card-body border" style="width: 38%;margin-left: auto;margin-right: auto;">
-						
+    <div class="card card-body border" style="width: 38%;margin-left: auto;margin-right: auto; margin-bottom: 5%">
+        <form action="/checkoutHotel" method="post">	
         <!-- Title -->
         <div class="d-sm-flex justify-content-sm-between align-items-center mb-3">
             <div>
@@ -112,14 +112,12 @@
                 <small> $<%= overallTotalPrice %> </small>
             </div>
         </div>		
-
-   
-       
-
+    
         <!-- Button -->
-        <div class="d-grid " style="width: 40%; margin-right: auto; margin-left: auto; padding-top: 10px; padding-bottom:10px ;">
-            <a href="" class="btn btn-primary-soft mb-0">Confirmation reservation</a>
+        <div class="d-grid" style="width: 40%; margin-right: auto; margin-left: auto; padding-top: 10px; padding-bottom:10px ;">
+            <button type="submit" class="btn btn-primary-soft mb-0">Confirmation reservation</button>
         </div>
+        </form>
     </div>
     <!-- Book now END -->
     <%- include('../partials/footer-client.ejs') %>

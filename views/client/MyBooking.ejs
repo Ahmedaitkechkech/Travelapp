@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"  href="/css/style.css">
+
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+    <section class="pt-5 w-100">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Sidebar START -->
+                <div class="col-lg-4 col-xl-3 mb-4">
+                    
+                    <%- include('../partials/sideSettings_cliient.ejs') %>
+                </div>
+                <!-- Sidebar END -->
+    
+                <!-- Main content START -->
+                <div class="col-lg-8 col-xl-9 ps-xl-5">
+
+                   
+    
+                    <div class="card border bg-transparent" style="margin-top: 15%;">
+                        <!-- Card header -->
+                        <div class="card-header bg-transparent border-bottom">
+                            <h4 class="card-header-title">My Bookings</h4>
+                        </div>
+    
+                        <!-- Card body START -->
+                        <div class="card-body p-0">
+    
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs nav-bottom-line nav-responsive nav-justified">
+                                <li class="nav-item"> 
+                                    <a class="nav-link mb-0 active" data-bs-toggle="tab" href="#tab-1"><i class="bi bi-briefcase-fill fa-fw me-1"></i>Reservation</a> 
+                                </li>
+                              
+                            </ul>
+    
+                            <!-- Tabs content START -->
+                            <div class="tab-content p-2 p-sm-4" id="nav-tabContent">
+    
+                                <!-- Tab content item START -->
+                                <div class="tab-pane fade show active" id="tab-1">
+                                    <h6>Completed booking </h6>
+                    <!-- Card item START -->
+                    <% hoteldBookingClient.forEach(hoteldBookingClient => { %>
+                        <div class="card border mb-4">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                                <!-- Icon and Title -->
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i class="fa-solid fa-hotel"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0"><%= hoteldBookingClient.Nom_Hotel.Nom_Hotel %></h6>
+                                        <ul class="nav nav-divider small">
+                                            <li class="nav-item"><%= hoteldBookingClient.Nombre_Personne %> personnes</li>
+                                            <li class="nav-item"><%= hoteldBookingClient.Nombre_Chambre %> chambres</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                    
+                                <!-- Button -->
+                                <div class="mt-2 mt-md-0">
+                                    <a href="/Cards-reservation" class="btn btn-primary-soft mb-0">Gérer la réservation</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-sm-6 col-md-4">
+                                        <span>Date d'entrée</span>
+                                        <h6 class="mb-0"><%= new Date(hoteldBookingClient.Date_entre).toLocaleDateString('fr-FR') %></h6>
+                                    </div>
+                    
+                                    <div class="col-sm-6 col-md-4">
+                                        <span>Date de sortie</span>
+                                        <h6 class="mb-0"><%= new Date(hoteldBookingClient.Date_sortie).toLocaleDateString('fr-FR') %></h6>
+                                    </div>
+                    
+                                    <div class="col-md-4">
+                                        <span>Réservé par</span>
+                                        <h6 class="mb-0"><%= hoteldBookingClient.username %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                    
+                                  
+                                    <% CarBookingClient.forEach(CarBookingClient => { %>
+                                        <div class="card border mb-4">
+                                            <!-- Card header -->
+                                            <div class="card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                                                <!-- Icon and Title -->
+                                                <div class="d-flex align-items-center">
+                                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i class="fa-solid fa-car"></i></div>
+                                                    <!-- Title -->
+                                                    <div class="ms-2">
+                                                        <h6 class="card-title mb-0"><%= CarBookingClient.name_companies.name_companies %></h6>
+                                                        <ul class="nav nav-divider small">
+                                                            <li class="nav-item"><%= CarBookingClient.name_companies.nombre_seats %></li>
+                                                            <li class="nav-item"><%= CarBookingClient.name_companies.prix %> $</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                    
+                                                <!-- Button -->
+                                                <div class="mt-2 mt-md-0">
+                                                    <a href="/Cards-reservationCar" class="btn btn-primary-soft mb-0">Gérer la réservation</a>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Card body -->
+                                            <div class="card-body">
+                                                <div class="row g-3">
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <span>Date sortie_car</span>
+                                                        <h6 class="mb-0"><%= new Date(CarBookingClient.date_sortie_car).toLocaleDateString('fr-FR') %></h6>
+                                                    </div>
+                                    
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <span>Date de retour</span>
+                                                        <h6 class="mb-0"><%= new Date(CarBookingClient.date_retourne).toLocaleDateString('fr-FR') %></h6>
+                                                    </div>
+                                    
+                                                    <div class="col-md-4">
+                                                        <span>Réservé par</span>
+                                                        <h6 class="mb-0"><%= CarBookingClient.username %></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card item END -->
+                                    <% }) %>
+                                    
+                                    
+                                </div>
+                                <!-- Tabs content item END -->
+    
+                               
+                            </div>
+    
+                        </div>
+                        <!-- Card body END -->
+                    </div>
+    
+                </div>
+                <!-- Main content END -->
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/footer-client.ejs') %>
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ThemeFunctions -->
+    <script src="assets/js/functions.js"></script>
+</body>
+</html>

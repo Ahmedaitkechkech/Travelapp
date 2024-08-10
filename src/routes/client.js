@@ -19,12 +19,17 @@ router.get("/get-allReview",ClientMiddleware,clientControllers.getAddReview);
 router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);
 router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteReview);
 
-router.get("/Home",clientControllers.findTicket);
-router.post("/flight-list", upload.array(),clientControllers.getTicketList);
+router.get("/Home",ClientMiddleware,clientControllers.findTicket);
+router.post("/flight-list",ClientMiddleware, upload.array(),clientControllers.getTicketList);
 router.get("/flight-detail/:id",clientControllers.getFlight_detail);
 router.post("/flight-detail",clientControllers.client_AddflightReservation);
-//About Page 
-router.get("/About",clientControllers.About);
+//About Page  and contact and team
+router.get("/Contact",ClientMiddleware,clientControllers.Contact);
+//post contact 
+router.post("/add_contact",ClientMiddleware,clientControllers.client_add_contact);
+router.get("/About",ClientMiddleware,clientControllers.About);
+router.get("/Team",ClientMiddleware,clientControllers.Teamworeked);
+
 //get view Recherche
 router.get("/client-Hotel",ClientMiddleware,clientControllers.getIndexHotel);
 //get data a partir db
@@ -61,13 +66,31 @@ router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.clien
 //delete   car reservation 
 router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
+//strip checkout car post 
+router.post("/checkoutCar", ClientMiddleware,clientControllers.checkoutCar);
+router.get("/completeCar", clientControllers.completeCar)
+router.get("/cancelCar", clientControllers.cancelCar)
+//strip checkout Hotel  
+router.post("/checkoutHotel", ClientMiddleware,clientControllers.checkoutHotel);
+router.get("/completeHotel", clientControllers.completeHotel)
+router.get("/cancelHotel", clientControllers.cancelHotel)
+
+
+//strip
+//settings client
+router.get("/client_settings",ClientMiddleware, clientControllers.client_settings)
+router.get("/myBooking",ClientMiddleware, clientControllers.clinet_myBooking)
+router.get("/delete",ClientMiddleware, clientControllers.popaup_delete)
+router.get("/deleteProfile",ClientMiddleware, clientControllers.deleteProfile)
+
 
 //client logout 
 router.get("/logout-client", clientControllers.client_logout)
 
 
 
-
+//404
+router.use('*', clientControllers.error404); 
 
 
 module.exports = router;
