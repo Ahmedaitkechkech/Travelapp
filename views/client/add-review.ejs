@@ -9,16 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+       
+     
 
         .card {
             width: 100%;
@@ -27,6 +19,10 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+         margin-left: auto;
+         margin-right: auto;
+         margin-bottom: 10%;
+         margin-top: 10%;
         }
 
         .card form {
@@ -103,6 +99,8 @@
     </style>
 </head>
 <body>
+    <%- include('../partials/header-client.ejs') %>
+
     <div class="card">
         <!-- Display existing reviews -->
         <% reviews.forEach(review => { %>
@@ -168,4 +166,6 @@
         </form>
     </div>
 </body>
+<%- include('../partials/footer-client.ejs') %>
+
 </html>

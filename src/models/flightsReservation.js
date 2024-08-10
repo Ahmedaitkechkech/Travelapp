@@ -8,9 +8,15 @@ const flightsReservation = new Schema({
         ref: 'Ticket_flight', 
         required: true,
     },
-   
-
     Email: {
+        type: String,
+        required: true,
+    },
+    Nom: {
+        type: String,
+        required: true,
+    },
+    Prenom: {
         type: String,
         required: true,
     },
@@ -35,8 +41,6 @@ const flightsReservation = new Schema({
         type: String,
         required: true,
     },
-    
-    
     createdAt: {
         type: Date,
         default: Date.now,

@@ -274,7 +274,7 @@ Flight list START -->
                                     <div class="col-sm-4 col-md-3 text-center">
                                         <!-- Price -->
                                         <h4 value="<%= ticket.prix %>">$<%= ticket.prix %></h4>
-                                        <a href="/flight-detail" class="btn btn-dark">Book Now</a>
+                                        <a href="/flight-detail/<%= ticket._id %>" class="btn btn-dark">Book Now</a>
                                         <button class="btn btn-link text-decoration-underline p-0 mb-0" data-bs-toggle="modal" data-bs-target="#flightdetail">
                                             <i class="bi bi-eye-fill me-1"></i>Flight Details
                                         </button>

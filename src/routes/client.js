@@ -21,7 +21,8 @@ router.delete("/edite-review/:id",ClientMiddleware,clientControllers.deleteRevie
 
 router.get("/Home",clientControllers.findTicket);
 router.post("/flight-list", upload.array(),clientControllers.getTicketList);
-
+router.get("/flight-detail/:id",clientControllers.getFlight_detail);
+router.post("/flight-detail",clientControllers.client_AddflightReservation);
 //About Page 
 router.get("/About",clientControllers.About);
 //get view Recherche
@@ -61,6 +62,8 @@ router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.clien
 router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
 
+//client logout 
+router.get("/logout-client", clientControllers.client_logout)
 
 
 

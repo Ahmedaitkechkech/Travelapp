@@ -52,9 +52,10 @@
       <table>
           <thead>
               <tr>
-                  <th>Image</th>
                   <th>name_companies</th>
                   <th>Email</th>
+                  <th>Nom</th>
+                  <th>Prenom</th>
                   <th>Genre</th>
                   <th>Téléphone</th>
                   <th>Lieu Départ</th>
@@ -66,9 +67,10 @@
           <tbody>
               <% ListFlight.forEach(flight => { %>
               <tr>
-                <td><img src=<%= flight.name_compagnies.photo %>></td>
                 <td><%= flight.name_compagnies.name_compagnies %></td>
                   <td><%= flight.Email %></td>
+                  <td><%= flight.Nom %></td>
+                  <td><%= flight.Prenom %></td>
                   <td><%= flight.genre %></td>
                   <td><%= flight.tele %></td>
                   <td><%= flight.lieu_depart %></td>

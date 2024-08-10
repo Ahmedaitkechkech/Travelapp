@@ -64,6 +64,8 @@ router.delete("/admin_delete_review/:id", adminMiddleware, adminTravel.admin_del
 
 //get all hoteles reservation  
 router.get("/hotelBooking", adminMiddleware, adminTravel.admin_get_Allhoteles_Booking);
+//get all cars reservation  
+router.get("/carBooking", adminMiddleware, adminTravel.admin_get_Allcars_Booking);
 
 
 /*logout admin*/

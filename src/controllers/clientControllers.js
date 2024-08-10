@@ -9,6 +9,8 @@ const jwtSecretClient = process.env.jwtSecretClient;
 const ClientReview = require('../models/clientReviewSchema');
 const Ticket_flight = require("../models/Ticket_flight"); 
 const Hotel = require('../models/HotelSchema');
+const flightReservationshema = require("../models/flightsReservation"); 
+const mongoose = require('mongoose');
 
 const Signup_Client = async (req, res) => {
     try {
@@ -183,7 +185,7 @@ const findTicket = async (req, res) => {
 const getTicketList = async (req, res) => {
     try {
         const { Travel_Class, lieu_depart, lieu_arrivee, Date_depart } = req.body;
-        console.log(req.body); // Log the request body for debugging
+         // Log the request body for debugging
 
         const ObjectList = req.body;
         const ticketList = await Ticket_flight.find({ lieu_depart, lieu_arrivee, Date_depart, Travel_Class });
@@ -202,6 +204,64 @@ const ListAllTicket = async (req,res) => {
         console.error(err);
     }
 }
+const getFlight_detail = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+ // Ensure the id is a valid ObjectId
+ if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send('Invalid Ticket ID');
+}
+
+        const ticketDetails = await Ticket_flight.findById(id);
+
+        if (!ticketDetails) {
+            return res.status(404).send('Ticket not found');
+        }
+
+        res.render("client/flight-detail", { ticketDetails });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Server error');
+    }
+}
+const client_AddflightReservation = async (req, res) => {
+    try {
+        const { name_compagnies, Email,Nom,Prenom, genre, tele, lieu_depart,heure_depart,lieu_arrivee } = req.body;
+
+
+        if (!name_compagnies || !lieu_depart || !heure_depart || !lieu_arrivee) {
+            return res.status(400).send('champs feild is required.');
+        }
+
+       
+        const flight = await Ticket_flight.findOne({ name_compagnies,lieu_depart,heure_depart,lieu_arrivee });
+
+        if (!flight) {
+            return res.status(404).send('flight not found.');
+        }
+
+        
+        const reservationflight = new flightReservationshema({
+            name_compagnies: flight._id,
+            Email,
+            Nom,
+            Prenom,
+            genre,
+            tele,
+            lieu_depart,
+            lieu_arrivee,
+            heure_depart,
+        });
+
+        await reservationflight.save();
+
+        res.redirect("/Home");
+    } catch (error) {
+        console.log('Error creating reservationFlight:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 const About = (req,res)=>{
    try{
     res.render("client/About");
@@ -575,6 +635,12 @@ const client_delete_CarReservation = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+//logout responsable 
+
+const client_logout = (req, res) => {
+    res.clearCookie("clientToken");
+    res.redirect("/login");
+};
 
 
 module.exports = {
@@ -582,6 +648,7 @@ module.exports = {
     Signup,
     login_client,
     login,
+    client_logout,
     //Review
     getAddReview,
     postAddReview,
@@ -590,6 +657,8 @@ module.exports = {
     findTicket,
     getTicketList,
     ListAllTicket,
+    getFlight_detail,
+    client_AddflightReservation,
     //About
     About,
     //client find hotel
