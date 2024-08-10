@@ -65,6 +65,22 @@ router.put("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.clien
 //delete   car reservation 
 router.delete("/edite_Reservation_car/:id",ClientMiddleware,clientControllers.client_delete_CarReservation);
 
+//strip checkout car post 
+router.post("/checkoutCar", ClientMiddleware,clientControllers.checkoutCar);
+router.get("/completeCar", clientControllers.completeCar)
+router.get("/cancelCar", clientControllers.cancelCar)
+//strip checkout Hotel  
+router.post("/checkoutHotel", ClientMiddleware,clientControllers.checkoutHotel);
+router.get("/completeHotel", clientControllers.completeHotel)
+router.get("/cancelHotel", clientControllers.cancelHotel)
+
+
+//strip
+//settings client
+router.get("/client_settings",ClientMiddleware, clientControllers.client_settings)
+router.get("/myBooking",ClientMiddleware, clientControllers.clinet_myBooking)
+router.get("/delete",ClientMiddleware, clientControllers.popaup_delete)
+router.get("/deleteProfile",ClientMiddleware, clientControllers.deleteProfile)
 
 
 //client logout 

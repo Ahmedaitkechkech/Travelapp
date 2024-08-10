@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const jwtSecretClient = process.env.jwtSecretClient;
 require("dotenv").config();
 
+
 const ClientMiddleware = (req, res, next) => {
     // Check if ClientToken is present in cookies
     const ClientToken = req.cookies.clientToken;
@@ -12,7 +13,9 @@ const ClientMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(ClientToken, jwtSecretClient);
+
         req.ClientToken = decoded.ClientId;
+
         next();
     } catch (error) {
         console.error("JWT Verification Error:", error);
