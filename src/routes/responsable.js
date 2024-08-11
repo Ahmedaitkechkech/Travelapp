@@ -94,6 +94,8 @@ router.post("/add-flightReservation",responsableMiddleware, responsablecontoller
 router.get("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation_id);
 router.put("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_edit_flightReservation);
 router.delete("/edite_flightReservation/:id",responsableMiddleware, responsablecontoller.responsable_delete_flightReservation);
+//affiche client car and hotel in responsable just client reserve produit by client
+router.get("/client",responsableMiddleware, responsablecontoller.getClientClientCarAndHotel);
 
 //responsable settings
 router.get("/Responsable_Settings",responsableMiddleware, responsablecontoller.responsable_Settings);

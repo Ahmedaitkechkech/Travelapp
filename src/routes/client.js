@@ -83,6 +83,11 @@ router.get("/myBooking",ClientMiddleware, clientControllers.clinet_myBooking)
 router.get("/delete",ClientMiddleware, clientControllers.popaup_delete)
 router.get("/deleteProfile",ClientMiddleware, clientControllers.deleteProfile)
 
+//get all Hoteles and car to client and details
+router.get("/Listing_Hoteles",ClientMiddleware, clientControllers.client_getAll_Hoteles)
+router.get("/Listing_cars",ClientMiddleware, clientControllers.client_getAll_cars)
+router.get("/Hotel_detail/:id",ClientMiddleware, clientControllers.client_getAll_Hoteles_id)
+router.get("/Car_detail/:id",ClientMiddleware, clientControllers.client_getAll_car_id)
 
 //client logout 
 router.get("/logout-client", clientControllers.client_logout)

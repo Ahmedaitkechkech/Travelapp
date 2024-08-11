@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Cars</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+
+    <section class="pt-5">
+        <div class="container">
+            <div class="row g-4">
+
+                <% car.forEach(car => { %>
+                <!-- Card item START -->
+                <div class="col-md-6 col-xl-4" style="gap: 10%;">
+                    <div class="card shadow p-2 pb-0 h-100" style="height: 100% !important;width: 90%; ">
+                        <!-- Image -->
+                        <img style="height: 48%;" src="<%= car.photo %>" class="rounded-2" alt="<%= car.car_model %>">
+    
+                        <!-- Card body START -->
+                        <div class="card-body px-3 pb-0">
+                            <!-- Rating and cart -->
+                            <div class="d-flex justify-content-between mb-3">
+                                <a href="#" class="badge bg-dark text-white"><i class="bi fa-fw bi-star-fill me-2 text-warning"></i>4.0</a>
+                                <a href="#" class="h6 mb-0 z-index-2"><i class="bi fa-fw bi-bookmark"></i></a>
+                            </div>
+    
+                            <!-- Title -->
+                            <h5 class="card-title"><%= car.name_companies %></h5>
+                            <h6><%= car.car_model %></h6>
+                            <!-- List -->
+                            <ul class="nav nav-divider mb-2 mb-sm-3">
+                                <li class="nav-item">Lieu de ramassage: <%= car.Lieu_de_ramassage %></li>
+                                <li class="nav-item">Prix: $<%= car.prix %> /day</li>
+                            </ul>
+                        </div>
+                        <!-- Card body END -->
+    
+                        <!-- Card footer START-->
+                        <div class="card-footer pt-0">
+                            <!-- Price and Button -->
+                            <div class="d-sm-flex justify-content-sm-between align-items-center">
+                                <!-- Price -->
+                                <div class="d-flex align-items-center">
+                                    <h5 class="fw-normal text-success mb-0 me-1">$<%= car.prix %></h5>
+                                    <span class="mb-0 me-2">/day</span>
+                                </div>
+                                <!-- Button -->
+                                <div class="mt-2 mt-sm-0 z-index-2">
+                                    <a href="/Car_detail/<%= car._id %>" class="btn btn-sm btn-primary-soft mb-0 w-100">View Detail<i class="bi bi-arrow-right ms-2"></i></a>    
+                                </div>                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item END -->
+                <% }); %>
+    
+            </div> 
+        </div>
+    </section>
+    <%- include('../partials/footer-client.ejs') %>
+
+</body>
+</html>

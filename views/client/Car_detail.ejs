@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la voiture</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+
+    <section class="pt-0">
+        <div class="container" data-sticky-container="">
+    
+            <div class="row g-4 g-xl-5">
+                <div class="col-xl-7 order-1">
+                    <div class="vstack gap-5">
+                        <div class="card bg-transparent">
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="mb-0"><%= car.name_companies %></h3>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-transparent">
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="card-title mb-0">Caractéristiques</h3>
+                            </div>
+    
+                            <div class="card-body pt-4 p-0">
+                                <div class="row g-4">
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-gas-pump me-2"></i>Type de carburant</h6>
+                                        <p><%= car.type %></p>
+                                    </div>
+        
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-users me-2"></i>Nombre de sièges</h6>
+                                        <p><%= car.nombre_seats %></p>
+                                    </div>
+        
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-location-dot me-2"></i>Lieu de ramassage</h6>
+                                        <p><%= car.Lieu_de_ramassage %></p>
+                                    </div>
+        
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-calendar me-2"></i>Date de ramassage</h6>
+                                        <p><%= car.Date_de_ramassage %></p>
+                                    </div>
+        
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-clock me-2"></i>Temps</h6>
+                                        <p><%= car.Temps %></p>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-file-alt me-2"></i>Description</h6>
+                                        <p><%= car.description %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+            
+                <!-- Right side content START -->
+                <aside class="col-xl-5 order-xl-2">
+                    <div data-sticky="" data-margin-top="100" data-sticky-for="1199">
+                        <div class="card card-body border">
+                            
+                            <!-- Title -->
+                            <div class="d-sm-flex justify-content-sm-between align-items-center mb-3">
+                                <div>
+                                    <span>Prix à partir de</span>
+                                    <h4 class="card-title mb-0">$<%= car.prix %></h4>
+                                </div>
+                                <div>
+                                    <h6 class="fw-normal mb-0">par jour</h6>
+                                </div>
+                            </div>		
+
+                            <div class="d-grid">
+                                <a href="/add-carReservation" class="btn btn-lg btn-primary-soft mb-0">Réserver</a>
+                            </div>
+                        </div>
+                    </div>	
+                </aside>
+                <!-- Right side content END -->
+            </div> 
+        </div>
+    </section>
+    <%- include('../partials/footer-client.ejs') %>
+
+</body>
+</html>
