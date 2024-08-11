@@ -229,26 +229,27 @@ const getFlight_detail = async (req, res) => {
 }
 const client_AddflightReservation = async (req, res) => {
     try {
-        const { name_compagnies, Email,Nom,Prenom, genre, tele, lieu_depart,heure_depart,lieu_arrivee } = req.body;
+        const { name_compagnies, Email, Nom, Prenom, username, genre, tele, lieu_depart, heure_depart, lieu_arrivee } = req.body;
 
-
+        // Validate required fields
         if (!name_compagnies || !lieu_depart || !heure_depart || !lieu_arrivee) {
-            return res.status(400).send('champs feild is required.');
+            return res.status(400).send('All fields are required.');
         }
 
-       
-        const flight = await Ticket_flight.findOne({ name_compagnies,lieu_depart,heure_depart,lieu_arrivee });
+        // Find the flight based on the provided details
+        const flight = await Ticket_flight.findOne({ name_compagnies, lieu_depart, heure_depart, lieu_arrivee });
 
         if (!flight) {
-            return res.status(404).send('flight not found.');
+            return res.status(404).send('Flight not found.');
         }
 
-        
-        const reservationflight = new flightReservationshema({
+        // Create a new flight reservation
+        const reservationFlight = new flightReservationshema({
             name_compagnies: flight._id,
             Email,
             Nom,
             Prenom,
+            username,
             genre,
             tele,
             lieu_depart,
@@ -256,14 +257,17 @@ const client_AddflightReservation = async (req, res) => {
             heure_depart,
         });
 
-        await reservationflight.save();
+        // Save the reservation
+        await reservationFlight.save();
 
+        // Redirect to the home page after saving
         res.redirect("/Home");
     } catch (error) {
-        console.log('Error creating reservationFlight:', error);
+        console.log('Error creating flight reservation:', error);
         res.status(500).send('Internal Server Error');
     }
 };
+
 const About = (req,res)=>{
    try{
     res.render("client/About");
@@ -727,31 +731,35 @@ const cancelCar = async (req, res) => {
 };
 //integer stripe checkout hotel
 //************** */
- const checkoutHotel= async (req, res) => {
+const checkoutHotel = async (req, res) => {
     try {
-       
+        // Fetch user's hotel reservations
+        const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
 
-            const CardReservation = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
-            // Calculate the total price for each reservation
-            let totalAmount = 0;
-            CardReservation.forEach(reservation => {
-                const dateEntre = new Date(reservation.Date_entre);
-                const dateSortie = new Date(reservation.Date_sortie);
-                const days = Math.ceil((dateSortie - dateEntre) / (1000 * 60 * 60 * 24)); //pour convert egalement dateSortie - dateEntre  to days
-                const totalPrice = days * reservation.Nom_Hotel.Prix; // Calculate total prix
-                totalAmount = totalAmount + totalPrice; // calculate all reservation
+        // Calculate the total amount for the reservations
+        let totalAmount = 0;
+        CardReservation.forEach(reservation => {
+            const dateEntre = new Date(reservation.Date_entre);
+            const dateSortie = new Date(reservation.Date_sortie);
+            const days = Math.ceil((dateSortie - dateEntre) / (1000 * 60 * 60 * 24)); // Calculate the number of days
+            const totalPrice = days * reservation.Nom_Hotel.Prix; // Calculate the total price for this reservation
+            totalAmount += totalPrice; // Sum up the total amount
         });
+
+        // Ensure the total amount is in USD cents
+        const totalAmountInCents = Math.round(totalAmount * 100);
 
         // Create a Stripe Checkout session
         const session = await Stripe.checkout.sessions.create({
+            payment_method_types: ['card'], // Specify payment method types
             line_items: [
                 {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Hotel Reservation Payment', 
+                            name: 'Hotel Reservation Payment',
                         },
-                        unit_amount: totalAmount * 100, // Convert dollars to cents
+                        unit_amount: totalAmountInCents, // Total amount in cents
                     },
                     quantity: 1,
                 },
@@ -760,8 +768,6 @@ const cancelCar = async (req, res) => {
             success_url: 'http://localhost:2002/completeHotel',
             cancel_url: 'http://localhost:2002/cancelHotel',
         });
-       
-       
 
         // Redirect to Stripe Checkout
         res.redirect(session.url);
@@ -770,6 +776,7 @@ const cancelCar = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
 const completeHotel = async (req, res) => {
     res.send( 'Payment Successful', 'Thank you for your payment!' );
 }
@@ -783,7 +790,7 @@ const client_settings = async (req, res) => {
         const client=  req.session.username;
 
         const clientx = await ClientSchema.findOne({ username: client });
-        console.log(clientx)
+        
         if (!clientx) {
             return res.status(404).send('User not found');
         }
@@ -803,13 +810,15 @@ const client_settings = async (req, res) => {
 const clinet_myBooking = async (req, res) => {
     const hoteldBookingClient = await HotelReservSchema.find({ username: req.session.username }).populate("Nom_Hotel");
     const CarBookingClient = await Car_reservation.find({ username: req.session.username }).populate("name_companies");
-
+    const flightBookingClient = await flightReservationshema.find({ username: req.session.username }).populate("name_compagnies");
+console.log(flightBookingClient);
     try {
     
     
         res.render("client/MyBooking", { 
             CarBookingClient,
             hoteldBookingClient,
+            flightBookingClient,
             title: 'card Reservation'
         });
     } catch (error) {

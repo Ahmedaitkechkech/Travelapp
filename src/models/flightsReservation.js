@@ -20,6 +20,10 @@ const flightsReservation = new Schema({
         type: String,
         required: true,
     },
+    username: {
+		type: String,
+		required: true,
+	},
     genre: {
         type: String,
         enum: ["femme", "homme"],
