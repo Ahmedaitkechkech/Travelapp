@@ -399,6 +399,46 @@ const admin_get_Allhoteles_Booking = async (req, res) => {
   
 }
 
+//get client car and hotel to admin
+const admin_getClientClientCarAndHotel = async (req, res) => {
+    try {
+
+        // Fetch car data
+        const clientCar = await Car.find({});
+        const ListClientcarsbyresponsable = clientCar.map(car => car._id);
+
+        const clientCarList = await car_reservation.find({ name_companies: { $in: ListClientcarsbyresponsable } })
+            .populate('name_companies')  
+
+        // Fetch hotel data
+        const hotels = await Hotel.find({});
+        const Listhotelesbyresponsable = hotels.map(hotel => hotel._id);
+
+        const clientHotelList = await HotelResrvation.find({ Nom_Hotel: { $in: Listhotelesbyresponsable } })
+            .populate('Nom_Hotel')  
+
+        // Combine both car and hotel reservations
+        const combinedReservations = [
+           ...clientCarList.map(car => ({
+                type: 'Car',
+                Nom: car.Nom,
+                Prenom: car.Prenom,
+                tele: car.tele,
+            })),
+         ...clientHotelList.map(hotel => ({
+                type: 'Hotel',
+                Nom: hotel.Nom,
+                Prenom: hotel.Prénom,
+                tele: hotel.Numéro_Téléphone,
+            }))
+        ];
+
+        res.render('Admin/clients', { combinedReservations });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+};
 
 
 
@@ -436,7 +476,8 @@ module.exports = {
     //afiche hotelesRervation and cars and flight
     admin_get_Allhoteles_Booking,
     admin_get_Allcars_Booking,
-
+    //admin get client car and Hotel
+    admin_getClientClientCarAndHotel,
     admin_logout,
     
 

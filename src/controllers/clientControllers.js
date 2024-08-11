@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const ClientSchema = require("../models/ClientSchema");
 const HotelSchema = require("../models/HotelSchema");
 const Cars = require("../models/carsShema");
@@ -11,6 +12,7 @@ const Ticket_flight = require("../models/Ticket_flight");
 const Hotel = require('../models/HotelSchema');
 const ContactShema = require('../models/contactSchema');
 const Stripe = require("stripe")(process.env.SCRET_STRIP_key);
+
 
 const Signup_Client = async (req, res) => {
     try {
@@ -714,7 +716,7 @@ const completeHotel = async (req, res) => {
     res.send( 'Payment Successful', 'Thank you for your payment!' );
 }
 const cancelHotel = async (req, res) => {
-    res.redirect('/Cards-reservationCar' );
+    res.redirect('/Cards-reservation' );
 };
 //************** */
 //settings client 
@@ -771,7 +773,7 @@ const popaup_delete =  async (req,res)=>{
      console.log(err)
     }
  }
-
+//click btn and delete
 const deleteProfile =  async (req,res)=>{
     const client=  req.session.username;
 
@@ -783,8 +785,72 @@ const deleteProfile =  async (req,res)=>{
      console.log(err)
     }
  }
+ //get all hoteles to client
+ const client_getAll_Hoteles = async (req,res)=>{
+    const hoteles = await HotelSchema.find({})
+    try{
+     res.render("client/All_Hotels",{
+        hoteles,
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+ //get hotel by id with details
+ const client_getAll_Hoteles_id = async (req, res) => {
+    const { id } = req.params;
 
+    // Validate the ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send("Invalid hotel ID");
+    }
 
+    try {
+        const hotel = await HotelSchema.findById(id);
+        if (!hotel) {
+            return res.status(404).send("Hotel not found");
+        }
+        res.render("client/Hotel_detail", {
+            hotel,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error");
+    }
+};
+ //get all cars to client
+ const client_getAll_cars = async (req,res)=>{
+    const car = await Cars.find({})
+    try{
+     res.render("client/all_cars",{
+        car,
+     });
+    }catch(err){
+     console.log(err)
+    }
+ }
+  //get car by id with details
+  const client_getAll_car_id = async (req, res) => {
+    const { id } = req.params;
+
+    // Validate the ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send("Invalid hotel ID");
+    }
+
+    try {
+        const car = await Cars.findById(id);
+        if (!car) {
+            return res.status(404).send("car not found");
+        }
+        res.render("client/Car_detail", {
+            car,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error");
+    }
+};
 
 //logout responsable 
 
@@ -860,6 +926,12 @@ module.exports = {
    clinet_myBooking,
    popaup_delete,
    deleteProfile,
+
+   //get all Hotel and car to client and details
+   client_getAll_Hoteles,
+   client_getAll_Hoteles_id,
+   client_getAll_cars,
+   client_getAll_car_id,
 
    error404,
    

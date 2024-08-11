@@ -664,6 +664,49 @@ const responsable_Settings= async (req,res)=>{
     }
 }
 
+//get client car and hotel
+const getClientClientCarAndHotel = async (req, res) => {
+    try {
+        const responsableUsername = req.user.username; // Logged-in responsable username
+
+        // Fetch car data
+        const clientCar = await carsShema.find({ username: responsableUsername });
+        const ListClientcarsbyresponsable = clientCar.map(car => car._id);
+
+        const clientCarList = await CarReservation.find({ name_companies: { $in: ListClientcarsbyresponsable } })
+            .populate('name_companies')  
+
+        // Fetch hotel data
+        const hotels = await HotelSchema.find({ username: responsableUsername });
+        const Listhotelesbyresponsable = hotels.map(hotel => hotel._id);
+
+        const clientHotelList = await HotelReservSchema.find({ Nom_Hotel: { $in: Listhotelesbyresponsable } })
+            .populate('Nom_Hotel')  
+
+        // Combine both car and hotel reservations
+        const combinedReservations = [
+           ...clientCarList.map(car => ({
+                type: 'Car',
+                Nom: car.Nom,
+                Prenom: car.Prenom,
+                tele: car.tele,
+            })),
+         ...clientHotelList.map(hotel => ({
+                type: 'Hotel',
+                Nom: hotel.Nom,
+                Prenom: hotel.Prénom,
+                tele: hotel.Numéro_Téléphone,
+            }))
+        ];
+
+        res.render('Responsable/clients', { combinedReservations });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+};
+
+
 
 
 //logout responsable 
@@ -731,4 +774,7 @@ module.exports = {
       getClientReservationsCar,
       //settings responsable
       responsable_Settings,
+      //affiche client car and hotel in responssable
+      getClientClientCarAndHotel,
+      
 };

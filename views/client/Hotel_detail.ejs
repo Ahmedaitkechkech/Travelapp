@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+
+    <section class="pt-0">
+        <div class="container" data-sticky-container="">
+    
+            <div class="row g-4 g-xl-5">
+                <div class="col-xl-7 order-1">
+                    <div class="vstack gap-5">
+                        <div class="card bg-transparent">
+
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="mb-0"><%= hotel.Nom_Hotel %></h3>
+                            </div>
+                        
+
+                        </div>
+                        
+                        <div class="card bg-transparent">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="card-title mb-0">Amenities</h3>
+                            </div>
+    
+                            <!-- Card body START -->
+                            <div class="card-body pt-4 p-0">
+                                <div class="row g-4">
+                                    <!-- Activities -->
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-biking me-2"></i>Activities</h6>
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-0">
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Swimming pool
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Spa
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Kids' play area
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Gym
+                                            </li>
+                                        </ul>
+                                    </div>
+        
+                                    <!-- Payment Method -->
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-credit-card me-2"></i>Payment Method</h6>
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-0">
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Credit card (Visa, Master card)
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Cash
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Debit Card
+                                            </li>
+                                        </ul>
+                                    </div>
+        
+                                    <!-- Services -->
+                                    <div class="col-sm-6">
+                                        <h6><i class="fa-solid fa-concierge-bell me-2"></i>Services</h6>
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-0">
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Dry cleaning
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Room Service
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Special service
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Waiting Area
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Secrete smoking area
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Concierge
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Laundry facilities
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Ironing Service
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Lift
+                                            </li>
+                                        </ul>
+                                    </div>
+        
+                                    <!-- Safety & Security -->
+                                    <div class="col-sm-6">
+                                        <h6><i class="bi bi-shield-fill-check me-2"></i>Safety & Security</h6>
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-4 mb-sm-5">
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Doctor on Call
+                                            </li>
+                                        </ul>
+        
+                                        <h6><i class="fa-solid fa-volume-up me-2"></i>Staff Language</h6>
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless mt-2 mb-0">
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>English
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Spanish
+                                            </li>
+                                            <li class="list-group-item pb-0">
+                                                <i class="fa-solid fa-check-circle text-success me-2"></i>Hindi
+                                            </li>
+                                        </ul>
+                                    </div>
+        
+                                </div>
+                            </div>
+                            <!-- Card body END -->
+                        </div>
+                        <!-- Amenities END -->
+                    </div>	
+                </div>
+            
+                <!-- Right side content START -->
+                <aside class="col-xl-5 order-xl-2">
+                    <div data-sticky="" data-margin-top="100" data-sticky-for="1199">
+                        <!-- Book now START -->
+                        <div class="card card-body border">
+                            
+                            <!-- Title -->
+                            <div class="d-sm-flex justify-content-sm-between align-items-center mb-3">
+                                <div>
+                                    <span>Price Start at</span>
+                                    <h4 class="card-title mb-0">$<%= hotel.Prix %></h4>
+                                </div>
+                                <div>
+                                    <h6 class="fw-normal mb-0">1 room per night</h6>
+                                    <small>+ $285 taxes & fees</small>
+                                </div>
+                            </div>		
+    
+                            <!-- Rating -->
+                            <ul class="list-inline mb-2">
+                                <li class="list-inline-item me-1 h6 fw-light mb-0"><i class="bi bi-arrow-right me-2"></i>4.5</li>
+                                <li class="list-inline-item me-0 small"><i class="fa-solid fa-star text-warning"></i></li>
+                                <li class="list-inline-item me-0 small"><i class="fa-solid fa-star text-warning"></i></li>
+                                <li class="list-inline-item me-0 small"><i class="fa-solid fa-star text-warning"></i></li>
+                                <li class="list-inline-item me-0 small"><i class="fa-solid fa-star text-warning"></i></li>
+                                <li class="list-inline-item me-0 small"><i class="fa-solid fa-star-half-alt text-warning"></i></li>
+                            </ul>
+    
+                            <p class="h6 fw-light mb-4"><i class="bi bi-arrow-right me-2"></i>Free breakfast available</p>
+    
+                            <!-- Button -->
+                            <div class="d-grid">
+                                <a href="/reserver-Hotel" class="btn btn-lg btn-primary-soft mb-0">Reservé</a>
+                            </div>
+                        </div>
+                        <!-- Book now END -->
+    
+                     
+                    </div>	
+                </aside>
+                <!-- Right side content END -->
+            </div> 
+        </div>
+    </section>
+    <%- include('../partials/footer-client.ejs') %>
+
+</body>
+</html>

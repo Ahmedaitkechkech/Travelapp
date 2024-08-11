@@ -67,6 +67,9 @@ router.get("/hotelBooking", adminMiddleware, adminTravel.admin_get_Allhoteles_Bo
 //get all cars reservation  
 router.get("/carBooking", adminMiddleware, adminTravel.admin_get_Allcars_Booking);
 
+//admin get all client car and hotel 
+router.get("/admin_client", adminMiddleware, adminTravel.admin_getClientClientCarAndHotel);
+
 
 /*logout admin*/
 router.get("/logout", adminMiddleware, adminTravel.admin_logout);
