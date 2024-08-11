@@ -337,9 +337,6 @@ const responsable_delete_car = async (req, res) => {
     }
 };
 
-
-
-
 /*-------------- Hotel Crud -----------*/
 const responsable_get_AddHotel = async (req, res) => {
     try {
@@ -453,9 +450,6 @@ const responsable_deleteReview = async (req, res) => {
         console.error(err);
     }
 };
-
-
-
 
 
 const getClientReservationsCar = async (req, res) => {
