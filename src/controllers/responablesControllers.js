@@ -94,9 +94,22 @@ const responsable_login = async (req, res) => {
 
 // get dashboard
 const get_dashboard_responsable = async (req, res) => {
+    const responsableUsername = req.user.username; 
+    const Hoteles = await HotelSchema.find({username:responsableUsername}).sort({ createdAt: -1 })
+    const Cars = await carsShema.find({username:responsableUsername}).sort({ createdAt: -1 })
+    const Flights = await Ticket_flight.find({username:responsableUsername}).sort({ createdAt: -1 })
+    const hotelCount = await HotelSchema.countDocuments({username:responsableUsername});
+    const carCount = await carsShema.countDocuments({username:responsableUsername});
+    const flifgtCount = await Ticket_flight.countDocuments({username:responsableUsername});
     try {
         res.render("Responsable/dashboard-Responsable", {
             title: "Espace privé Reasponsable",
+            Hoteles,
+            Cars,
+            Flights,
+            hotelCount,
+            carCount,
+            flifgtCount,
          
         });
     } catch (error) {
