@@ -11,6 +11,8 @@
 
 	
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -131,7 +133,6 @@
 						</button>
 						<!-- Toggler for menubar END -->
 	
-						<!-- Topbar menu START -->
 						<div class="collapse navbar-collapse w-100 z-index-1" id="navbarTopContent">
 							<!-- Top search START -->
 							<div class="nav my-3 my-xl-0 flex-nowrap align-items-center">
@@ -142,67 +143,11 @@
 									</form>
 								</div>
 							</div>
-							<!-- Top search END -->
 						</div>
-						<!-- Topbar menu END -->
 					</div>
-					<!-- Top bar left END -->
-					
-					<!-- Top bar right START -->
-					<ul class="nav flex-row align-items-center list-unstyled ms-xl-auto">
-						
-
-						<!-- Notification dropdown START -->
-						<li class="nav-item dropdown ms-3">
-							<!-- Notification button -->
-							<a class="nav-notification btn btn-light p-0 mb-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-								<i class="bi bi-bell fa-fw"></i>
-							</a>
-							<!-- Notification dote -->
-							<span class="notif-badge animation-blink"></span>
-		
-							
-						</li>
-						<!-- Notification dropdown END -->
-		
-						<!-- Profile dropdown START -->
-						<li class="nav-item ms-3 dropdown">
-							<!-- Avatar -->
-							<a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-								<img class="avatar-img rounded-2" src="/img/Amin.png" alt="avatar">
-							</a>
-		
-							<ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown">
-								<!-- Profile info -->
-								<li class="px-3 mb-3">
-									<div class="d-flex align-items-center">
-										<!-- Avatar -->
-										<div class="avatar me-3">
-											<img class="avatar-img rounded-circle shadow" src="/img/avatar/01.jpg" alt="avatar">
-										</div>
-										<div>
-											<a class="h6 mt-2 mt-sm-0" href="#">Lori Ferguson</a>
-											<p class="small m-0">example@gmail.com</p>
-										</div>
-									</div>
-								</li>
-		
-								<!-- Links -->
-								<li> <hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw me-2"></i>My Bookings</a></li>
-								<li><a class="dropdown-item" href="#"><i class="bi bi-heart fa-fw me-2"></i>My Wishlist</a></li>
-								<li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Settings</a></li>
-								<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help Center</a></li>
-								<li><a class="dropdown-item bg-danger-soft-hover" href="/logout"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
-							</ul>
-						</li>
-						<!-- Profile dropdown END -->
-					</ul>
-					<!-- Top bar right END -->
 				</div>
 			</div>
 		</nav>
-		<!-- Top bar END -->
 	
 		<!-- Page main content START -->
 		<div class="page-content-wrapper p-xxl-4">
@@ -212,81 +157,231 @@
 				<div class="col-12 mb-4 mb-sm-5">
 					<div class="d-sm-flex justify-content-between align-items-center">
 						<h1 class="h3 mb-2 mb-sm-0">Dashboard</h1>
-						<div class="d-grid"><a href="#" class="btn btn-primary-soft mb-0"><i class="bi bi-plus-lg fa-fw"></i> New Booking</a></div>				
 					</div>
 				</div>
 			</div>
 
 			<!-- Counter boxes START -->
-			<div class="row g-4 mb-5">
+			<div class="row g-4 mb-5 justify-content-between ">
 				<!-- Counter item -->
-				<div class="col-md-6 col-xxl-3">
-					<div class="card card-body bg-warning bg-opacity-10 border border-warning border-opacity-25 p-4 h-100">
+				<div class="col-md-6 col-xxl-3" style="width: 33%;">
+					<div
+						class="card card-body bg-warning bg-opacity-10 border border-warning border-opacity-25 p-4 h-100">
 						<div class="d-flex justify-content-between align-items-center">
 							<!-- Digit -->
 							<div>
-								<h4 class="mb-0">56</h4>
+								<h4 class="mb-0"><%= hotelCount %></h4>
 								<span class="h6 fw-light mb-0">Total Hotels</span>
 							</div>
 							<!-- Icon -->
-							<div class="icon-lg rounded-circle bg-warning text-white mb-0"><i class="fa-solid fa-hotel fa-fw"></i></div>
+							<div class="icon-lg rounded-circle bg-warning text-white mb-0"><i
+									class="fa-solid fa-hotel fa-fw"></i></div>
 						</div>
 					</div>
 				</div>
 
-				<!-- Counter item -->
-				<div class="col-md-6 col-xxl-3">
-					<div class="card card-body bg-success bg-opacity-10 border border-success border-opacity-25 p-4 h-100">
+			
+				<div class="col-md-6 col-xxl-3" style="width: 33%;">
+					<div
+						class="card card-body bg-primary bg-opacity-10 border border-primary border-opacity-25 p-4 h-100">
 						<div class="d-flex justify-content-between align-items-center">
 							<!-- Digit -->
 							<div>
-								<h4 class="mb-0">$836,789</h4>
-								<span class="h6 fw-light mb-0">Total Incomes</span>
-							</div>
-							<!-- Icon -->
-							<div class="icon-lg rounded-circle bg-success text-white mb-0"><i class="fa-solid fa-hand-holding-dollar fa-fw"></i></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Counter item -->
-				<div class="col-md-6 col-xxl-3">
-					<div class="card card-body bg-primary bg-opacity-10 border border-primary border-opacity-25 p-4 h-100">
-						<div class="d-flex justify-content-between align-items-center">
-							<!-- Digit -->
-							<div>
-								<h4 class="mb-0">245</h4>
+								<h4 class="mb-0"><%= flifgtCount %></h4>
 								<span class="h6 fw-light mb-0">Total Flights</span>
 							</div>
 							<!-- Icon -->
-							<div class="icon-lg rounded-circle bg-primary text-white mb-0"><i class="fa-solid fa-bed fa-fw"></i></div>
+							<div class="icon-lg rounded-circle bg-primary text-white mb-0"><i
+									class="fa-solid fa-bed fa-fw"></i></div>
 						</div>
 					</div>
 				</div>
 
 				<!-- Counter item -->
-				<div class="col-md-6 col-xxl-3">
-					<div class="card card-body bg-info bg-opacity-10 border border-info border-opacity-25 p-4 h-100">
+				<div class="col-md-6 col-xxl-3" style="width: 33%;">
+					<div
+						class="card card-body bg-info bg-opacity-10 border border-info border-opacity-25 p-4 h-100">
 						<div class="d-flex justify-content-between align-items-center">
 							<!-- Digit -->
 							<div>
-								<h4 class="mb-0">147</h4>
+								<h4 class="mb-0"><%= carCount %></h4>
 								<span class="h6 fw-light mb-0">Total Car</span>
 							</div>
 							<!-- Icon -->
-							<div class="icon-lg rounded-circle bg-info text-white mb-0"><i class="fa-solid fa-building-circle-check fa-fw"></i></div>
+							<div class="icon-lg rounded-circle bg-info text-white mb-0"><i class="fa-solid fa-car fa-fw"></i>
+							</i></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Counter boxes END -->
+
+			<!-- Hotel grid START -->
+			<div class="row g-4 mb-5">
+				<!-- Title -->
+				<div class="col-12">
+					<div class="d-flex justify-content-center">
+						<h4 class="mb-0" style="color: #009EE2;">Quatre derniers Hôtels</h4>
+					</div>
+				</div>
+
+				<% Hoteles.forEach(hotel => { %>
+					<!-- Hotel item -->
+					<div class="col-lg-6">
+						<div class="card shadow p-3" style="height: 20vh;">
+							<div class="row g-4">
+								<!-- Card img -->
+								<div class="col-md-3">
+									<img style="height: 10vh;width:75% ;margin-left: 10%; margin-top: 4%; " src="<%= hotel.Photo %>" class="rounded-2" alt="<%= hotel.Nom_Hotel %>">
+								</div>
+
+								<!-- Card body -->
+								<div class="col-md-9">
+									<div class="card-body position-relative d-flex flex-column p-0 h-100">
+										<!-- Title -->
+										<h5 class="card-title mb-0 me-5"><%= hotel.Nom_Hotel %></h5>
+										<small><i class="bi bi-geo-alt me-2 font-weight-bold"></i><%= hotel.Adresse_Hotel %></small>
+										<small><i class="bi bi-person font-weight-bold"></i>Responsable: <%= hotel.username %></small>
+										<ul class="list-inline smaller mb-0">
+											<li class="list-inline-item me-0" ><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0">(35 reviews)</li>
+										</ul>
+
+										<!-- Price and Button -->
+										<div class="d-sm-flex justify-content-sm-between align-items-center mt-3 mt-md-auto">
+											<!-- Price -->
+											<div class="d-flex align-items-center">
+												<h5 class="fw-bold mb-0 me-1">$<%= hotel.Prix %></h5>
+												<span class="mb-0 me-2">/jour</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+			<!-- Hotel grid END -->
+
+			<!-- car and flight grid START -->
+			<div class="d-flex align-items-center  gap-4">
+							<!-- car START -->
+							<div class="col-lg-6 col-xxl-4">
+								<div class="card shadow h-100" style="width: 36vw !important; ">
+									<!-- Card header -->
+									<div class="card-header border-bottom d-flex justify-content-between align-items-center p-3">
+										<h5 class="card-header-title">Voitures Disponibles</h5>
+									</div>
+
+									<!-- Card body START -->
+									<div class="card-body p-3">
+										<% if (Cars && Cars.length > 0) { %>
+											<% Cars.forEach(function(car) { %>
+												<!-- Car item START -->
+												<div class="d-flex justify-content-between align-items-center">
+													<!-- Image and info -->
+													<div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+														<!-- Avatar -->
+														<div class="flex-shrink-0">
+															<img style="width: 92px;" src="<%= car.photo %>" class="rounded h-60px" alt="Image de <%= car.car_model %>">
+														</div>
+														<!-- Info -->
+														<div class="ms-sm-3 mt-2 mt-sm-0">
+															<h6 class="mb-1"><%= car.name_companies %></h6>
+															<ul class="list-inline smaller mb-0">
+																<li class="list-inline-item me-0 font-weight-bold" style="font-weight: 900;"><%= car.car_model %></li>
+																<li class="list-inline-item me-0 font-weight-bold" style="font-weight: 900;"><%= car.Date_de_ramassage %> - <%= car.Temps %></li>
+																<li class="list-inline-item me-0" style="font-weight: 900;"><%= car.username %></li>
+															</ul>
+															<ul class="list-inline smaller mb-0">
+																<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+																<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+																<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+																<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+																<li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
+																<li class="list-inline-item me-0">(35 reviews)</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<!-- Car item END -->
+
+												<hr>
+											<% }); %>
+										<% } else { %>
+											<p>Aucune voiture disponible.</p>
+										<% } %>
+									</div>
+									<!-- Card body END -->
+								</div>
+							</div>
+							<!-- car END -->
+							<!-- Flight START -->
+							<div class="col-lg-6 col-xxl-4">
+							<div class="card shadow h-100" style="margin-left: 57%; width: 36vw !important;">
+								<!-- Card header -->
+								<div class="card-header border-bottom d-flex justify-content-between align-items-center p-3">
+									<h5 class="card-header-title">Derniers Vols</h5>
+								</div>
+
+								<!-- Card body START -->
+								<div class="card-body p-3">
+									<% if (Flights && Flights.length > 0) { %>
+										<% Flights.forEach(function(flight) { %>
+											<!-- Flight item START -->
+											<div class="d-flex justify-content-between align-items-center">
+												<!-- Image and info -->
+												<div class="d-sm-flex align-items-center mb-1 mb-sm-0">
+													<!-- Avatar -->
+													<div class="flex-shrink-0">
+														<img style="width: 92px;" src="<%= flight.photo %>" class="rounded h-60px" alt="Image de <%= flight.name_compagnies %>">
+													</div>
+													<!-- Info -->
+													<div class="ms-sm-3 mt-2 mt-sm-0">
+														<h6 class="mb-1"><%= flight.name_compagnies %></h6>
+														<ul class="list-inline smaller mb-0">
+															<li class="list-inline-item me-0" style="font-weight: 900;"><%= flight.lieu_depart %> - <%= flight.lieu_arrivee %></li>
+															<li class="list-inline-item me-0" style="font-weight: 900;"><%= flight.heure_depart %> - <%= flight.heure_arrivee %></li>
+															<li class="list-inline-item me-0" style="font-weight: 900;">Classe: <%= flight.Travel_Class %></li>
+															<li class="list-inline-item me-0" style="font-weight: 900;">Prix: <%= flight.prix %> MAD</li>
+															<li class="list-inline-item me-0" style="font-weight: 900;">responsable: <%= flight.username %></li>
+														</ul>
+														<ul class="list-inline smaller mb-0">
+															<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+															<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+															<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+															<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+															<li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
+															<li class="list-inline-item me-0">(35 reviews)</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<!-- Flight item END -->
+
+											<hr>
+										<% }); %>
+									<% } else { %>
+										<p>Aucun vol disponible.</p>
+									<% } %>
+								</div>
+								<!-- Card body END -->
+							</div>
+							</div>
+							<!-- Flight END -->
+
+			</div>
+		   	<!-- car and flight grid END -->
+
 		</div>
-		<!-- Page main content END -->
 	</div>
-	<!-- Page content END -->
 	
 	</main>
-<!-- **************** MAIN CONTENT END **************** -->
 
 
 
