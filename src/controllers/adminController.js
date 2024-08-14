@@ -77,13 +77,29 @@ const admin_login = async (req, res) => {
 const get_dashboard_admin = async (req, res) => {
     const admin = await Admintravel.findOne({});
     const responsables = await Responsable.find().sort({ createdAt: -1 });
+    const Hoteles = await Hotel.find({}).sort({ createdAt: -1 }).limit(4)
+    const Cars = await Car.find({}).sort({ createdAt: -1 }).limit(6)
+    const Flights = await Flight.find({}).sort({ createdAt: -1 }).limit(6)
+    const hotelCount = await Hotel.countDocuments({});
+    const carCount = await Car.countDocuments({});
+    const flifgtCount = await Flight.countDocuments({});
+
+
+
+
 
     
     try {
         res.render("Admin/dashboard", {
             title: "place admin",
             admin,
-            responsables
+            responsables,
+            Hoteles,
+            Cars,
+            Flights,
+            flifgtCount,
+            carCount,
+            hotelCount,
         });
     } catch (error) {
         console.log(error);
@@ -457,6 +473,7 @@ const admin_getClientClientCarAndHotel  = async (req, res) => {
 
 
 
+
 module.exports = {
     loginAuth,
     admin_login,
@@ -493,7 +510,9 @@ module.exports = {
     admin_get_Allcars_Booking,
     //admin get client car and Hotel
     admin_getClientClientCarAndHotel,
+
     admin_logout,
+    
     
 
    
