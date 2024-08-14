@@ -13,7 +13,7 @@ const Hotel = require('../models/HotelSchema');
 const ContactShema = require('../models/contactSchema');
 const Stripe = require("stripe")(process.env.SCRET_STRIP_key);
 const flightReservationshema = require("../models/flightsReservation"); 
-const mongoose = require('mongoose');
+
 
 
 const Signup_Client = async (req, res) => {
@@ -96,6 +96,7 @@ const login_client = async (req, res) => {
             default:
                 const clientToken = jwt.sign({ clientId: client._id }, jwtSecretClient);
                 req.session.username = client.username;
+                
              
              
                 res.cookie("clientToken", clientToken, { httpOnly: true });
@@ -212,7 +213,7 @@ const getFlight_detail = async (req, res) => {
     try {
         const id = req.params.id;
 
- // Ensure the id is a valid ObjectId
+ 
  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send('Invalid Ticket ID');
 }
@@ -263,12 +264,171 @@ const client_AddflightReservation = async (req, res) => {
         await reservationFlight.save();
 
         // Redirect to the home page after saving
-        res.redirect("/Home");
+        res.redirect("/flight-booking");
     } catch (error) {
         console.log('Error creating flight reservation:', error);
         res.status(500).send('Internal Server Error');
     }
 };
+const client_EditflightReservation = async (req,res)=>{
+    try {
+        const id = req.params.id;
+        // Validate that the ID is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).send('Invalid Ticket ID');
+        }
+
+        // Fetch the flight reservation by ID
+        const flightReservInfo = await flightReservationshema.findById({_id:id}).populate('name_compagnies');
+        if (!flightReservInfo) {
+            return res.status(404).send('Reservation not found.');
+        }
+
+        res.render("client/edit-flight-detail", { flightReservInfo });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+const client_EditflightReservation_byid = async (req, res) => {
+    try {
+        const { name_compagnies, Email,Nom,Prenom,username, genre, tele, lieu_depart, heure_depart, lieu_arrivee } = req.body;
+        const updateObject = {};
+
+        // Validate and set the name_compagnies field
+        if (name_compagnies) {
+            const flight = await Ticket_flight.findOne({ name_compagnies });
+            if (!flight) {
+                return res.status(404).send('Flight not found.');
+            }
+            updateObject.name_compagnies = flight._id;
+        }
+
+        // Set other fields if they are present in the request body
+        if (Email) updateObject.Email = Email;
+        if (genre) updateObject.genre = genre;
+        if (tele) updateObject.tele = tele;
+        if (Nom) updateObject.Nom = Nom;
+        if (Prenom) updateObject.Prenom = Prenom;
+        if (username) updateObject.username = username;
+        if (lieu_depart) updateObject.lieu_depart = lieu_depart;
+        if (heure_depart) updateObject.heure_depart = heure_depart;
+        if (lieu_arrivee) updateObject.lieu_arrivee = lieu_arrivee;
+
+        // Update the flight reservation
+        await flightReservationshema.findByIdAndUpdate(req.params.id, updateObject, { new: true });
+        res.redirect("/flightReservationList");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const client_delete_flightReservation = async (req, res) => {
+    try {
+        const id=req.params.id;
+        await flightReservationshema.findByIdAndDelete({_id:id});
+        res.redirect("/flight-booking");
+    } catch (error) {
+        console.log('Error deleting reservation:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+const client_getAll_CardReservationFlight = async (req, res) => {
+    try {
+        const username = req.session.username;
+        
+        const flightReservationClient = await flightReservationshema.find({ username }).populate("name_compagnies");
+
+        // Calculate total for each flight reservation
+        const flightReservationsWithTotal = flightReservationClient.map(reservation => {
+            const Total = reservation.name_compagnies.prix + 20;
+            return { ...reservation._doc, Total }; // Spread the original reservation and add the Total property
+        });
+
+        res.render("client/flight-booking", { flightReservationClient: flightReservationsWithTotal });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error");
+    }
+};
+const client_getbyId_CardReservationFlight = async (req, res) => {
+    try {
+        const username = req.session.username;
+        const id = req.params.id;
+        
+        // Find the specific flight reservation by username and ID
+        const flightReservationClient = await flightReservationshema.findOne({ username, _id: id }).populate("name_compagnies");
+
+        if (!flightReservationClient || !flightReservationClient.name_compagnies) {
+            return res.status(404).send("Reservation or company not found");
+        }
+
+        // Calculate total for the flight reservation
+        const Total = flightReservationClient.name_compagnies.prix + 20;
+
+        // Include the Total in the response
+        const flightReservationWithTotal = { ...flightReservationClient._doc, Total };
+
+        res.render("client/flight-booking", { flightReservationClient: [flightReservationWithTotal] });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error");
+    }
+};
+
+const checkoutFlight = async (req, res) => {
+    try {
+        // Fetch the flight reservation details
+        const flightReservation = await flightReservationshema.findOne({ username: req.session.username }).populate("name_compagnies");
+
+        if (!flightReservation) {
+            return res.status(404).send('Flight reservation not found');
+        }
+
+        // Calculate the total amount (adding $20 to the flight price)
+        const basePrice = flightReservation.name_compagnies.prix;
+        const totalAmount = basePrice + 20;
+
+        // Convert the total amount to cents for Stripe (assuming the price is in USD)
+        const totalAmountInCents = Math.round(totalAmount * 100);
+
+        // Create a Stripe Checkout session
+        const session = await Stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Flight Reservation Payment',
+                        },
+                        unit_amount: totalAmountInCents,
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:2002/completeFlight',
+            cancel_url: 'http://localhost:2002/cancelFlight',
+        });
+
+        // Redirect to Stripe Checkout
+        res.redirect(session.url);
+    } catch (error) {
+        console.error('Error creating Stripe Checkout session:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+const completeFlight = async (req, res) => {
+    res.send('Payment Successful', 'Thank you for your payment!');
+}
+
+const cancelFlight = async (req, res) => {
+    res.redirect('/flight-booking');
+};
+
+
 
 const About = (req,res)=>{
    try{
@@ -325,9 +485,11 @@ try{
 };
 //get view add reservatio
 const client_get_AddHotelReservation = async (req, res) => {
+    try {
+        
     const hotelInfo = await Hotel.find({}); 
 
-    try {
+    
        
         res.render('client/add-HotelReservation',{
             hotelInfo,
@@ -956,6 +1118,11 @@ module.exports = {
     ListAllTicket,
     getFlight_detail,
     client_AddflightReservation,
+    client_getAll_CardReservationFlight,
+    client_getbyId_CardReservationFlight,
+    client_EditflightReservation,
+    client_EditflightReservation_byid,
+    client_delete_flightReservation,
     //About and Contact and team
     About,
     Contact,
@@ -991,6 +1158,10 @@ module.exports = {
    checkoutHotel,
    completeHotel,
    cancelHotel,
+   // strip flight 
+   checkoutFlight ,
+   completeFlight ,
+   cancelFlight ,
 
    //settings 
    client_settings,

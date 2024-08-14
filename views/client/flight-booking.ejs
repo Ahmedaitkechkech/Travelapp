@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Booking - Multipurpose Online Booking Theme</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Booking - Multipurpose Online Booking Theme">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+</head>
+<body>
+    <%- include('../partials/header-client.ejs') %>
+
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <!-- =======================
+        Main Content START -->
+        <section class="pt-4 pt-lg-5">
+            <div class="container">
+                <div class="row g-4 g-xl-5">
+                    <!-- Left Content START -->
+                    <div class="col-xl-8">
+                        <div class="card bg-transparent p-0">
+                            <!-- Card header START -->
+                            <div class="card-header bg-transparent p-0">
+                                <h1 class="card-title fs-2 mb-0">Enter Your Payment Details</h1>
+                            </div>
+                            <!-- Card header END -->
+                            <!-- Booking START -->
+                            
+                            <% flightReservationClient.forEach(flight => { %>
+                                <div class="col-md-6 col-xl-12">
+                                    <div class="card border">
+                                        <div class="card-header border-bottom">
+                                            <h5 class="mb-0 card-title">Your Booking</h5>
+                                        </div>
+                            
+                                        <div class="card-body">
+                                            <small><i class="bi bi-ticket me-2"></i>Flight Ticket</small>
+                                            <div class="d-flex mt-2">
+                                                <img src="<%= flight.name_compagnies ? flight.name_compagnies.photo : 'default-image.jpg' %>" class="w-40px me-2" alt="">
+                                                <h6 class="fw-normal mb-0"><%= flight.lieu_depart %> <i class="bi bi-arrow-right"></i> <%= flight.lieu_arrivee %></h6>
+                                            </div>
+                                            <ul class="nav nav-divider small text-body mt-1 mb-0">
+                                                <li class="nav-item"><%= flight.name_compagnies ? flight.name_compagnies.Date_depart : "Date not available" %></li>
+                                                <li class="nav-item"><%= flight.name_compagnies ? flight.name_compagnies.Date_arrivee : "Date not available" %></li>
+                                            </ul>
+                            
+                                            <hr>
+                            
+                                            <small><i class="bi bi-person me-1"></i>Traveler detail</small>
+                                            <h6 class="mb-0 fw-normal mt-2"><%= flight.Nom %> </h6>
+                                            <ul class="nav nav-divider small text-body mt-1 mb-0">
+                                                <li class="nav-item">Adult</li>
+                                                <li class="nav-item"><%= flight.genre %></li>
+                                                <li class="nav-item"><%= flight.tele %></li>
+                                            </ul>
+                                        </div>
+                            
+                                        <div class="card-footer border-top text-center p-3">
+                                            <a href="/edit-flight-detail/<%= flight._id %>" class="btn btn-link mb-0 p-0">Review booking</a>
+                                        </div>
+                                        <form action="/delete-flight-detail/<%= flight._id %>?_method=DELETE" method="post">
+                                            <div class="card-footer border-top text-center p-3">
+                                                <button type="submit" class="btn btn-link mb-0 p-0" style="color: red; cursor: pointer;">Delete</button>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            
+                                <!-- Fare summary form START -->
+                                <div class="col-md-6 col-xl-12 mt-4">
+                                    <div class="card bg-light rounded-2">
+                                        <!-- card header -->
+                                        <div class="card-header border-bottom bg-light">
+                                            <h5 class="card-title mb-0">Fare Summary</h5>
+                                        </div>
+                            
+                                        <!-- Card body -->
+                                        <form action="/checkoutFlight" method="POST">
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-borderless">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span class="h6 fw-normal mb-0">Prix
+                                                            <a tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="COVID-19 test required Vaccinated travelers can visit">
+                                                                <i class="bi bi-info-circle"></i>
+                                                            </a>
+                                                        </span>
+                                                        <span class="fs-5"><%= flight.name_compagnies ? flight.name_compagnies.prix : "Price not available" %></span>
+                                                        <input type="hidden" name="baseFare" value="<%= flight.name_compagnies ? flight.name_compagnies.prix : '' %>">
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span class="h6 fw-normal mb-0">Other Services</span>
+                                                        <span class="fs-5 text-success">+$20</span>
+                                                        <input type="hidden" name="otherServices" value="20">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                            
+                                            <!-- Card footer -->
+                                            <div class="card-footer border-top bg-light">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="h5 fw-normal mb-0">Total Fare</span>
+                                                    <span class="h5 fw-normal mb-0"><%= flight.Total %></span>
+                                                    <input type="hidden" name="totalFare" value="<%= flight.Total %>">
+                                                </div>
+                                                <div class="mt-3">
+                                                    <button type="submit" class="btn btn-primary w-100">Submit Fare Summary</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Fare summary form END -->
+                            <% }); %>
+                            
+
+                        </div>
+                    </div>
+                    <!-- Left Content END -->
+
+                    <!-- Right content START -->
+                    <aside class="col-xl-4">
+                        <div class="row g-4 mt-3">
+                            
+                            <!-- Information START -->
+                            <div class="col-md-6 col-xl-12 ">
+                                <div class="card shadow mt-3">
+                                    <!-- Card header -->
+                                    <div class="card-header border-bottom ">
+                                        <h5 class="card-title mb-0">Why Sign up or Log in</h5>
+                                    </div>
+
+                                    <!-- Card body -->
+                                    <div class="card-body ">
+                                        <!-- List -->
+                                        <ul class="list-group list-group-borderless">
+                                            <li class="list-group-item d-flex mb-0"><i class="fa-solid fa-check text-success me-2"></i>
+                                                <span class="h6 fw-normal">Get Access to Secret Deal</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex mb-0"><i class="fa-solid fa-check text-success me-2"></i>
+                                                <span class="h6 fw-normal">Book Faster</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex mb-0"><i class="fa-solid fa-check text-success me-2"></i>
+                                                <span class="h6 fw-normal">Manage Your Booking</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Information END -->
+                            
+                        </div>    
+                    </aside>
+                    <!-- Right content END -->
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Main Content END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+
+    <!-- Back to top -->
+    <div class="back-top"></div>
+
+    <%- include('../partials/footer-client.ejs') %>
+
+</body>
+</html>

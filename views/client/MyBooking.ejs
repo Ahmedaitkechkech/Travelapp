@@ -140,7 +140,7 @@
                                         </div>
                                         <!-- Card item END -->
                                     <% }) %>
-                                    <% flightBookingClient.forEach(flightBookingClient => { %>
+                                    <% flightBookingClient.forEach(client => { %>
                                         <div class="card border mb-4">
                                             <!-- Card header -->
                                             <div class="card-header border-bottom d-md-flex justify-content-md-between align-items-center">
@@ -149,17 +149,26 @@
                                                     <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i class="fa-solid fa-car"></i></div>
                                                     <!-- Title -->
                                                     <div class="ms-2">
-                                                        <h6 class="card-title mb-0"><%= flightBookingClient.name_compagnies.name_compagnies %></h6>
+                                                        <h6 class="card-title mb-0"><%= client.name_compagnies.name_compagnies %></h6>
                                                         <ul class="nav nav-divider small">
-                                                            <li class="nav-item"><%= flightBookingClient.name_compagnies.prix %></li>
-                                                            <li class="nav-item"><%= flightBookingClient.name_compagnies.Travel_Class %> $</li>
+                                                            <li class="nav-item"><%= client.name_compagnies.prix %></li>
+                                                            <li class="nav-item"><%= client.name_compagnies.Travel_Class %> $</li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                     
-                                                <!-- Button -->
+                                                <!-- Form with Button -->
                                                 <div class="mt-2 mt-md-0">
-                                                    <a href="/Cards-reservationCar" class="btn btn-primary-soft mb-0">Gérer la réservation</a>
+                                                    <form action="/flight-booking/<%= client._id %>" method="POST">
+                                                        <!-- Include hidden fields inside the form -->
+                                                        <input type="hidden" name="id" value="<%= client._id %>">
+                                                        <input type="hidden" name="username" value="<%= client.username %>">
+                                                        <input type="hidden" name="Date_depart" value="<%= client.Date_depart %>">
+                                                        <input type="hidden" name="Date_arrivee" value="<%= client.Date_arrivee %>">
+                                                        <!-- Add other fields as needed -->
+                                    
+                                                        <button type="submit" class="btn btn-primary-soft mb-0">Gérer la réservation</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             
@@ -168,23 +177,24 @@
                                                 <div class="row g-3">
                                                     <div class="col-sm-6 col-md-4">
                                                         <span>Date sortie_car</span>
-                                                        <h6 class="mb-0"><%= new Date(flightBookingClient.Date_depart).toLocaleDateString('fr-FR') %></h6>
+                                                        <h6 class="mb-0"><%= new Date(client.Date_depart).toLocaleDateString('fr-FR') %></h6>
                                                     </div>
                                     
                                                     <div class="col-sm-6 col-md-4">
                                                         <span>Date de retour</span>
-                                                        <h6 class="mb-0"><%= new Date(flightBookingClient.Date_arrivee).toLocaleDateString('fr-FR') %></h6>
+                                                        <h6 class="mb-0"><%= new Date(client.Date_arrivee).toLocaleDateString('fr-FR') %></h6>
                                                     </div>
                                     
                                                     <div class="col-md-4">
                                                         <span>Réservé par</span>
-                                                        <h6 class="mb-0"><%= flightBookingClient.username %></h6>
+                                                        <h6 class="mb-0"><%= client.username %></h6>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Card item END -->
                                     <% }) %>
+                                    
                                     
                                 </div>
                                 <!-- Tabs content item END -->

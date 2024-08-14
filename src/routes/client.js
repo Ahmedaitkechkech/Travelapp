@@ -23,6 +23,11 @@ router.get("/Home",ClientMiddleware,clientControllers.findTicket);
 router.post("/flight-list",ClientMiddleware, upload.array(),clientControllers.getTicketList);
 router.get("/flight-detail/:id",clientControllers.getFlight_detail);
 router.post("/flight-detail",clientControllers.client_AddflightReservation);
+router.get("/edit-flight-detail/:id",clientControllers.client_EditflightReservation);
+router.put("/edit-flight-detail/:id",clientControllers.client_EditflightReservation_byid);
+router.delete("/delete-flight-detail/:id",clientControllers.client_delete_flightReservation);
+router.get("/flight-booking",ClientMiddleware,clientControllers.client_getAll_CardReservationFlight);
+router.post("/flight-booking/:id",ClientMiddleware,clientControllers.client_getbyId_CardReservationFlight);
 //About Page  and contact and team
 router.get("/Contact",ClientMiddleware,clientControllers.Contact);
 //post contact 
@@ -76,7 +81,10 @@ router.get("/completeHotel", clientControllers.completeHotel)
 router.get("/cancelHotel", clientControllers.cancelHotel)
 
 
-//strip
+//strip checkout Hotel  
+router.post("/checkoutFlight", ClientMiddleware,clientControllers.checkoutFlight);
+router.get("/completeFlight", clientControllers.completeFlight);
+router.get("/cancelFlight", clientControllers.cancelFlight);
 //settings client
 router.get("/client_settings",ClientMiddleware, clientControllers.client_settings)
 router.get("/myBooking",ClientMiddleware, clientControllers.clinet_myBooking)

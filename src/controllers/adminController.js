@@ -6,6 +6,7 @@ const Hotel = require("../models/HotelSchema");
 const reviews = require("../models/clientReviewSchema"); 
 const HotelResrvation = require("../models/Hotel_ReserSchema"); 
 const car_reservation = require("../models/Car_reservation"); 
+const flightReservationshema = require("../models/flightsReservation"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
@@ -400,42 +401,56 @@ const admin_get_Allhoteles_Booking = async (req, res) => {
 }
 
 //get client car and hotel to admin
-const admin_getClientClientCarAndHotel = async (req, res) => {
+const admin_getClientClientCarAndHotel  = async (req, res) => {
     try {
+        
 
         // Fetch car data
-        const clientCar = await Car.find({});
-        const ListClientcarsbyresponsable = clientCar.map(car => car._id);
+        const clientCars = await Car.find({});
+        const ListClientcarsbyresponsable = clientCars.map(car => car._id);
 
         const clientCarList = await car_reservation.find({ name_companies: { $in: ListClientcarsbyresponsable } })
-            .populate('name_companies')  
+            .populate('name_companies').sort({ createdAt: -1 });
 
         // Fetch hotel data
         const hotels = await Hotel.find({});
         const Listhotelesbyresponsable = hotels.map(hotel => hotel._id);
 
         const clientHotelList = await HotelResrvation.find({ Nom_Hotel: { $in: Listhotelesbyresponsable } })
-            .populate('Nom_Hotel')  
+            .populate('Nom_Hotel').sort({ createdAt: -1 });
 
-        // Combine both car and hotel reservations
+        // Fetch flight data
+        const flights = await Flight.find({});
+        const ListClientflightbyresponsable = flights.map(flight => flight._id);
+
+        const clientFlightList = await flightReservationshema.find({ name_compagnies: { $in: ListClientflightbyresponsable } })
+            .populate('name_compagnies').sort({ createdAt: -1 });
+
+        // Combine car, hotel, and flight reservations
         const combinedReservations = [
-           ...clientCarList.map(car => ({
+            ...clientCarList.map(car => ({
                 type: 'Car',
                 Nom: car.Nom,
                 Prenom: car.Prenom,
                 tele: car.tele,
             })),
-         ...clientHotelList.map(hotel => ({
+            ...clientHotelList.map(hotel => ({
                 type: 'Hotel',
                 Nom: hotel.Nom,
                 Prenom: hotel.Prénom,
                 tele: hotel.Numéro_Téléphone,
-            }))
+            })),
+            ...clientFlightList.map(flight => ({
+                type: 'Flight',
+                Nom: flight.Nom,
+                Prenom: flight.Prenom,
+                tele: flight.tele,
+            })),
         ];
 
-        res.render('Admin/clients', { combinedReservations });
+        res.render('Responsable/clients', { combinedReservations });
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching client reservations:", error);
         res.status(500).send('Server Error');
     }
 };

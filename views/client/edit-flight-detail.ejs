@@ -37,13 +37,13 @@ Main Content START -->
         <!-- Title -->
         <ul class="list-inline mb-2">
             <li class="list-inline-item me-2">
-                <h3 class="mb-0"><%= ticketDetails.lieu_depart %></h3>
+                <h3 class="mb-0"><%= flightReservInfo.lieu_depart %></h3>
             </li>
             <li class="list-inline-item me-2">
                 <h3 class="mb-0"><i class="bi bi-arrow-right"></i></h3>
             </li>
             <li class="list-inline-item me-0">
-                <h3 class="mb-0"><%= ticketDetails.lieu_arrivee %></h3>
+                <h3 class="mb-0"><%= flightReservInfo.lieu_arrivee %></h3>
             </li>
         </ul>
 
@@ -68,30 +68,30 @@ Main Content START -->
                 <!-- Image -->
                 <img src="/img/09.svg" class="w-80px mb-3" alt="">
                 <!-- Title -->
-                <h6 class="fw-normal mb-0"><%= ticketDetails.name_compagnies %></h6>
+                <h6 class="fw-normal mb-0"><%= flightReservInfo.name_compagnies.name_compagnies %></h6>
                 <h6 class="fw-normal mb-0">PA - 5620</h6>
             </div>
 
             <!-- Airport detail -->
             <div class="col-sm-4 col-md-3">
                 <!-- Title -->
-                <h4><%= ticketDetails.heure_depart %></h4>
-                <h6 class="mb-0"><%= ticketDetails.Date_depart %></h6>
-                <p class="mb-0"><%= ticketDetails.lieu_depart %></p>
+                <h4><%= flightReservInfo.name_compagnies.heure_depart %></h4>
+                <h6 class="mb-0"><%= flightReservInfo.name_compagnies.Date_depart %></h6>
+                <p class="mb-0"><%= flightReservInfo.name_compagnies.lieu_depart %></p>
             </div>
 
             <!-- Airport detail -->
             <div class="col-sm-4 col-md-3">
                 <!-- Title -->
-                <h4><%= ticketDetails.heure_arrivee %></h4>
-                <h6 class="mb-0"><%= ticketDetails.Date_arrivee %></h6>
-                <p class="mb-0"><%= ticketDetails.lieu_arrivee %></p>
+                <h4><%= flightReservInfo.name_compagnies.heure_arrivee %></h4>
+                <h6 class="mb-0"><%= flightReservInfo.name_compagnies.Date_arrivee %></h6>
+                <p class="mb-0"><%= flightReservInfo.name_compagnies.lieu_arrivee %></p>
             </div>
 
             <!-- Price -->
             <div class="col-sm-4 col-md-3 text-center">
                 <!-- Price -->
-                <h4 value="<%= ticketDetails.prix %>">$<%= ticketDetails.prix %></h4>
+                <h4 value="<%= flightReservInfo.prix %>">$<%= flightReservInfo.name_compagnies.prix %></h4>
             </div>
         </div>
     </div>
@@ -123,10 +123,10 @@ Main Content START -->
 						<!-- Card body -->
 						<div class="card-body py-4">
 							<!-- List -->
-							<h5 class="mb-3"><i class="bi bi-arrow-right rtl-flip me-2"></i>Passengers traveling to <%= ticketDetails.lieu_arrivee %>, please note</h5>
+							<h5 class="mb-3"><i class="bi bi-arrow-right rtl-flip me-2"></i>Passengers traveling to <%= flightReservInfo.lieu_arrivee %>, please note</h5>
 							<ul>
 								<li class="mb-2">Who can travel? <strong>All fully vaccinated travelers are allowed to enter the country. All WHO-approved vaccines, including Covishield and Covaxin, are accepted .</strong></li>
-								<li class="mb-2">Destination restrictions: <strong>Non-vaccinated travelers from <%= ticketDetails.lieu_depart %> cannot enter. Any traveler transiting via <%= ticketDetails.name_compagnies %> cannot enter <%= ticketDetails.lieu_arrivee %>.</strong></li>
+								<li class="mb-2">Destination restrictions: <strong>Non-vaccinated travelers from <%= flightReservInfo.lieu_depart %> cannot enter. Any traveler transiting via <%= flightReservInfo.name_compagnies.name_compagnies %> cannot enter <%= flightReservInfo.lieu_arrivee %>.</strong></li>
 								<li class="mb-2">Insipidity the sufficient discretion imprudence resolution sir him decisively. Proceed how any engaged visitor.</li>
 								<li class="mb-2">Explained propriety off out perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated astonished is.</li>
 								<li class="mb-2"> Was sister for a few longer Mrs sudden talent become. Done may bore quit evil old mile. If likely am of beauty tastes. </li>
@@ -141,7 +141,7 @@ Main Content START -->
 					<!-- Information END -->
 
 					<!-- Booking form START -->
-						<form action="/flight-detail" class="card border" method="POST">
+						<form action="/edit-flight-detail/<%= flightReservInfo._id %>?_method=PUT" class="card border" method="POST">
 							<!-- Card header -->
 						<div class="card-header border-bottom px-4" >
 							<h3 class="card-title mb-0">Traveler Details</h3>
@@ -150,46 +150,46 @@ Main Content START -->
 						<div class="row g-3">
 							<div class="col-md-6">
 							<label class="form-label">Nom des Compagnies</label>
-							<input class="form-control" type="text" name="name_compagnies" value="<%= ticketDetails.name_compagnies %>" placeholder="Entrez Nom des Compagnies">
+							<input class="form-control" type="text" name="name_compagnies" value="<%= flightReservInfo.name_compagnies.name_compagnies %>" placeholder="Entrez Nom des Compagnies">
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Nom</label>
-							<input class="form-control" type="Nom" name="Nom" placeholder="Entrez votre Nom">
+							<input class="form-control" type="Nom" value="<%= flightReservInfo.Nom %>" name="Nom" placeholder="Entrez votre Nom">
 							</div>
 							<div class="col-md-6">
 								<label class="form-label">Prenom</label>
-								<input class="form-control" type="Prenom" name="Prenom" placeholder="Entrez votre Prenom">
+								<input class="form-control" type="Prenom" value="<%= flightReservInfo.Prenom %>" name="Prenom" placeholder="Entrez votre Prenom">
 							</div>
 							<div class="col-md-6">
 								<label class="form-label">Email</label>
-								<input class="form-control" type="email" name="Email" placeholder="Entrez l'Email">
+								<input class="form-control" type="email" value="<%= flightReservInfo.Email %>" name="Email" placeholder="Entrez l'Email">
 							</div>
 							<div class="col-md-6">
 								<label class="form-label">Username</label>
-								<input class="form-control" type="username" name="username" placeholder="Entrez votre Username">
+								<input class="form-control" type="username" value="<%= flightReservInfo.username %>" name="username" placeholder="Entrez votre Username">
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Genre</label>
 							<select class="form-control" name="genre">
-								<option value="homme">Homme</option>
-								<option value="femme">Femme</option>
+								<option value="femme" <%= flightReservInfo.genre === 'femme' ? 'selected' : '' %>>Femme</option>
+                                <option value="homme" <%= flightReservInfo.genre === 'homme' ? 'selected' : '' %>>Homme</option>
 							</select>
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Téléphone</label>
-							<input class="form-control" type="text" name="tele" placeholder="Entrez le Numéro de Téléphone">
+							<input class="form-control" type="text" name="tele" value="<%= flightReservInfo.tele %>" placeholder="Entrez le Numéro de Téléphone">
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Lieu de Départ</label>
-							<input class="form-control" value="<%= ticketDetails.lieu_depart %>" type="text" name="lieu_depart" placeholder="Entrez le Lieu de Départ">
+							<input class="form-control" value="<%= flightReservInfo.lieu_depart %>" type="text" name="lieu_depart" placeholder="Entrez le Lieu de Départ">
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Heure de Départ</label>
-							<input class="form-control" type="time" value="<%= ticketDetails.heure_depart %>" name="heure_depart" placeholder="Entrez l'Heure de Départ">
+							<input class="form-control" type="time" value="<%= flightReservInfo.heure_depart %>" name="heure_depart" placeholder="Entrez l'Heure de Départ">
 							</div>
 							<div class="col-md-6">
 							<label class="form-label">Lieu d'Arrivée</label>
-							<input class="form-control" type="text" value="<%= ticketDetails.lieu_arrivee %>" name="lieu_arrivee" placeholder="Entrez le Lieu d'Arrivée">
+							<input class="form-control" type="text" value="<%= flightReservInfo.lieu_arrivee %>" name="lieu_arrivee" placeholder="Entrez le Lieu d'Arrivée">
 							</div>
 						</div>
 						<div class="mt-3">
