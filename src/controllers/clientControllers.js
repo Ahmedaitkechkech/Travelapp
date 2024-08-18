@@ -13,7 +13,7 @@ const Hotel = require('../models/HotelSchema');
 const ContactShema = require('../models/contactSchema');
 const Stripe = require("stripe")(process.env.SCRET_STRIP_key);
 const flightReservationshema = require("../models/flightsReservation"); 
-const mongoose = require('mongoose');
+
 
 
 const Signup_Client = async (req, res) => {

@@ -66,7 +66,7 @@
                 <% hotelReservationAdmin.forEach(hotelRes => { %>
                     <tr>
                         <% if (hotelRes.Nom_Hotel) { %>
-                            <td><img src="<%= hotelRes.Nom_Hotel.Photo %>" alt="<%= hotelRes.Nom_Hotel.Nom_Hotel %>"></td>
+                            <td><img style="height: 16vh;width: 12vw;  border-radius: 10px;" src="<%= hotelRes.Nom_Hotel.Photo %>" alt="<%= hotelRes.Nom_Hotel.Nom_Hotel %>"></td>
                             <td><%= hotelRes.Nom_Hotel.Nom_Hotel %></td>
                             <td><%= hotelRes.Nom %></td>
                             <td><%= hotelRes.Prénom %></td>
