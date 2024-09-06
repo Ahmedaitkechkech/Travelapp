@@ -62,10 +62,21 @@
                 </tr>
             </thead>
             <tbody>
-                <% reservationsCarWithPrice.forEach(car_rese => { %>
+                <% carReservationAdmin.forEach(car_rese => { 
+                    const dateSortieCar = new Date(car_rese.date_sortie_car);
+                    const dateRetourne = new Date(car_rese.date_retourne);
+                    const diffTime = Math.abs(dateRetourne - dateSortieCar);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    const totalPriceCar = car_rese.name_companies ? car_rese.name_companies.prix * diffDays : 0;
+                %>
                     <tr>
-                        <td><img src="<%= car_rese.name_companies.photo %>" alt="<%= car_rese.name_companies.name_companies %>"></td>
-                        <td><%= car_rese.name_companies.name_companies %></td>
+                        <% if (car_rese.name_companies) { %>
+                            <td><img src="<%= car_rese.name_companies.photo %>" alt="<%= car_rese.name_companies.name_companies %>"></td>
+                            <td><%= car_rese.name_companies.name_companies %></td>
+                        <% } else { %>
+                            <td>No Image Available</td>
+                            <td>No Company Available</td>
+                        <% } %>
                         <td><%= car_rese.Nom %></td>
                         <td><%= car_rese.Prenom %></td>
                         <td><%= car_rese.tele %></td>
@@ -73,10 +84,12 @@
                         <td><%= car_rese.Email %></td>
                         <td><%= new Date(car_rese.date_sortie_car).toLocaleDateString() %></td>
                         <td><%= new Date(car_rese.date_retourne).toLocaleDateString() %></td>
-                        <td>$<%= car_rese.totalPriceCar %></td>
+                        <td>$<%= totalPriceCar %></td>
                     </tr>
                 <% }); %>
             </tbody>
+            
+            
         </table>
     </div>
         <%- include('../partials/footer.ejs') %>

@@ -375,24 +375,13 @@ const admin_deleteReview = async (req, res) => {
 const admin_get_Allcars_Booking = async (req, res) => {
     try {
         const carReservationAdmin = await car_reservation.find({}).populate('name_companies');
-        let totalallcarsReservation = 0;
-
-        const reservationsCarWithPrice = carReservationAdmin.map(reservationcar => {
-            const dateSortieVoiture = new Date(reservationcar.date_sortie_car);
-            const dateRetourneVoiture = new Date(reservationcar.date_retourne);
-            const days = Math.ceil((dateRetourneVoiture - dateSortieVoiture) / (1000 * 60 * 60 * 24)); // Convert date difference to days
-            const totalPriceCar = days * reservationcar.name_companies.prix; // Calculate total price using name_companies.prix
-            totalallcarsReservation += totalPriceCar;
-            return {
-                ...reservationcar.toObject(),
-                totalPriceCar
-            };
-        });
+       
+       
 
         res.render('Admin/Cars-Rservation.ejs', {
             title: "Place Admin",
-            reservationsCarWithPrice,
-            totalallcarsReservation
+            carReservationAdmin,
+            
         });
     } catch (err) {
         console.error("Error fetching car reservations:", err);
