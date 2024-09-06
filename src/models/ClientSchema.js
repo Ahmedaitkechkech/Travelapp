@@ -20,6 +20,10 @@ const ClientSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'HotelReservSchema'
     }],
+    googleId:{
+        type: String,
+        unique:true
+    }
 })
 
 ClientSchema.pre("save", async function (next) {

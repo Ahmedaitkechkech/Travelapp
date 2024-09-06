@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const clientControllers = require('../controllers/clientControllers');
-const { ClientMiddleware } = require("../middlewares/clientMiddlewares");
+const { ClientMiddleware} = require("../middlewares/clientMiddlewares");
 const multer = require("multer");
+const passport = require("passport");
 // Configure Multer for parsing multipart/form-data
 const upload = multer();
 /* Get Signup page */
@@ -13,7 +14,9 @@ router.post("/Signup",clientControllers.Signup);
 router.get("/login",clientControllers.login);
 /* Check client */
 router.post("/login",clientControllers.login_client);
-
+/*google OAuth*/
+router.get('/auth/google',passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/auth/google/callback',passport.authenticate('google', { failureRedirect: '/login' }),clientControllers.login_OAuth);
 
 router.get("/get-allReview",ClientMiddleware,clientControllers.getAddReview);
 router.post("/add-review",ClientMiddleware,clientControllers.postAddReview);

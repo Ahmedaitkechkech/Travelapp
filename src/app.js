@@ -6,7 +6,9 @@ const connectDB = require("../config/db");
 const path = require("path");
 const session = require("express-session");
 const flash = require("express-flash");
+const passport = require("passport");
 require('dotenv').config();
+require('../utils/auth');
 
 // Express app
 const app = express();
@@ -31,6 +33,8 @@ app.use(
         cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 days in milliseconds
     })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Flash messages middleware
 app.use(flash());

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style.css">
     <title>Document</title>
@@ -186,7 +187,7 @@
                     <div class="d-sm-flex justify-content-sm-between align-items-center">
                         <!-- Title -->
                         <div class="mb-3 mb-sm-0">
-                            <h1 class="fs-3">09 Flight Available</h1>
+                            <h1 class="fs-3">01 Flight Available</h1>
                             <ul class="nav nav-divider h6 mb-0">
                                 <li class="nav-item">25 Jan</li>
                             </ul>
@@ -206,7 +207,7 @@
                 <div class="row g-4 align-items-center">
                     <!-- Image -->
                     <div class="col-6 col-md-3 text-center order-1">
-                        <img src="assets/images/element/11.svg" class="mb-n5" alt="">
+                        <img src="/img/10.svg" class="mb-n5" alt="">
                     </div>
     
                     <!-- Content -->
@@ -217,11 +218,6 @@
                         <p class="mb-2">COVID safety measures adopted by various countries including VISA restrictions, quarantine rules, etc.</p>
                         <!-- Button -->
                         <a href="#" class="btn btn-sm btn-primary mb-0">View Guidelines</a>
-                    </div>
-    
-                    <!-- Image -->
-                    <div class="col-6 col-md-3 text-center order-3">
-                        <img src="assets/images/element/10.svg" class="mb-n5" alt="">
                     </div>
                 </div>
             </div>
@@ -248,7 +244,7 @@ Flight list START -->
                                     <!-- Air line name -->
                                     <div class="col-md-3">
                                         <!-- Image -->
-                                        <img src="/img/09.svg" class="w-80px mb-3" alt="">
+                                        <img src="<%= ticket.photo %>" class="w-80px mb-3" alt="">
                                         <!-- Title -->
                                         <h6 class="fw-normal mb-0"><%= ticket.name_compagnies %></h6>
                                         <h6 class="fw-normal mb-0">PA - 5620</h6>
@@ -270,15 +266,16 @@ Flight list START -->
                                         <p class="mb-0"><%= ticket.lieu_arrivee %></p>
                                     </div>
     
-                                    <!-- Price -->
                                     <div class="col-sm-4 col-md-3 text-center">
                                         <!-- Price -->
                                         <h4 value="<%= ticket.prix %>">$<%= ticket.prix %></h4>
                                         <a href="/flight-detail/<%= ticket._id %>" class="btn btn-dark">Book Now</a>
-                                        <button class="btn btn-link text-decoration-underline p-0 mb-0" data-bs-toggle="modal" data-bs-target="#flightdetail">
+                                        <button class="btn btn-link text-decoration-underline p-0 mb-0" 
+                                                onclick="window.location.href='/flight-detail/<%= ticket._id %>'">
                                             <i class="bi bi-eye-fill me-1"></i>Flight Details
                                         </button>
                                     </div>
+                                    
     
                                 </div>
                             </div>

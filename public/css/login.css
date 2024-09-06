@@ -160,23 +160,9 @@ body {
     font-family: 'Montserrat';
 }
 
-.google-btn {
-    width: 30%;
-    padding: 15px;
-    background-color: #E7F2F5;
-    border: 1px solid #ccc;
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin: 0 auto; /* Center horizontally */
-    text-align: center; /* Center text within buttons */
-}
 
-.google-btn img {
-    margin-right: 10px;
-}
+
+
 
 .register-link {
     text-align: center;
@@ -218,7 +204,35 @@ position: relative;
 right: -120px; /* Adjust this value to move Icon 1 horizontally */
 top: 0px; /* Adjust this value to move Icon 1 vertically */
 }
+.google-btn {
+    width: 30%;
+    padding: 15px;
+    background-color: #E7F2F5;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center text within buttons */
+}
+
+.google-btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: inherit; /* Keep text color */
+    text-decoration: none; /* Remove underline from text */
+}
+
+.google-btn img {
+    margin-right: 10px;
+}
+
 .Google-icon {
     width: 23.52px;
     height: 24px;
 }
+

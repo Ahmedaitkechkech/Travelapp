@@ -107,7 +107,15 @@ const login_client = async (req, res) => {
         return res.status(500).json({ error: "An error occurred." });
     }
 };
+const login_OAuth = async (req, res) => {
+    // Generate JWT for Google authenticated user
+    const token = jwt.sign({ ClientId: req.user.id }, jwtSecretClient, { expiresIn: '7d' });
+    
+    // Store JWT in cookies
+    res.cookie('clientToken', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 days
 
+    res.redirect('/Home');
+}
 
 //  form to add a new review
 const getAddReview = async  (req, res) => {
@@ -1107,6 +1115,7 @@ module.exports = {
     Signup,
     login_client,
     login,
+    login_OAuth,
     client_logout,
     //Review
     getAddReview,
