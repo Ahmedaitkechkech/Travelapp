@@ -36,7 +36,7 @@ router.get("/Contact",ClientMiddleware,clientControllers.Contact);
 //post contact 
 router.post("/add_contact",ClientMiddleware,clientControllers.client_add_contact);
 router.get("/About",ClientMiddleware,clientControllers.About);
-router.get("/Team",ClientMiddleware,clientControllers.Teamworeked);
+//router.get("/Team",ClientMiddleware,clientControllers.Teamworeked);
 
 //get view Recherche
 router.get("/client-Hotel",ClientMiddleware,clientControllers.getIndexHotel);

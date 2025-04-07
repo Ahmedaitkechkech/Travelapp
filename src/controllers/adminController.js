@@ -11,6 +11,42 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.jwtSecret;
 
+
+const registerAdmin = async (req, res) => {
+    try {
+        const { username, email, tele, password, role } = req.body;
+        console.log(req.body)
+
+        if (!username || !email || !tele || !password || !role) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        const existingAdmin = await Admintravel.findOne({ $or: [{ username }, { email }] });
+        if (existingAdmin) {
+            return res.status(400).json({ error: 'Admin already exists' });
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create admin
+        const admin = new Admintravel({
+            username,
+            email,
+            tele,
+            role,
+            password: hashedPassword
+        });
+
+        await admin.save();
+
+        res.status(201).json({ message: 'Admin created successfully', admin });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+
+
 // login page
 const loginAuth = async (req, res) => {
     try {
@@ -467,7 +503,7 @@ module.exports = {
     loginAuth,
     admin_login,
     get_dashboard_admin,
-    
+    registerAdmin,
     // CRUD Responsable
     admin_get_AddResponsable,
     admin_Add_Responsable,

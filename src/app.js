@@ -12,7 +12,7 @@ require('../utils/auth');
 
 // Express app
 const app = express();
-
+app.use(express.json())
 // Connect to DB
 connectDB();
 
@@ -49,6 +49,9 @@ app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 
 // Routes
+app.get('/',(req,res)=>{
+    res.redirect('/home')
+})
 app.use("/", require("./routes/admin"));
 app.use("/", require("./routes/responsable"));
 app.use("/", require("./routes/client"));

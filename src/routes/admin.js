@@ -16,7 +16,7 @@ router.get("/dashboard", adminMiddleware, adminTravel.get_dashboard_admin);
 /*Settings admin*/
 router.get("/Settings",adminMiddleware,adminTravel.admin_get_Settings);
 
-
+router.post('/admin/register', adminTravel.registerAdmin);
 
 
 /* ----------------------- Routes CRUD Admin to Responsable ---------------------- */
