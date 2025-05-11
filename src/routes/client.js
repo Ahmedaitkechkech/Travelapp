@@ -4,6 +4,9 @@ const clientControllers = require('../controllers/clientControllers');
 const { ClientMiddleware} = require("../middlewares/clientMiddlewares");
 const multer = require("multer");
 const passport = require("passport");
+const chatbotController = require('../controllers/chatbotController');
+
+
 // Configure Multer for parsing multipart/form-data
 const upload = multer();
 /* Get Signup page */
@@ -103,6 +106,17 @@ router.get("/Car_detail/:id",ClientMiddleware, clientControllers.client_getAll_c
 //client logout 
 router.get("/logout-client", clientControllers.client_logout)
 
+
+//*************CHATBOT ROUTES**********
+
+// send a message to the chatbot
+router.post('/send-message', ClientMiddleware, chatbotController.sendMessage);
+
+// get chat history
+router.get('/get-chat-history', ClientMiddleware, chatbotController.getChatHistory);
+
+// clear chat history
+router.get('/clear-chat', ClientMiddleware, chatbotController.clearChatHistory);
 
 
 //404
